@@ -92,11 +92,13 @@ document.documentElement.lang = lang;
 const stage = document.getElementById('stage');
 const add = (html) => { const d = document.createElement('div'); d.className = 'scene'; d.innerHTML = html; stage.appendChild(d); return d; };
 
-// Timeline in seconds: [start, end]
-const INTRO = [0, 2.8];
-const STEP_START = 2.8, STEP_LEN = 1.85;            // 7 steps -> ends at 15.75
-const PROMO = [15.75, 17.75];
-const OUTRO = [17.75, 20.5];
+// Timeline in seconds: [start, end]. ?dur=30 gives the long cut; default is 20 s.
+const LONG = new URLSearchParams(location.search).get('dur') === '30';
+const INTRO = LONG ? [0, 3.5] : [0, 2.8];
+const STEP_START = INTRO[1], STEP_LEN = LONG ? 3.0 : 1.85;   // 7 steps: 24.5 s (30) or 15.75 s (20)
+const STEPS_END = STEP_START + 7 * STEP_LEN;
+const PROMO = [STEPS_END, STEPS_END + (LONG ? 2.7 : 2.0)];
+const OUTRO = [PROMO[1], LONG ? 30.5 : 20.5];
 
 const intro = add(`<img class="logo" src="../../brand/logos/logo77.jpeg" alt="">
   <div class="kicker">${c.kicker}</div><div class="title">${c.title}</div><div class="rule"></div>

@@ -2,13 +2,13 @@ const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const path = require('path');
 (async () => {
-  const [src, lang, out, stills] = process.argv.slice(2);
-  const FPS = 30, DUR = 20;
+  const [src, lang, out, stills, durArg] = process.argv.slice(2);
+  const FPS = 30, DUR = Number(durArg || 20);
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
-  await p.goto('file://' + path.resolve(src) + '?lang=' + lang, { waitUntil: 'networkidle' });
+  await p.goto('file://' + path.resolve(src) + '?lang=' + lang + '&dur=' + DUR, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.fonts.ready);
-  if (stills) {
+  if (stills && stills !== '-') {
     for (const t of stills.split(',').map(Number)) {
       await p.evaluate((t) => render(t), t);
       await p.screenshot({ path: `${out}-${t}.png` });
