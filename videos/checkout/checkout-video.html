@@ -31,8 +31,14 @@
   .dots { display: flex; gap: 18px; }
   .dot { width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,.22); }
   .dot.on { background: var(--gold); }
-  .num { width: 230px; height: 230px; border-radius: 50%; background: var(--gold); color: var(--purple-dark); font-family: var(--font-heading); font-size: 140px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+  .art { position: relative; width: 500px; height: 500px; border-radius: 50%; background: rgba(255,255,255,.06); border: 4px solid rgba(203,165,77,.45); display: flex; align-items: center; justify-content: center; color: var(--gold-light); }
+  .art svg { width: 320px; height: 320px; display: block; }
+  .num { position: absolute; top: -10px; left: -10px; width: 150px; height: 150px; border-radius: 50%; background: var(--gold); color: var(--purple-dark); font-family: var(--font-heading); font-size: 92px; font-weight: 500; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 10px var(--purple-logo); }
   .step-title { font-family: var(--font-heading); font-size: 96px; line-height: 1.1; margin-top: 80px; text-wrap: balance; }
+  .icon { color: var(--gold-light); display: block; }
+  .clock { width: 200px; height: 200px; margin: 50px auto 0; }
+  .promo-icon { width: 300px; height: 300px; margin-bottom: 70px; }
+  .plane { width: 220px; height: 220px; margin-bottom: 40px; }
   .step-text { font-size: 48px; line-height: 1.4; color: var(--gold-light); margin-top: 44px; text-wrap: balance; }
 
   /* promo */
@@ -100,12 +106,42 @@ const STEPS_END = STEP_START + 7 * STEP_LEN;
 const PROMO = [STEPS_END, STEPS_END + (LONG ? 2.7 : 2.0)];
 const OUTRO = [PROMO[1], LONG ? 30.5 : 20.5];
 
-const intro = add(`<img class="logo" src="../../brand/logos/logo77.jpeg" alt="">
-  <div class="kicker">${c.kicker}</div><div class="title">${c.title}</div><div class="rule"></div>
-  <div class="limit">${c.limitLabel}<strong>${c.limit}</strong></div>`);
-const steps = c.steps.map(([t, d], i) => add(`<div class="num">${i + 1}</div><div class="step-title">${t}</div>${d ? `<div class="step-text">${d}</div>` : ''}`));
-const promo = add(`<div class="card"><div class="t">${c.promoT}</div><div class="d">${c.promoD}</div></div>`);
-const outro = add(`<div class="thanks">${c.thanks}<span>${c.trip}</span></div>
+// Line illustrations, one per scene (120x120 grid, drawn in the gold-light stroke).
+const svg = (inner, cls = '') => `<svg class="icon ${cls}" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+const star = (cx, cy, R) => {
+  const pts = [];
+  for (let k = 0; k < 10; k++) { const r = k % 2 ? R * 0.45 : R, a = -Math.PI / 2 + k * Math.PI / 5; pts.push(`${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`); }
+  return `<polygon points="${pts.join(' ')}" fill="currentColor" stroke-width="2"/>`;
+};
+const ART = {
+  clock: `<circle cx="60" cy="60" r="44"/><path d="M60 22v6M98 60h-6M60 98v-6M22 60h6"/><path d="M60 60V30"/><path d="M60 60V42" stroke-width="7"/><circle cx="60" cy="60" r="3.5" fill="currentColor"/>`,
+  steps: [
+    // 1 phone with a chat bubble
+    `<rect x="36" y="10" width="48" height="100" rx="9"/><path d="M54 18h12M54 101h12"/><path d="M46 40h28a5 5 0 0 1 5 5v14a5 5 0 0 1-5 5H56l-7 6v-6h-3a5 5 0 0 1-5-5V45a5 5 0 0 1 5-5z"/><circle cx="52" cy="52" r="2.2" fill="currentColor"/><circle cx="60" cy="52" r="2.2" fill="currentColor"/><circle cx="68" cy="52" r="2.2" fill="currentColor"/>`,
+    // 2 air conditioner and power button
+    `<rect x="14" y="20" width="92" height="36" rx="8"/><path d="M24 46h72"/><circle cx="94" cy="32" r="2.5" fill="currentColor"/><path d="M50.1 82.1A14 14 0 1 0 69.9 82.1"/><path d="M60 72v16"/>`,
+    // 3 tied trash bag
+    `<path d="M38 50C18 68 20 106 40 108h40c20-2 22-40 2-58z"/><path d="M38 50l12-10h20l12 10"/><path d="M50 40c-12-16-22-8-10-2M70 40c12-16 22-8 10-2"/><path d="M50 40h20" stroke-width="6"/>`,
+    // 4 door with padlock
+    `<rect x="20" y="10" width="52" height="98" rx="3"/><path d="M12 108h68"/><circle cx="62" cy="62" r="3.5" fill="currentColor"/><path d="M86 66v-8a10 10 0 0 1 20 0v8"/><rect x="80" y="66" width="32" height="28" rx="5"/><path d="M96 76v8"/>`,
+    // 5 lockbox and key
+    `<rect x="12" y="34" width="62" height="62" rx="8"/><circle cx="43" cy="65" r="15"/><path d="M43 50v6"/><circle cx="96" cy="30" r="12"/><circle cx="96" cy="30" r="4"/><path d="M96 42v60M96 86h10M96 98h8"/>`,
+    // 6 reception bell
+    `<path d="M24 86a36 36 0 0 1 72 0z"/><path d="M14 96h92" stroke-width="6"/><path d="M60 50v-8"/><path d="M50 40h20"/><path d="M40 72a22 22 0 0 1 12-14"/>`,
+    // 7 rating card with stars
+    `<rect x="8" y="34" width="104" height="52" rx="12"/>${[24, 42, 60, 78, 96].map((x) => star(x, 60, 9)).join('')}`,
+  ],
+  suitcase: `<path d="M46 34v-8a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v8"/><rect x="18" y="34" width="84" height="62" rx="8"/><path d="M40 34v62M80 34v62"/><circle cx="34" cy="104" r="4"/><circle cx="86" cy="104" r="4"/>`,
+  plane: `<path d="M12 64L108 26L72 98L58 72z"/><path d="M58 72L108 26"/><path d="M58 72l-6 22 14-14"/>`,
+};
+
+const intro = add(`<img class="logo" src="../../brand/logos/logo77.jpeg" alt="" style="width:420px">
+  <div class="kicker" style="margin-top:70px">${c.kicker}</div><div class="title">${c.title}</div><div class="rule"></div>
+  ${svg(ART.clock, 'clock')}
+  <div class="limit" style="margin-top:36px">${c.limitLabel}<strong>${c.limit}</strong></div>`);
+const steps = c.steps.map(([t, d], i) => add(`<div class="art"><div class="num">${i + 1}</div>${svg(ART.steps[i])}</div><div class="step-title">${t}</div>${d ? `<div class="step-text">${d}</div>` : ''}`));
+const promo = add(`${svg(ART.suitcase, 'promo-icon')}<div class="card"><div class="t">${c.promoT}</div><div class="d">${c.promoD}</div></div>`);
+const outro = add(`${svg(ART.plane, 'plane')}<div class="thanks">${c.thanks}<span>${c.trip}</span></div>
   <img class="end-logo" src="../../brand/logos/logo77.jpeg" alt="">
   <div class="qr"><img src="../../posters/checkout/qr-whatsapp.svg" alt=""><small>${c.qr}</small></div>
   <div class="contact"><b>WhatsApp</b> +57 304 673 6241<br>77rentals.com · @co77rentals</div>`);
@@ -133,7 +169,13 @@ window.render = function (t) {
     const k = ease((t - 0.1 - i * 0.12) / 0.5);
     ch.style.opacity = k; ch.style.transform = `translateY(${(1 - k) * 40}px)`;
   });
-  steps.forEach((el, i) => show(el, t, STEP_START + i * STEP_LEN, STEP_START + (i + 1) * STEP_LEN));
+  steps.forEach((el, i) => {
+    const a = STEP_START + i * STEP_LEN;
+    show(el, t, a, a + STEP_LEN);
+    // the illustration pops in slightly after the scene, then drifts very gently
+    const k = ease((t - a - 0.1) / 0.5);
+    el.querySelector('.art svg').style.transform = `scale(${0.82 + 0.18 * k + 0.03 * clamp((t - a) / STEP_LEN)})`;
+  });
   const stepsEnd = STEP_START + c.steps.length * STEP_LEN;
   const topIn = ease((t - STEP_START) / IN), topOut = 1 - ease((t - (stepsEnd - OUT)) / OUT);
   topBar.style.opacity = t >= STEP_START && t <= stepsEnd ? Math.min(topIn, topOut) : 0;
