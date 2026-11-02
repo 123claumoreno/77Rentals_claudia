@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Check-out video 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* 1080x1920 vertical, 20 s. Frames are drawn by render(t) so the export is deterministic. */
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--purple-logo); }
+  body { font-family: var(--font-body); color: var(--white); position: relative; }
+  .scene { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 110px; opacity: 0; }
+
+  /* intro */
+  .logo { width: 520px; display: block; }
+  .kicker { font-size: 34px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-light); margin-top: 90px; }
+  .title { font-family: var(--font-heading); font-weight: 400; font-size: 132px; line-height: 1.05; margin-top: 24px; }
+  .rule { width: 120px; height: 7px; border-radius: 4px; background: var(--gold); margin: 50px auto 0; }
+  .limit { font-size: 44px; margin-top: 50px; line-height: 1.35; }
+  .limit strong { color: var(--gold-light); font-weight: 600; display: block; font-size: 64px; }
+
+  /* steps */
+  .top { position: absolute; top: 120px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 34px; opacity: 0; }
+  .top img { width: 220px; }
+  .dots { display: flex; gap: 18px; }
+  .dot { width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,.22); }
+  .dot.on { background: var(--gold); }
+  .num { width: 230px; height: 230px; border-radius: 50%; background: var(--gold); color: var(--purple-dark); font-family: var(--font-heading); font-size: 140px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+  .step-title { font-family: var(--font-heading); font-size: 96px; line-height: 1.1; margin-top: 80px; text-wrap: balance; }
+  .step-text { font-size: 48px; line-height: 1.4; color: var(--gold-light); margin-top: 44px; text-wrap: balance; }
+
+  /* promo */
+  .card { background: var(--purple-light); color: var(--purple); border-radius: 36px; padding: 90px 80px; border-left: 16px solid var(--gold); }
+  .card .t { font-family: var(--font-heading); font-size: 92px; line-height: 1.1; }
+  .card .d { font-size: 50px; line-height: 1.4; margin-top: 36px; }
+
+  /* closing */
+  .thanks { font-family: var(--font-heading); font-size: 100px; line-height: 1.1; }
+  .thanks span { color: var(--gold-light); display: block; margin-top: 10px; }
+  .end-logo { width: 380px; margin-top: 90px; }
+  .qr { background: var(--white); border-radius: 28px; padding: 24px; margin-top: 70px; }
+  .qr img { width: 250px; height: 250px; display: block; }
+  .qr small { display: block; color: var(--purple); font-size: 26px; font-weight: 600; letter-spacing: .06em; margin-top: 14px; }
+  .contact { font-size: 44px; line-height: 1.5; margin-top: 50px; }
+  .contact b { font-weight: 600; color: var(--gold-light); }
+</style>
+</head>
+<body>
+<div class="top" id="top"><img src="../../brand/logos/logo77.jpeg" alt="77Rentals"><div class="dots" id="dots"></div></div>
+<div id="stage"></div>
+<script>
+const COPY = {
+  es: {
+    kicker: 'Check-out', title: 'Antes de irte', limitLabel: 'Hora máxima de salida', limit: '12:00 del mediodía',
+    steps: [
+      ['Avísanos un día antes', 'Escríbenos por WhatsApp tu hora aproximada de salida.'],
+      ['Apaga todo', 'Luces, electrodomésticos y aires acondicionados.'],
+      ['Cierra la bolsa de basura', 'Déjala bien amarrada.'],
+      ['Cierra bien la puerta principal', 'Verifica que quede asegurada.'],
+      ['Deja la llave en la caja de seguridad', ''],
+      ['Pasa por la recepción', 'Avisa que vas de salida y entrega las manillas.'],
+      ['Califica tu estadía', 'En la plataforma donde reservaste. Tu opinión nos ayuda a mejorar.'],
+    ],
+    promoT: '¿Vuelves pronto?', promoD: 'Reserva directo con nosotros por WhatsApp y recibe un descuento en tu próxima estadía.',
+    thanks: 'Gracias por elegirnos.', trip: '¡Feliz viaje!', qr: 'ESCRÍBENOS',
+  },
+  en: {
+    kicker: 'Check-out', title: 'Before you go', limitLabel: 'Latest check-out', limit: '12:00 noon',
+    steps: [
+      ['Let us know a day ahead', 'Message us on WhatsApp with your approximate departure time.'],
+      ['Turn everything off', 'Lights, appliances and air conditioning.'],
+      ['Tie up the trash bag', 'Make sure it is tightly closed.'],
+      ['Lock the front door', 'Check that it is securely closed.'],
+      ['Leave the key in the lockbox', ''],
+      ['Stop by the front desk', 'Let them know you are checking out and hand in your wristbands.'],
+      ['Rate your stay', 'On the platform where you booked. Your feedback helps us improve.'],
+    ],
+    promoT: 'Coming back soon?', promoD: 'Book directly with us on WhatsApp and get a discount on your next stay.',
+    thanks: 'Thank you for choosing us.', trip: 'Have a great trip!', qr: 'MESSAGE US',
+  },
+};
+const lang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'es';
+const c = COPY[lang];
+document.documentElement.lang = lang;
+
+const stage = document.getElementById('stage');
+const add = (html) => { const d = document.createElement('div'); d.className = 'scene'; d.innerHTML = html; stage.appendChild(d); return d; };
+
+// Timeline in seconds: [start, end]
+const INTRO = [0, 2.8];
+const STEP_START = 2.8, STEP_LEN = 1.85;            // 7 steps -> ends at 15.75
+const PROMO = [15.75, 17.75];
+const OUTRO = [17.75, 20.5];
+
+const intro = add(`<img class="logo" src="../../brand/logos/logo77.jpeg" alt="">
+  <div class="kicker">${c.kicker}</div><div class="title">${c.title}</div><div class="rule"></div>
+  <div class="limit">${c.limitLabel}<strong>${c.limit}</strong></div>`);
+const steps = c.steps.map(([t, d], i) => add(`<div class="num">${i + 1}</div><div class="step-title">${t}</div>${d ? `<div class="step-text">${d}</div>` : ''}`));
+const promo = add(`<div class="card"><div class="t">${c.promoT}</div><div class="d">${c.promoD}</div></div>`);
+const outro = add(`<div class="thanks">${c.thanks}<span>${c.trip}</span></div>
+  <img class="end-logo" src="../../brand/logos/logo77.jpeg" alt="">
+  <div class="qr"><img src="../../posters/checkout/qr-whatsapp.svg" alt=""><small>${c.qr}</small></div>
+  <div class="contact"><b>WhatsApp</b> +57 304 673 6241<br>77rentals.com · @co77rentals</div>`);
+const topBar = document.getElementById('top');
+const dots = document.getElementById('dots');
+c.steps.forEach(() => { const d = document.createElement('div'); d.className = 'dot'; dots.appendChild(d); });
+
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const IN = 0.4, OUT = 0.3;
+
+function show(el, t, a, b, { rise = 60, first = false, last = false } = {}) {
+  if (t < a - 0.01 || t > b + 0.01) { el.style.opacity = 0; return; }
+  const fin = first ? 1 : ease((t - a) / IN);
+  const fout = last ? 1 : 1 - ease((t - (b - OUT)) / OUT);
+  const o = Math.min(fin, fout);
+  el.style.opacity = o;
+  el.style.transform = `translateY(${(1 - fin) * rise - (1 - fout) * rise * 0.5}px)`;
+}
+
+window.render = function (t) {
+  show(intro, t, INTRO[0], INTRO[1], { first: true });
+  // intro: stagger children a little
+  [...intro.children].forEach((ch, i) => {
+    const k = ease((t - 0.1 - i * 0.12) / 0.5);
+    ch.style.opacity = k; ch.style.transform = `translateY(${(1 - k) * 40}px)`;
+  });
+  steps.forEach((el, i) => show(el, t, STEP_START + i * STEP_LEN, STEP_START + (i + 1) * STEP_LEN));
+  const stepsEnd = STEP_START + c.steps.length * STEP_LEN;
+  const topIn = ease((t - STEP_START) / IN), topOut = 1 - ease((t - (stepsEnd - OUT)) / OUT);
+  topBar.style.opacity = t >= STEP_START && t <= stepsEnd ? Math.min(topIn, topOut) : 0;
+  const cur = Math.floor((t - STEP_START) / STEP_LEN);
+  [...dots.children].forEach((d, i) => d.classList.toggle('on', i <= cur));
+  show(promo, t, PROMO[0], PROMO[1]);
+  show(outro, t, OUTRO[0], OUTRO[1], { last: true });
+};
+render(0);
+</script>
+</body>
+</html>
