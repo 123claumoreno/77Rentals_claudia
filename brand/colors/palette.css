@@ -1,0 +1,16 @@
+/* 77Rentals palette, copied from the 77rentals.com site (src/index.css) on
+   2026-11-02. Paste into any HTML poster or page. See brand/BRAND.md. */
+:root {
+  --purple: #341D63;        /* main brand color, headings, text, buttons */
+  --purple-dark: #251547;   /* dark sections */
+  --purple-light: #F1EEF6;  /* tinted backgrounds */
+  --purple-logo: #3B2055;   /* the logo's own background: use it behind the logo */
+  --gold: #CBA54D;          /* accents, icons, lines (not text on white) */
+  --gold-light: #E0C585;    /* soft accents on dark */
+  --white: #FFFFFF;
+  --muted: #6F677E;         /* secondary text */
+  --border: #DFDCE5;
+
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-body: 'General Sans', system-ui, sans-serif;
+}
