@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Check-out 77Rentals (EN)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  :root {
+    --purple: #341D63;
+    --purple-dark: #251547;
+    --purple-light: #F1EEF6;
+    --purple-logo: #3B2055;
+    --gold: #CBA54D;
+    --gold-light: #E0C585;
+    --white: #FFFFFF;
+    --muted: #6F677E;
+    --border: #DFDCE5;
+    --font-heading: 'Fraunces', Georgia, serif;
+    --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--white); }
+  body { font-family: var(--font-body); color: var(--purple); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .poster { width: 210mm; height: 297mm; display: flex; flex-direction: column; overflow: hidden; }
+
+  header { background: var(--purple-logo); color: var(--white); text-align: center; padding: 8mm 16mm 7mm; }
+  header img { height: 25mm; display: block; margin: 0 auto 3.5mm; }
+  .kicker { font-size: 10.5pt; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 36pt; line-height: 1.05; margin-top: 1.5mm; }
+  .rule { width: 22mm; height: 1.2mm; background: var(--gold); border-radius: 1mm; margin: 4mm auto 0; }
+  .limit { margin-top: 4mm; font-size: 13pt; }
+  .limit strong { color: var(--gold-light); font-weight: 600; }
+
+  main { flex: 1; padding: 7mm 18mm 6mm; display: flex; min-height: 0; flex-direction: column; justify-content: space-between; }
+  ol { list-style: none; display: flex; flex-direction: column; gap: 2.6mm; }
+  li { display: grid; grid-template-columns: 12mm 1fr; column-gap: 6mm; align-items: start; padding-bottom: 2.6mm; border-bottom: .3mm solid var(--border); }
+  li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .num { width: 12mm; height: 12mm; border-radius: 50%; background: var(--gold); color: var(--purple-dark); font-family: var(--font-heading); font-size: 17pt; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+  .step-title { font-size: 14.5pt; font-weight: 600; line-height: 1.25; padding-top: .6mm; }
+  .step-text { font-size: 11.5pt; color: var(--muted); line-height: 1.4; margin-top: 1mm; }
+
+  .promo { margin-top: 4mm; background: var(--purple-light); border-left: 1.4mm solid var(--gold); border-radius: 2mm; padding: 4mm 6mm; }
+  .promo-title { font-family: var(--font-heading); font-size: 16pt; line-height: 1.2; }
+  .promo-text { font-size: 11.5pt; line-height: 1.4; margin-top: 1mm; }
+  footer { flex: none; background: var(--purple-logo); color: var(--white); padding: 7mm 18mm; display: flex; align-items: center; justify-content: space-between; gap: 8mm; }
+  .thanks { font-family: var(--font-heading); font-size: 24pt; line-height: 1.15; }
+  .thanks span { color: var(--gold-light); }
+  .contact { margin-top: 3mm; font-size: 11pt; line-height: 1.5; }
+  .contact b { font-weight: 600; }
+  .qr { background: var(--white); padding: 2.5mm; border-radius: 2.5mm; flex: none; text-align: center; }
+  .qr img { width: 26mm; height: 26mm; display: block; }
+  .qr small { display: block; color: var(--purple); font-size: 7.5pt; font-weight: 600; margin-top: 1.5mm; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<div class="poster">
+  <header>
+    <img src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+    <div class="kicker">Check-out</div>
+    <h1>Before you go</h1>
+    <div class="rule"></div>
+    <p class="limit">Latest check-out: <strong>12:00 noon</strong></p>
+  </header>
+
+  <main>
+    <ol>
+      <li><div class="num">1</div><div>
+        <div class="step-title">Let us know a day ahead</div>
+        <div class="step-text">Message us on WhatsApp with your approximate departure time.</div>
+      </div></li>
+      <li><div class="num">2</div><div>
+        <div class="step-title">Turn everything off</div>
+        <div class="step-text">Lights, appliances and air conditioning.</div>
+      </div></li>
+      <li><div class="num">3</div><div>
+        <div class="step-title">Tie up the trash bag</div>
+        <div class="step-text">Make sure it is tightly closed.</div>
+      </div></li>
+      <li><div class="num">4</div><div>
+        <div class="step-title">Lock the front door</div>
+        <div class="step-text">Check that it is securely closed.</div>
+      </div></li>
+      <li><div class="num">5</div><div>
+        <div class="step-title">Leave the key in the lockbox</div>
+      </div></li>
+      <li><div class="num">6</div><div>
+        <div class="step-title">Stop by the front desk</div>
+        <div class="step-text">Let them know you are checking out and hand in your wristbands.</div>
+      </div></li>
+      <li><div class="num">7</div><div>
+        <div class="step-title">Rate your stay</div>
+        <div class="step-text">On the platform where you booked. Your feedback helps us improve.</div>
+      </div></li>
+    </ol>
+    <div class="promo">
+      <div class="promo-title">Coming back soon?</div>
+      <div class="promo-text">Book directly with us on WhatsApp and get a discount on your next stay.</div>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      <div class="thanks">Thank you for choosing us.<br><span>Have a great trip!</span></div>
+      <div class="contact"><b>WhatsApp</b> +57 304 673 6241<br>77rentals.com · @co77rentals</div>
+    </div>
+    <div class="qr"><img src="qr-whatsapp.svg" alt="QR WhatsApp"><small>MESSAGE US</small></div>
+  </footer>
+</div>
+</body>
+</html>
