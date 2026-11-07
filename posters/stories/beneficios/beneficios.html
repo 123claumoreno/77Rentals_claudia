@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Beneficios huésped frecuente 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* Instagram stories, 1080x1920. Text stays inside y 250..1670 (Instagram covers the top and bottom bands). */
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: var(--font-body); color: var(--white); }
+  .slide { width: 1080px; height: 1920px; background: var(--purple-logo); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 250px 100px 0; text-align: center; margin-bottom: 40px; }
+  .slide::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--gold); }
+
+  .mini-logo { width: 230px; display: block; }
+  .photo { width: 880px; height: 660px; border-radius: 48px; margin-top: 50px; overflow: hidden; background: var(--purple-light); display: flex; align-items: center; justify-content: center; color: var(--purple); flex: none; position: relative; }
+  .photo img.ph { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo svg { width: 420px; height: 420px; }
+  .kicker { font-size: 34px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); margin-top: 60px; }
+  h2 { font-family: var(--font-heading); font-weight: 400; font-size: 96px; line-height: 1.08; margin-top: 22px; text-wrap: balance; }
+  .text { font-size: 50px; line-height: 1.38; margin-top: 34px; text-wrap: balance; }
+  .text strong { color: var(--gold-light); font-weight: 600; }
+
+  /* cover */
+  .cover { justify-content: center; padding-bottom: 250px; }
+  .cover .logo { width: 640px; display: block; }
+  .cover h1 { font-family: var(--font-heading); font-weight: 400; font-size: 118px; line-height: 1.05; margin-top: 90px; text-wrap: balance; }
+  .cover .rule { width: 140px; height: 8px; border-radius: 4px; background: var(--gold); margin: 60px auto 0; }
+  .cover .text { margin-top: 56px; font-size: 56px; }
+  .tap { margin-top: 90px; font-size: 32px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 18px; }
+  .tap svg { width: 44px; height: 44px; }
+
+  /* nights */
+  .nights { display: grid; grid-template-columns: repeat(4, 150px); gap: 36px 40px; justify-content: center; }
+  .night { width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--purple); display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 64px; color: var(--purple); line-height: 1; }
+  .night small { font-family: var(--font-body); font-size: 20px; font-weight: 600; letter-spacing: .08em; margin-top: 6px; }
+  .night.free { background: var(--gold); border-color: var(--gold); color: var(--purple-dark); }
+  .night.free span { font-size: 30px; font-family: var(--font-body); font-weight: 600; letter-spacing: .06em; }
+  .plus { font-family: var(--font-heading); font-size: 64px; color: var(--purple); display: flex; align-items: center; justify-content: center; }
+
+  /* closing */
+  .closing { justify-content: center; padding-bottom: 250px; }
+  .closing .logo { width: 460px; display: block; }
+  .host-label { font-size: 34px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); margin-top: 90px; }
+  .host { font-family: var(--font-heading); font-size: 116px; line-height: 1.05; margin-top: 20px; }
+  .closing .rule { width: 140px; height: 8px; border-radius: 4px; background: var(--gold); margin: 56px auto 0; }
+  .find { font-size: 36px; margin-top: 64px; }
+  .platforms { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; margin-top: 32px; max-width: 860px; }
+  .platforms span { background: var(--purple-light); color: var(--purple); border-radius: 999px; padding: 16px 34px; font-size: 38px; font-weight: 600; }
+  .wa { margin-top: 70px; font-size: 44px; line-height: 1.45; }
+  .wa b { color: var(--gold-light); font-weight: 600; }
+  .fine { margin-top: 36px; font-size: 26px; color: var(--gold-light); opacity: .85; }
+</style>
+</head>
+<body>
+<div id="slides"></div>
+<script>
+// Real photos go here: put the file in assets/photos/stories/ and set its path, e.g. '../../../assets/photos/stories/desayuno.jpg'.
+const PHOTOS = { descuentos: null, cumple: null, noches: null, detalle: null };
+
+const svg = (inner) => `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+const G = 'fill="#CBA54D" stroke="#CBA54D"';
+const ART = {
+  descuentos: `<rect x="14" y="24" width="92" height="82" rx="10"/><path d="M14 44h92M38 16v16M82 16v16"/><circle cx="46" cy="64" r="7" ${G}/><circle cx="74" cy="90" r="7" ${G}/><path d="M78 58L42 96" stroke="#CBA54D" stroke-width="5"/>`,
+  cumple: `<path d="M12 106h96"/><rect x="22" y="70" width="76" height="36" rx="6"/><rect x="32" y="50" width="56" height="20" rx="5"/><path d="M22 84c8 6 14 6 19 0s12-6 19 0 12 6 19 0 12-6 19 0"/><path d="M46 50V38M60 50V34M74 50V38"/><path d="M46 31c-3-4 0-8 0-8s3 4 0 8zM60 27c-3-4 0-8 0-8s3 4 0 8zM74 31c-3-4 0-8 0-8s3 4 0 8z" ${G}/>`,
+  detalle: `<rect x="20" y="54" width="80" height="52" rx="4"/><rect x="14" y="40" width="92" height="16" rx="4"/><path d="M60 40v66" stroke="#CBA54D" stroke-width="6"/><path d="M60 40c-8-18-30-18-22-2 4 6 22 2 22 2zM60 40c8-18 30-18 22-2-4 6-22 2-22 2z" stroke="#CBA54D" stroke-width="5"/>`,
+};
+const photo = (key, fallback) => `<div class="photo">${PHOTOS[key] ? `<img class="ph" src="${PHOTOS[key]}" alt="">` : fallback}</div>`;
+const LOGO = '../../../brand/logos/logo77.jpeg';
+const mini = `<img class="mini-logo" src="${LOGO}" alt="77Rentals">`;
+
+const nightsArt = `<div class="nights">
+  ${[1, 2, 3, 4, 5, 6].map((n) => `<div class="night">${n}<small>NOCHE</small></div>`).join('')}
+  <div class="plus">=</div>
+  <div class="night free"><span>GRATIS</span></div>
+</div>`;
+
+const SLIDES = [
+  `<div class="slide cover">
+    <img class="logo" src="${LOGO}" alt="77Rentals">
+    <h1>¿Eres huésped frecuente?</h1>
+    <div class="rule"></div>
+    <p class="text">Mira los beneficios que tienes con nosotros</p>
+    <div class="tap">Toca para ver ${svg('<path d="M30 60h60M66 36l24 24-24 24" stroke-width="8"/>')}</div>
+  </div>`,
+  `<div class="slide">${mini}${photo('descuentos', svg(ART.descuentos))}
+    <div class="kicker">Beneficio 1</div>
+    <h2>Descuentos especiales</h2>
+    <p class="text">En <strong>fechas especiales</strong> durante todo el año.</p>
+  </div>`,
+  `<div class="slide">${mini}${photo('cumple', svg(ART.cumple))}
+    <div class="kicker">Beneficio 2</div>
+    <h2>¿Viajas por tu cumpleaños?</h2>
+    <p class="text">Te obsequiamos <strong>el primer desayuno</strong> para ti y tus acompañantes.</p>
+  </div>`,
+  `<div class="slide">${mini}${photo('noches', nightsArt)}
+    <div class="kicker">Beneficio 3</div>
+    <h2>Una noche gratis</h2>
+    <p class="text">Al hospedarte <strong>6 noches al año</strong> con nosotros, obtienes una noche totalmente gratis.</p>
+  </div>`,
+  `<div class="slide">${mini}${photo('detalle', svg(ART.detalle))}
+    <div class="kicker">¿Sabías que...?</div>
+    <h2>Siempre hay un detalle para ti</h2>
+    <p class="text">En cada llegada encontrarás <strong>un detalle de bienvenida</strong> de parte de 77Rentals.</p>
+  </div>`,
+  `<div class="slide closing">
+    <img class="logo" src="${LOGO}" alt="77Rentals">
+    <div class="host-label">Your host</div>
+    <div class="host">Claudia Moreno</div>
+    <div class="rule"></div>
+    <p class="find">Encuéntranos en</p>
+    <div class="platforms"><span>Airbnb</span><span>Booking.com</span><span>Despegar</span><span>Vrbo</span><span>Hotels.com</span><span>Tripadvisor</span></div>
+    <p class="wa"><b>Escríbenos por WhatsApp</b><br>+57 304 673 6241 · @co77rentals</p>
+  </div>`,
+];
+document.getElementById('slides').innerHTML = SLIDES.join('');
+</script>
+</body>
+</html>
