@@ -61,13 +61,14 @@
 <div id="slides"></div>
 <script>
 // Real photos go here: put the file in assets/photos/stories/ and set its path, e.g. '../../../assets/photos/stories/desayuno.jpg'.
-const PHOTOS = { descuentos: null, cumple: null, noches: null, detalle: null };
+const PHOTOS = { descuentos: null, cumple: null, noches: null, mascota: null, detalle: null };
 
 const svg = (inner) => `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
 const G = 'fill="#CBA54D" stroke="#CBA54D"';
 const ART = {
   descuentos: `<rect x="14" y="24" width="92" height="82" rx="10"/><path d="M14 44h92M38 16v16M82 16v16"/><circle cx="46" cy="64" r="7" ${G}/><circle cx="74" cy="90" r="7" ${G}/><path d="M78 58L42 96" stroke="#CBA54D" stroke-width="5"/>`,
   cumple: `<path d="M12 106h96"/><rect x="22" y="70" width="76" height="36" rx="6"/><rect x="32" y="50" width="56" height="20" rx="5"/><path d="M22 84c8 6 14 6 19 0s12-6 19 0 12 6 19 0 12-6 19 0"/><path d="M46 50V38M60 50V34M74 50V38"/><path d="M46 31c-3-4 0-8 0-8s3 4 0 8zM60 27c-3-4 0-8 0-8s3 4 0 8zM74 31c-3-4 0-8 0-8s3 4 0 8z" ${G}/>`,
+  mascota: `<ellipse cx="54" cy="78" rx="22" ry="18"/><ellipse cx="26" cy="54" rx="8" ry="10"/><ellipse cx="42" cy="36" rx="8" ry="10"/><ellipse cx="66" cy="36" rx="8" ry="10"/><ellipse cx="82" cy="54" rx="8" ry="10"/><g stroke="#CBA54D" stroke-width="4"><rect x="84" y="90" width="26" height="20" rx="2"/><rect x="81" y="83" width="32" height="8" rx="2"/><path d="M97 83v27M97 83c-4-9-14-9-10-1 2 3 10 1 10 1zM97 83c4-9 14-9 10-1-2 3-10 1-10 1z"/></g>`,
   detalle: `<rect x="20" y="54" width="80" height="52" rx="4"/><rect x="14" y="40" width="92" height="16" rx="4"/><path d="M60 40v66" stroke="#CBA54D" stroke-width="6"/><path d="M60 40c-8-18-30-18-22-2 4 6 22 2 22 2zM60 40c8-18 30-18 22-2-4 6-22 2-22 2z" stroke="#CBA54D" stroke-width="5"/>`,
 };
 const photo = (key, fallback) => `<div class="photo">${PHOTOS[key] ? `<img class="ph" src="${PHOTOS[key]}" alt="">` : fallback}</div>`;
@@ -83,36 +84,42 @@ const nightsArt = `<div class="nights">
 const SLIDES = [
   `<div class="slide cover">
     <img class="logo" src="${LOGO}" alt="77Rentals">
-    <h1>¿Eres huésped frecuente?</h1>
+    <h1>Cada vez que vuelves, la experiencia es mejor</h1>
     <div class="rule"></div>
-    <p class="text">Mira los beneficios que tienes con nosotros</p>
+    <p class="text">Así consentimos a nuestros huéspedes frecuentes</p>
     <div class="tap">Toca para ver ${svg('<path d="M30 60h60M66 36l24 24-24 24" stroke-width="8"/>')}</div>
   </div>`,
   `<div class="slide">${mini}${photo('descuentos', svg(ART.descuentos))}
     <div class="kicker">Beneficio 1</div>
-    <h2>Descuentos especiales</h2>
-    <p class="text">En <strong>fechas especiales</strong> durante todo el año.</p>
+    <h2>Más fechas para vivir la ciudad</h2>
+    <p class="text">En <strong>fechas especiales</strong> del año te damos descuentos para que vuelvas a disfrutar tu destino favorito.</p>
   </div>`,
   `<div class="slide">${mini}${photo('cumple', svg(ART.cumple))}
     <div class="kicker">Beneficio 2</div>
-    <h2>¿Viajas por tu cumpleaños?</h2>
-    <p class="text">Te obsequiamos <strong>el primer desayuno</strong> para ti y tus acompañantes.</p>
+    <h2>Tu cumpleaños empieza con desayuno</h2>
+    <p class="text">Despierta en tu día especial con <strong>el primer desayuno por nuestra cuenta</strong>, para ti y quienes te acompañan.</p>
   </div>`,
   `<div class="slide">${mini}${photo('noches', nightsArt)}
     <div class="kicker">Beneficio 3</div>
-    <h2>Una noche gratis</h2>
-    <p class="text">Al hospedarte <strong>6 noches al año</strong> con nosotros, obtienes una noche totalmente gratis.</p>
+    <h2>6 noches de recuerdos, 1 noche de regalo</h2>
+    <p class="text">Al sumar <strong>6 noches al año</strong> con nosotros, la siguiente noche es totalmente gratis.</p>
+  </div>`,
+  `<div class="slide">${mini}${photo('mascota', svg(ART.mascota))}
+    <div class="kicker">Beneficio 4</div>
+    <h2>¿Viajas con tu mascota?</h2>
+    <p class="text">También es bienvenida: se hospeda <strong>sin costo adicional</strong> y recibe un obsequio de bienvenida.</p>
   </div>`,
   `<div class="slide">${mini}${photo('detalle', svg(ART.detalle))}
     <div class="kicker">¿Sabías que...?</div>
-    <h2>Siempre hay un detalle para ti</h2>
-    <p class="text">En cada llegada encontrarás <strong>un detalle de bienvenida</strong> de parte de 77Rentals.</p>
+    <h2>Llegar y sentirte esperado</h2>
+    <p class="text">En cada llegada te espera <strong>un detalle de bienvenida</strong>, porque una buena estadía empieza desde que abres la puerta.</p>
   </div>`,
   `<div class="slide closing">
     <img class="logo" src="${LOGO}" alt="77Rentals">
     <div class="host-label">Your host</div>
     <div class="host">Claudia Moreno</div>
     <div class="rule"></div>
+    <p class="text" style="margin-top:48px">Nos vemos en tu próxima experiencia.</p>
     <p class="find">Encuéntranos en</p>
     <div class="platforms"><span>Airbnb</span><span>Booking.com</span><span>Despegar</span><span>Vrbo</span><span>Hotels.com</span><span>Tripadvisor</span></div>
     <p class="wa"><b>Escríbenos por WhatsApp</b><br>+57 304 673 6241 · @co77rentals</p>
