@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Beneficios huésped frecuente 77Rentals</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Great+Vibes&display=swap">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
 <style>
   /* Instagram stories, 1080x1920. Text stays inside y 250..1670 (Instagram covers the top and bottom bands). */
@@ -11,6 +11,7 @@
     --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
     --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
     --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+    --font-script: 'Great Vibes', 'Brush Script MT', cursive;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #222; font-family: var(--font-body); color: var(--white); }
@@ -25,6 +26,8 @@
   h2 { font-family: var(--font-heading); font-weight: 400; font-size: 96px; line-height: 1.08; margin-top: 22px; text-wrap: balance; }
   .text { font-size: 50px; line-height: 1.38; margin-top: 34px; text-wrap: balance; }
   .text strong { color: var(--gold-light); font-weight: 600; }
+  .script { font-family: var(--font-script); font-weight: 400; color: var(--gold-light); font-size: 1.45em; line-height: .9; display: block; }
+  .italic { font-family: var(--font-heading); font-style: italic; }
 
   /* cover */
   .cover { justify-content: center; padding-bottom: 250px; }
@@ -50,8 +53,9 @@
   .host { font-family: var(--font-heading); font-size: 116px; line-height: 1.05; margin-top: 20px; }
   .closing .rule { width: 140px; height: 8px; border-radius: 4px; background: var(--gold); margin: 56px auto 0; }
   .find { font-size: 36px; margin-top: 64px; }
-  .platforms { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; margin-top: 32px; max-width: 860px; }
-  .platforms span { background: var(--purple-light); color: var(--purple); border-radius: 999px; padding: 16px 34px; font-size: 38px; font-weight: 600; }
+  .platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 30px; margin-top: 30px; width: 880px; background: var(--white); border-radius: 36px; padding: 44px 40px; align-items: center; justify-items: center; }
+  .platforms img { display: block; max-width: 240px; object-fit: contain; }
+  .platforms img.tall { height: 76px; }
   .wa { margin-top: 70px; font-size: 44px; line-height: 1.45; }
   .wa b { color: var(--gold-light); font-weight: 600; }
   .fine { margin-top: 36px; font-size: 26px; color: var(--gold-light); opacity: .85; }
@@ -84,44 +88,44 @@ const nightsArt = `<div class="nights">
 const SLIDES = [
   `<div class="slide cover">
     <img class="logo" src="${LOGO}" alt="77Rentals">
-    <h1>Cada vez que vuelves, la experiencia es mejor</h1>
+    <h1>Cada vez que vuelves,<span class="script">todo es mejor</span></h1>
     <div class="rule"></div>
-    <p class="text">Así consentimos a nuestros huéspedes frecuentes</p>
+    <p class="text italic">Así consentimos a nuestros huéspedes frecuentes</p>
     <div class="tap">Toca para ver ${svg('<path d="M30 60h60M66 36l24 24-24 24" stroke-width="8"/>')}</div>
   </div>`,
   `<div class="slide">${mini}${photo('descuentos', svg(ART.descuentos))}
-    <div class="kicker">Beneficio 1</div>
-    <h2>Más fechas para vivir la ciudad</h2>
-    <p class="text">En <strong>fechas especiales</strong> del año te damos descuentos para que vuelvas a disfrutar tu destino favorito.</p>
+    <div class="kicker">Temporadas especiales</div>
+    <h2><span class="script">Descuentos</span>para vivir la ciudad</h2>
+    <p class="text">En <strong>fechas especiales</strong> del año, tu estadía cuesta menos.</p>
   </div>`,
   `<div class="slide">${mini}${photo('cumple', svg(ART.cumple))}
-    <div class="kicker">Beneficio 2</div>
-    <h2>Tu cumpleaños empieza con desayuno</h2>
-    <p class="text">Despierta en tu día especial con <strong>el primer desayuno por nuestra cuenta</strong>, para ti y quienes te acompañan.</p>
+    <div class="kicker">Cumpleaños</div>
+    <h2><span class="script">Celebra</span>tu día con nosotros</h2>
+    <p class="text">Despierta en tu gran fecha con <strong>el primer desayuno por nuestra cuenta</strong>, para ti y quienes te acompañan.</p>
   </div>`,
   `<div class="slide">${mini}${photo('noches', nightsArt)}
-    <div class="kicker">Beneficio 3</div>
-    <h2>6 noches de recuerdos, 1 noche de regalo</h2>
-    <p class="text">Al sumar <strong>6 noches al año</strong> con nosotros, la siguiente noche es totalmente gratis.</p>
+    <div class="kicker">Huésped frecuente</div>
+    <h2>Suma recuerdos,<span class="script">gana una noche</span></h2>
+    <p class="text">Hospédate <strong>6 noches al año</strong> con nosotros y te regalamos una más, totalmente gratis.</p>
   </div>`,
   `<div class="slide">${mini}${photo('mascota', svg(ART.mascota))}
-    <div class="kicker">Beneficio 4</div>
-    <h2>¿Viajas con tu mascota?</h2>
-    <p class="text">También es bienvenida: se hospeda <strong>sin costo adicional</strong> y recibe un obsequio de bienvenida.</p>
+    <div class="kicker">Pet friendly</div>
+    <h2>¿Viajas con tu<span class="script">mascota?</span></h2>
+    <p class="text">Tu peludo también es parte del viaje: se hospeda <strong>sin costo adicional</strong> y recibe un obsequio al llegar.</p>
   </div>`,
   `<div class="slide">${mini}${photo('detalle', svg(ART.detalle))}
     <div class="kicker">¿Sabías que...?</div>
-    <h2>Llegar y sentirte esperado</h2>
-    <p class="text">En cada llegada te espera <strong>un detalle de bienvenida</strong>, porque una buena estadía empieza desde que abres la puerta.</p>
+    <h2>Llegar y sentirte<span class="script">en casa</span></h2>
+    <p class="text">Siempre encontrarás <strong>un detalle de bienvenida</strong>, porque una buena estadía empieza desde que abres la puerta.</p>
   </div>`,
   `<div class="slide closing">
     <img class="logo" src="${LOGO}" alt="77Rentals">
-    <div class="host-label">Your host</div>
+    <div class="host-label"><span class="script" style="font-size:110px;letter-spacing:0;text-transform:none">Your host</span></div>
     <div class="host">Claudia Moreno</div>
     <div class="rule"></div>
-    <p class="text" style="margin-top:48px">Nos vemos en tu próxima experiencia.</p>
+    <p class="text italic" style="margin-top:44px">Nos vemos en tu próximo viaje.</p>
     <p class="find">Encuéntranos en</p>
-    <div class="platforms"><span>Airbnb</span><span>Booking.com</span><span>Despegar</span><span>Vrbo</span><span>Hotels.com</span><span>Tripadvisor</span></div>
+    <div class="platforms">${["airbnb","booking","despegar","vrbo","hotels","tripadvisor"].map((n) => `<img style="height:${{airbnb:72,booking:44,despegar:90,vrbo:54,hotels:46,tripadvisor:50}[n]}px" src="../../../brand/platforms/${n}.svg" alt="${n}">`).join("")}</div>
     <p class="wa"><b>Escríbenos por WhatsApp</b><br>+57 304 673 6241 · @co77rentals</p>
   </div>`,
 ];
