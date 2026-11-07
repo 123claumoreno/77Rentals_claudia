@@ -30,12 +30,16 @@
   .italic { font-family: var(--font-heading); font-style: italic; }
 
   /* cover */
-  .cover { justify-content: center; padding-bottom: 250px; }
-  .cover .logo { width: 640px; display: block; }
-  .cover h1 { font-family: var(--font-heading); font-weight: 400; font-size: 118px; line-height: 1.05; margin-top: 90px; text-wrap: balance; }
-  .cover .rule { width: 140px; height: 8px; border-radius: 4px; background: var(--gold); margin: 60px auto 0; }
-  .cover .text { margin-top: 56px; font-size: 56px; }
-  .tap { margin-top: 90px; font-size: 32px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 18px; }
+  .cover { padding-top: 700px; }
+  .cover-photo { position: absolute; left: 0; right: 0; top: 0; height: 900px; background: center 40% / cover no-repeat; }
+  .cover-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(59,32,85,0) 45%, var(--purple-logo) 100%); }
+  .cover > :not(.cover-photo) { position: relative; }
+  .cover .logo { width: 380px; display: block; border-radius: 28px; }
+  .cover h1 { font-family: var(--font-heading); font-weight: 400; font-size: 100px; line-height: 1.05; margin-top: 40px; text-wrap: balance; }
+  .badge { position: absolute; left: 28px; bottom: 28px; background: var(--gold); color: var(--purple-dark); border-radius: 999px; padding: 14px 30px; font-size: 32px; font-weight: 600; }
+  .cover .rule { width: 140px; height: 8px; border-radius: 4px; background: var(--gold); margin: 36px auto 0; }
+  .cover .text { margin-top: 30px; font-size: 50px; }
+  .tap { margin-top: 44px; font-size: 32px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 18px; }
   .tap svg { width: 44px; height: 44px; }
 
   /* nights */
@@ -65,7 +69,8 @@
 <div id="slides"></div>
 <script>
 // Real photos go here: put the file in assets/photos/stories/ and set its path, e.g. '../../../assets/photos/stories/desayuno.jpg'.
-const PHOTOS = { descuentos: null, cumple: null, noches: null, mascota: null, detalle: null };
+const P = '../../../assets/photos/stories/';
+const PHOTOS = { descuentos: P + 'descuentos-bahia.jpg', cumple: P + 'cumple-frutero.jpg', noches: P + 'noche-habitacion.jpg', mascota: null, detalle: null, planes: P + 'planes-atardecer.jpg' };
 
 const svg = (inner) => `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
 const G = 'fill="#CBA54D" stroke="#CBA54D"';
@@ -75,7 +80,7 @@ const ART = {
   mascota: `<ellipse cx="54" cy="78" rx="22" ry="18"/><ellipse cx="26" cy="54" rx="8" ry="10"/><ellipse cx="42" cy="36" rx="8" ry="10"/><ellipse cx="66" cy="36" rx="8" ry="10"/><ellipse cx="82" cy="54" rx="8" ry="10"/><g stroke="#CBA54D" stroke-width="4"><rect x="84" y="90" width="26" height="20" rx="2"/><rect x="81" y="83" width="32" height="8" rx="2"/><path d="M97 83v27M97 83c-4-9-14-9-10-1 2 3 10 1 10 1zM97 83c4-9 14-9 10-1-2 3-10 1-10 1z"/></g>`,
   detalle: `<rect x="20" y="54" width="80" height="52" rx="4"/><rect x="14" y="40" width="92" height="16" rx="4"/><path d="M60 40v66" stroke="#CBA54D" stroke-width="6"/><path d="M60 40c-8-18-30-18-22-2 4 6 22 2 22 2zM60 40c8-18 30-18 22-2-4 6-22 2-22 2z" stroke="#CBA54D" stroke-width="5"/>`,
 };
-const photo = (key, fallback) => `<div class="photo">${PHOTOS[key] ? `<img class="ph" src="${PHOTOS[key]}" alt="">` : fallback}</div>`;
+const photo = (key, fallback, badge = '') => `<div class="photo">${PHOTOS[key] ? `<img class="ph" src="${PHOTOS[key]}" alt="">${badge}` : fallback}</div>`;
 const LOGO = '../../../brand/logos/logo77.jpeg';
 const mini = `<img class="mini-logo" src="${LOGO}" alt="77Rentals">`;
 
@@ -87,6 +92,7 @@ const nightsArt = `<div class="nights">
 
 const SLIDES = [
   `<div class="slide cover">
+    <div class="cover-photo" style="background-image:url('${P}portada-atardecer.jpg')"></div>
     <img class="logo" src="${LOGO}" alt="77Rentals">
     <h1>Cada vez que vuelves,<span class="script">todo es mejor</span></h1>
     <div class="rule"></div>
@@ -103,7 +109,7 @@ const SLIDES = [
     <h2><span class="script">Celebra</span>tu día con nosotros</h2>
     <p class="text">Despierta en tu gran fecha con <strong>el primer desayuno por nuestra cuenta</strong>, para ti y quienes te acompañan.</p>
   </div>`,
-  `<div class="slide">${mini}${photo('noches', nightsArt)}
+  `<div class="slide">${mini}${photo('noches', nightsArt, '<div class="badge">6 noches + 1 gratis</div>')}
     <div class="kicker">Huésped frecuente</div>
     <h2>Suma recuerdos,<span class="script">gana una noche</span></h2>
     <p class="text">Hospédate <strong>6 noches al año</strong> con nosotros y te regalamos una más, totalmente gratis.</p>
@@ -117,6 +123,11 @@ const SLIDES = [
     <div class="kicker">¿Sabías que...?</div>
     <h2>Llegar y sentirte<span class="script">en casa</span></h2>
     <p class="text">Siempre encontrarás <strong>un detalle de bienvenida</strong>, porque una buena estadía empieza desde que abres la puerta.</p>
+  </div>`,
+  `<div class="slide">${mini}${photo('planes', '')}
+    <div class="kicker">Planes turísticos</div>
+    <h2><span class="script">Vive</span>Cartagena a tu manera</h2>
+    <p class="text">Te ofrecemos <strong>los mejores planes turísticos en Cartagena</strong>. Pregúntanos por WhatsApp y armamos tu plan.</p>
   </div>`,
   `<div class="slide closing">
     <img class="logo" src="${LOGO}" alt="77Rentals">
