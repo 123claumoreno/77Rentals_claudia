@@ -2,47 +2,85 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Estado WhatsApp experiencias 77Rentals</title>
+<title>Estados WhatsApp 77Rentals</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Great+Vibes&display=swap">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
 <style>
-/* WhatsApp status, 1080x1920. Text stays inside y 230..1670. */
+/* WhatsApp status, 1080x1920. Text stays inside y 225..1690. */
 :root{--purple:#341D63;--purple-dark:#251547;--purple-logo:#3B2055;--gold:#CBA54D;--gold-light:#E0C585;--white:#fff;
 --font-heading:'Fraunces',Georgia,serif;--font-body:'General Sans',system-ui,sans-serif;--font-script:'Great Vibes','Brush Script MT',cursive}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#222;color:#fff;font-family:var(--font-body)}
-.slide{width:1080px;height:1920px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:225px 90px 0;
- background:url('../../../assets/photos/stories/portada-atardecer.jpg') center 30%/cover no-repeat}
-.slide:before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(37,21,71,.4) 0%,rgba(37,21,71,.12) 30%,rgba(37,21,71,.3) 55%,rgba(37,21,71,.6) 78%,rgba(37,21,71,.9) 100%)}
+.slide{width:1080px;height:1920px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:205px 90px 0;margin-bottom:40px}
 .slide>*{position:relative}
-.kicker{font-weight:600;font-size:32px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light)}
-.script{font-family:var(--font-script);font-size:230px;line-height:.95;color:#fff;margin-top:46px;text-shadow:0 6px 30px rgba(37,21,71,.5)}
-.h{text-shadow:0 3px 18px rgba(37,21,71,.7);font-family:var(--font-heading);font-weight:600;font-size:70px;line-height:1.1;margin-top:6px;text-wrap:balance}
+.logo{width:170px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.kicker{margin-top:34px;font-weight:600;font-size:28px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-light)}
+.script{font-family:var(--font-script);font-size:190px;line-height:1;color:#fff;margin-top:22px;text-shadow:0 6px 30px rgba(37,21,71,.55)}
+.h{font-family:var(--font-heading);font-weight:600;font-size:58px;line-height:1.14;margin-top:2px;text-wrap:balance;text-shadow:0 3px 18px rgba(37,21,71,.7)}
 .h em{font-weight:400;font-style:italic;color:var(--gold-light)}
-.rule{width:140px;height:7px;border-radius:4px;background:var(--gold);margin:40px auto 38px}
-.list{width:100%;display:flex;flex-direction:column;gap:18px}
-.item{display:flex;align-items:center;gap:26px;text-align:left;background:rgba(52,29,99,.7);border:2px solid rgba(224,197,133,.55);border-radius:30px;padding:24px 34px;font-size:42px;font-weight:500;line-height:1.2;backdrop-filter:blur(6px)}
-.item i{flex:none;width:18px;height:18px;border-radius:50%;background:var(--gold)}
-.item b{font-family:var(--font-heading);font-weight:600}
-.logo{width:290px;border-radius:26px;margin-top:56px;box-shadow:0 12px 34px rgba(0,0,0,.4)}
-.wa{margin-top:34px;font-size:40px;line-height:1.4}
-.wa b{color:var(--gold-light);font-weight:600}
+.rule{width:120px;height:5px;border-radius:3px;background:var(--gold);margin:26px auto 28px}
+/* slide 1 */
+.s1{background:url('../../../assets/photos/stories/portada-atardecer.jpg') center 30%/cover no-repeat}
+.s1:before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(37,21,71,.45) 0%,rgba(37,21,71,.15) 32%,rgba(37,21,71,.35) 55%,rgba(37,21,71,.7) 80%,rgba(37,21,71,.92) 100%)}
+.panel{width:100%;background:rgba(37,21,71,.62);border:2px solid rgba(224,197,133,.5);border-radius:36px;padding:14px 44px;backdrop-filter:blur(8px)}
+.row{display:flex;align-items:center;gap:28px;text-align:left;padding:19px 0;font-size:40px;line-height:1.2;font-weight:400}
+.row+.row{border-top:2px solid rgba(224,197,133,.28)}
+.row b{font-family:var(--font-heading);font-weight:600;display:block;font-size:42px}
+.ico{flex:none;width:74px;height:74px;border-radius:50%;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center}
+.ico svg{width:40px;height:40px;fill:none;stroke:var(--gold-light);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.cta{margin-top:34px;background:var(--gold);color:var(--purple-dark);border-radius:999px;padding:26px 62px;font-weight:600;font-size:40px;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.num{margin-top:18px;font-size:34px;font-weight:500}
+.url{margin-top:8px;font-size:28px;color:var(--gold-light);letter-spacing:.06em}
+/* slide 2 */
+.s2{background:var(--purple-logo)}
+.s2:after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;background:var(--gold)}
+.s2 .script{font-size:130px;margin-top:14px}
+.chat{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:26px;text-align:left}
+.bph{width:380px;height:440px;border-radius:34px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.bph img{width:100%;height:100%;object-fit:cover;display:block}
+.btx{background:#EFEFEF;color:#111;border-radius:36px;padding:30px 38px;font-size:31px;line-height:1.38;box-shadow:0 14px 34px rgba(0,0,0,.3)}
+.btx p+p{margin-top:16px}
+.row2{width:100%;display:flex;justify-content:space-between;align-items:flex-end}
+.via{background:#fff;color:var(--purple);border-radius:26px;padding:18px 28px;display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:500;font-size:22px}
+.via img{height:44px;display:block}
+.s2 .cta{margin-top:36px}
 </style>
 </head>
 <body>
-<div class="slide">
+<div class="slide s1">
+  <img class="logo" src="../../../brand/logos/logo77.jpeg" alt="77Rentals">
   <div class="kicker">Nuestra especialidad</div>
   <div class="script">Experiencias</div>
   <div class="h">para que tus vacaciones sean <em>inolvidables</em></div>
   <div class="rule"></div>
-  <div class="list">
-    <div class="item"><i></i><span><b>Desayuno de cumpleaños</b> de regalo</span></div>
-    <div class="item"><i></i><span><b>Planes turísticos</b> en Cartagena</span></div>
-    <div class="item"><i></i><span><b>Detalle de bienvenida</b> al llegar</span></div>
-    <div class="item"><i></i><span><b>Pet friendly:</b> tu peludo también viaja</span></div>
+  <div class="panel">
+    <div class="row"><div class="ico"><svg viewBox="0 0 120 120"><path d="M12 106h96"/><rect x="22" y="70" width="76" height="36" rx="6"/><rect x="32" y="50" width="56" height="20" rx="5"/><path d="M46 50V38M60 50V34M74 50V38"/></svg></div><span><b>Desayuno de cumpleaños</b>de regalo</span></div>
+    <div class="row"><div class="ico"><svg viewBox="0 0 120 120"><path d="M60 108s32-34 32-58a32 32 0 1 0-64 0c0 24 32 58 32 58z"/><circle cx="60" cy="50" r="11"/></svg></div><span><b>Planes turísticos</b>en Cartagena</span></div>
+    <div class="row"><div class="ico"><svg viewBox="0 0 120 120"><rect x="20" y="54" width="80" height="52" rx="4"/><rect x="14" y="40" width="92" height="16" rx="4"/><path d="M60 40v66"/><path d="M60 40c-8-18-30-18-22-2 4 6 22 2 22 2zM60 40c8-18 30-18 22-2-4 6-22 2-22 2z"/></svg></div><span><b>Detalle de bienvenida</b>al llegar</span></div>
+    <div class="row"><div class="ico"><svg viewBox="0 0 120 120"><ellipse cx="60" cy="82" rx="22" ry="18"/><ellipse cx="26" cy="56" rx="8" ry="10"/><ellipse cx="44" cy="36" rx="8" ry="10"/><ellipse cx="76" cy="36" rx="8" ry="10"/><ellipse cx="94" cy="56" rx="8" ry="10"/></svg></div><span><b>Pet friendly</b>tu peludo también viaja</span></div>
   </div>
+  <div class="cta">Reserva por WhatsApp</div>
+  <div class="num">+57 304 673 6241</div>
+  <div class="url">77rentals.com</div>
+</div>
+
+<div class="slide s2">
   <img class="logo" src="../../../brand/logos/logo77.jpeg" alt="77Rentals">
-  <p class="wa"><b>Escríbenos por WhatsApp</b><br>+57 304 673 6241</p>
+  <div class="kicker">Experiencias de huéspedes</div>
+  <div class="script">Esto nos escribió</div>
+  <div class="h"><em>un huésped</em></div>
+  <div class="chat">
+    <div class="row2">
+      <div class="bph"><img src="../../experiencia-huespedes/foto-huesped.png" alt=""></div>
+      <div class="via"><span>Reservado por</span><img src="../../../brand/platforms/airbnb.svg" alt="Airbnb"></div>
+    </div>
+    <div class="btx">
+      <p>Una experiencia que llevaremos por siempre en nuestro corazón. 🤍🌊</p>
+      <p>Reservamos con ustedes y fue una experiencia maravillosa. Todo hizo parte de un viaje muy especial, lleno de amor, ilusión y momentos inolvidables. Esta vez no viajábamos solo dos, ¡nuestro bebé también nos acompañaba! 🥹👶🏻</p>
+    </div>
+  </div>
+  <div class="cta">Reserva por WhatsApp</div>
+  <div class="num">+57 304 673 6241</div>
 </div>
 </body>
 </html>
