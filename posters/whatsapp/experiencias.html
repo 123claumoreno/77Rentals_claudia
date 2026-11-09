@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Experiencias 77Rentals, post para WhatsApp</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Great+Vibes&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* WhatsApp Estado / post vertical, 1080x1920. */
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+    --font-script: 'Great Vibes', 'Brush Script MT', cursive;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: var(--font-body); color: var(--white); }
+  .slide { width: 1080px; height: 1920px; background: var(--purple-logo); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 76px 80px 0; text-align: center; }
+  .slide::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--gold); }
+
+  .logo { width: 240px; display: block; border-radius: 28px; }
+  .script { font-family: var(--font-script); color: var(--gold-light); font-size: 100px; line-height: .9; display: block; margin-top: 22px; }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-size: 76px; line-height: 1.06; margin-top: 12px; text-wrap: balance; }
+  h1 em { font-style: italic; color: var(--gold-light); }
+  .lead { font-size: 40px; line-height: 1.35; margin-top: 26px; text-wrap: balance; }
+  .lead b { color: var(--gold-light); font-weight: 600; }
+
+  .collage { width: 920px; margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 380px 260px; gap: 16px; position: relative; }
+  .collage .ph { border-radius: 40px; overflow: hidden; background: var(--purple); }
+  .collage .ph.big { grid-column: 1 / 3; }
+  .collage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .stamp { position: absolute; right: -6px; top: -34px; transform: rotate(6deg); background: var(--gold); color: var(--purple-dark); border-radius: 999px; padding: 16px 34px; font-size: 34px; font-weight: 600; letter-spacing: .02em; box-shadow: 0 10px 26px rgba(0,0,0,.28); }
+
+  .real { font-family: var(--font-heading); font-style: italic; font-size: 50px; line-height: 1.1; margin-top: 34px; }
+  .real .script { display: inline; font-size: 1.5em; margin: 0; }
+
+  .pills { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; width: 920px; }
+  .pill { display: flex; align-items: center; gap: 24px; text-align: left; background: rgba(255,255,255,.08); border: 2px solid rgba(203,165,77,.55); border-radius: 999px; padding: 13px 40px; font-size: 34px; font-weight: 500; }
+  .pill i { flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--gold); }
+  .pill b { color: var(--gold-light); font-weight: 600; }
+
+  .cta { margin-top: 32px; background: var(--gold); color: var(--purple-dark); border-radius: 999px; padding: 20px 56px; font-size: 40px; font-weight: 600; }
+  .num { margin-top: 12px; font-size: 36px; font-weight: 500; letter-spacing: .02em; }
+  .sign { margin-top: 14px; font-size: 28px; color: var(--gold-light); letter-spacing: .04em; }
+  .sign .script { display: inline; font-size: 2em; margin: 0; vertical-align: -6px; }
+</style>
+</head>
+<body>
+<div class="slide" id="post">
+  <img class="logo" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <span class="script">Vive la experiencia</span>
+  <h1>Desde que llegas, <em>estamos contigo</em></h1>
+
+  <div class="collage">
+    <div class="stamp">Fotos reales</div>
+    <div class="ph big"><img src="../../assets/photos/stories/descuentos-bahia.jpg" alt=""></div>
+    <div class="ph"><img src="../../assets/photos/stories/portada-atardecer.jpg" alt="" style="object-position:center 55%"></div>
+    <div class="ph"><img src="../../assets/photos/stories/noche-habitacion.jpg" alt="" style="object-position:30% center"></div>
+  </div>
+
+  <p class="real">Nada es inventado, <span class="script">todo es real</span></p>
+
+  <div class="pills">
+    <div class="pill"><i></i><span>Atención <b>24/7</b> desde tu llegada</span></div>
+    <div class="pill"><i></i><span>Los <b>mejores apartamentos</b> de la ciudad</span></div>
+    <div class="pill"><i></i><span>Las <b>mejores vistas</b> de Cartagena</span></div>
+  </div>
+
+  <div class="cta">Escríbenos por WhatsApp</div>
+  <div class="num">+57 304 673 6241</div>
+  <div class="sign">77Rentals · <span class="script">Claudia Moreno</span></div>
+</div>
+</body>
+</html>
