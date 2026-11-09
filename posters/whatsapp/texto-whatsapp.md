@@ -17,7 +17,7 @@ En 77Rentals no te damos solo un lugar donde dormir: te damos una *experiencia*.
 ¿Ya tienes fechas? Escríbenos y armamos tu viaje 👇
 👉 wa.me/573046736241
 
-*77Rentals* · Claudia Moreno
+*77Rentals* · Clau Moreno
 
 ## Versión corta (para Estado o para reenviar)
 
