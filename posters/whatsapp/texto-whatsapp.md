@@ -4,28 +4,28 @@ Imagen: `posters/exports/whatsapp/experiencias-estado.png` (1080 x 1920, sirve p
 
 ## Versión principal
 
-*Cartagena te espera* 🌅
+🌴 *¿Listo para Cartagena?* 🌴
 
-En 77Rentals creamos experiencias de hospedaje pensadas para que solo te ocupes de disfrutar.
+Tú pones las ganas, nosotros ponemos todo lo demás.
 
-🔑 Desde el primer momento, nuestro equipo está contigo, 24/7.
-🏢 Te hospedas en los mejores apartamentos.
-🌊 Despiertas con las mejores vistas.
-📸 No lo inventamos: las fotos son reales.
+🔥 Contigo 24/7 desde que llegas.
+🏙️ Los mejores apartamentos, pensados para ti.
+🌅 Las mejores vistas de la ciudad.
+📸 Cero carreta: estas fotos son reales, lo que ves es lo que vives.
 
-Cuéntanos tus fechas y te ayudamos a planear tu estadía.
-Reserva por WhatsApp 👉 wa.me/573046736241
+Tu viaje empieza con un mensaje 👇
+💬 Reserva por WhatsApp: wa.me/573046736241
 
 *77Rentals* · Clau Moreno
 
 ## Versión corta (para Estado o para reenviar)
 
-Cartagena te espera 🌅
-Equipo disponible 24/7, los mejores apartamentos y las mejores vistas. Fotos reales, sin inventos.
-Reserva por WhatsApp 👉 wa.me/573046736241
+🌴 ¿Listo para Cartagena?
+Contigo 24/7, los mejores apartamentos y las mejores vistas. Fotos reales, cero carreta 📸
+💬 Reserva por WhatsApp: wa.me/573046736241
 
-## Opciones de cierre
+## Cierres alternativos
 
-- "Tú elige las fechas, nosotros nos encargamos del resto."
-- "Escríbenos hoy y empieza a planear tu viaje."
-- "Estamos a un mensaje de distancia."
+- "Escríbenos hoy y tu próxima escapada ya va en camino."
+- "Un mensaje, y empezamos a armar tu viaje."
+- "Las fechas las eliges tú, lo demás es cosa nuestra."
