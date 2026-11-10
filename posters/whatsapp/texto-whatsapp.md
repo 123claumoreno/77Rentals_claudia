@@ -2,30 +2,30 @@
 
 Imagen: `posters/exports/whatsapp/experiencias-estado.png` (1080 x 1920, sirve para Estado o para enviar).
 
-## Versión principal (profesional)
+## Versión principal
 
-*77Rentals · Experiencias de hospedaje en Cartagena*
+*Cartagena te espera* 🌅
 
-Hospedarte con nosotros es más que reservar un apartamento: es vivir Cartagena con el respaldo de un equipo que te acompaña en cada paso.
+En 77Rentals creamos experiencias de hospedaje pensadas para que solo te ocupes de disfrutar.
 
-✔️ Acompañamiento 24/7, desde el momento en que llegas a tu destino.
-✔️ Los mejores apartamentos de la ciudad.
-✔️ Las mejores vistas de Cartagena.
-✔️ Transparencia total: las fotos que ves son reales. Lo que ves es lo que encuentras.
+🔑 Desde el primer momento, nuestro equipo está contigo, 24/7.
+🏢 Te hospedas en los mejores apartamentos.
+🌊 Despiertas con las mejores vistas.
+📸 No lo inventamos: las fotos son reales.
 
-Reserva por WhatsApp y cuéntanos tus fechas. Con gusto diseñamos tu estadía.
-👉 wa.me/573046736241
+Cuéntanos tus fechas y te ayudamos a planear tu estadía.
+Reserva por WhatsApp 👉 wa.me/573046736241
 
 *77Rentals* · Clau Moreno
 
 ## Versión corta (para Estado o para reenviar)
 
-*77Rentals* · Tu experiencia en Cartagena, acompañada 24/7.
-Los mejores apartamentos, las mejores vistas y fotos 100% reales.
+Cartagena te espera 🌅
+Equipo disponible 24/7, los mejores apartamentos y las mejores vistas. Fotos reales, sin inventos.
 Reserva por WhatsApp 👉 wa.me/573046736241
 
 ## Opciones de cierre
 
-- "Escríbenos y empecemos a planear tu viaje."
-- "Estamos a un mensaje de distancia, a cualquier hora."
-- "Tu próxima estadía en Cartagena empieza aquí."
+- "Tú elige las fechas, nosotros nos encargamos del resto."
+- "Escríbenos hoy y empieza a planear tu viaje."
+- "Estamos a un mensaje de distancia."
