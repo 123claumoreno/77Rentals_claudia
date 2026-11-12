@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Aviso puente festivo Cartagena 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Great+Vibes&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* WhatsApp status, 1080x1920. Text stays inside y 250..1670 (the app covers the top and bottom bands). */
+  :root {
+    --purple-dark: #251547; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+    --font-script: 'Great Vibes', 'Brush Script MT', cursive;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: var(--font-body); color: var(--white); }
+  .poster { width: 1080px; height: 1920px; background: var(--purple-logo); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 235px 70px 0; text-align: center; }
+  .poster::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--gold); }
+  .logo { width: 250px; display: block; flex: none; border-radius: 28px; }
+  .script { font-family: var(--font-script); color: var(--gold-light); font-size: 96px; line-height: 1; margin-top: 24px; }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-size: 118px; line-height: 1.02; margin-top: 12px; }
+  .date { margin-top: 26px; background: var(--gold); color: var(--purple-dark); border-radius: 999px; padding: 14px 48px 18px; font-family: var(--font-heading); font-weight: 500; font-size: 60px; line-height: 1.1; }
+  .event { font-size: 28px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); margin-top: 34px; line-height: 1.5; }
+  .text { font-size: 40px; line-height: 1.4; margin-top: 26px; text-wrap: balance; }
+  .text strong { font-weight: 600; color: var(--gold-light); }
+  .rule { width: 140px; height: 8px; border-radius: 4px; background: var(--gold); margin: 24px auto 0; }
+  .cta { font-family: var(--font-heading); font-style: italic; font-size: 42px; line-height: 1.25; color: var(--gold-light); margin-top: 26px; }
+  .cta b { display: block; font-family: var(--font-body); font-style: normal; font-weight: 600; font-size: 42px; color: var(--white); margin-top: 8px; letter-spacing: .02em; }
+  .host-label { font-family: var(--font-script); font-size: 70px; line-height: 1; color: var(--gold-light); margin-top: 34px; }
+  .host { font-family: var(--font-heading); font-size: 68px; line-height: 1.05; margin-top: 2px; }
+  .find { font-size: 24px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); margin-top: 34px; }
+  .platforms { display: flex; gap: 60px; margin-top: 16px; width: 940px; background: var(--white); border-radius: 32px; padding: 24px 40px; align-items: center; justify-content: center; }
+  .platforms img { display: block; object-fit: contain; }
+</style>
+</head>
+<body>
+<div class="poster" id="poster">
+  <img class="logo" src="../../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <div class="script">Aviso para nuestros huéspedes</div>
+  <h1>Estamos completos</h1>
+  <div class="date">Del 14 al 16 de noviembre</div>
+  <div class="event">Puente festivo y Fiestas de Independencia<br>en Cartagena</div>
+  <p class="text"><strong>No nos queda hospedaje disponible</strong> para esas fechas. Gracias por escribirnos y por pensar en 77Rentals para tu viaje.</p>
+  <div class="rule"></div>
+  <div class="cta">¿Planeas otra fecha? Escríbenos por WhatsApp<b>+57 304 673 6241</b></div>
+  <div class="host-label">Your host</div>
+  <div class="host">Claudia Moreno</div>
+  <div class="find">También en</div>
+  <div class="platforms">
+    <img style="height:58px" src="../../../brand/platforms/airbnb.svg" alt="Airbnb">
+    <img style="height:36px" src="../../../brand/platforms/booking.svg" alt="Booking.com">
+    <img style="height:68px" src="../../../brand/platforms/despegar.svg" alt="Despegar">
+  </div>
+</div>
+</body>
+</html>
