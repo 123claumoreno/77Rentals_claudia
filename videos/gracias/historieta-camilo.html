@@ -221,7 +221,7 @@ function bedsSVG(x0, FY) {
   return s + `<rect x="${x0 + 213}" y="${FY - 62}" width="16" height="62" rx="4" fill="#CBA54D"/>`;
 }
 function interior(o, t) {
-  const FY = o.beds !== undefined ? 650 : 760;
+  const FY = (o.beds !== undefined || o.sofa !== undefined) ? 650 : 760;
   let s = `<defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EDE8F6"/></linearGradient>
   <linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EBD7A6"/><stop offset="1" stop-color="#CBA54D"/></linearGradient>
   <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FDDF0"/><stop offset="1" stop-color="#FFF1CF"/></linearGradient>
@@ -231,6 +231,7 @@ function interior(o, t) {
   s += `<rect y="${FY - 16}" width="920" height="18" fill="#FFFFFF" stroke="#E4DEF0" stroke-width="2"/>`;
   if (o.win) s += windowView(o.win[0], o.win[1], o.win[2], o.beds !== undefined ? Math.min(o.win[3], FY - o.win[1] - 8) : o.win[3], t);
   if (o.beds !== undefined) s += bedsSVG(o.beds, FY);
+  if (o.sofa !== undefined) s += sofaSVG(o.sofa, FY);
   if (o.curtain) s += `<path d="M${o.win[0] - 40} 40Q${o.win[0] + 10} 300 ${o.win[0] - 20} 750H${o.win[0] - 120}V40Z" fill="#5B3AA0"/><path d="M${o.win[0] - 90} 40Q${o.win[0] - 60} 300 ${o.win[0] - 80} 750" stroke="#341D63" stroke-width="5" fill="none"/>`;
   if (o.plant) s += `<g transform="translate(${o.plant} 750)"><path d="M0 0Q-50 -80 -30 -150Q0 -90 0 0Z" fill="#12B5B0"/><path d="M0 0Q50 -90 34 -170Q-4 -100 0 0Z" fill="#0E9A96"/><path d="M0 0Q-10 -100 8 -190Q18 -100 0 0Z" fill="#19C6C0"/><path d="M-34 0h68l-10 56h-48z" transform="translate(0 -14)" fill="#FF6B5B" stroke="#251547" stroke-width="3"/></g>`;
   return s;
@@ -255,6 +256,49 @@ function beach(t) {
   s += `<path d="M0 760Q300 700 920 740V900H0Z" fill="#F6DCA6"/><path d="M0 800Q300 760 920 790" stroke="#E0C585" stroke-width="6" fill="none"/>`;
   const palm = (x, y, f, sw) => `<g transform="translate(${x} ${y}) scale(${f} 1)"><path d="M0 0Q30 -140 ${10 + sw} -300" stroke="#8A5A3A" stroke-width="22" fill="none" stroke-linecap="round"/><g transform="translate(${10 + sw} -300)">${[-70, -35, 0, 35, 70].map((a, i) => `<path transform="rotate(${a + Math.sin(t * 2 + i) * 4 - 90})" d="M0 0Q90 -60 190 10Q100 -10 0 0Z" fill="${i % 2 ? '#0E9A96' : '#19C6C0'}"/>`).join('')}<circle r="14" fill="#8A5A3A"/></g></g>`;
   s += palm(110, 790, 1, 10) + palm(830, 800, -1, 6);
+  return s;
+}
+
+function sofaSVG(x0, FY) {
+  return `<g transform="translate(${x0} ${FY})"><ellipse cx="150" cy="40" rx="200" ry="26" fill="#B88F3A" opacity=".25"/><rect x="0" y="-120" width="300" height="86" rx="26" fill="#5B3AA0" stroke="#251547" stroke-width="3"/><rect x="-18" y="-84" width="50" height="84" rx="20" fill="#4A2C8C" stroke="#251547" stroke-width="3"/><rect x="268" y="-84" width="50" height="84" rx="20" fill="#4A2C8C" stroke="#251547" stroke-width="3"/><rect x="24" y="-66" width="252" height="56" rx="16" fill="#6A4AB0" stroke="#251547" stroke-width="3"/><rect x="46" y="-110" width="60" height="50" rx="16" fill="#12B5B0"/><rect x="194" y="-110" width="60" height="50" rx="16" fill="#FFC93C"/><rect x="-10" y="-6" width="320" height="12" rx="6" fill="#3B2055"/></g>`;
+}
+const palmTree = (x, y, f, t, k = 0) => `<g transform="translate(${x} ${y}) scale(${f} 1)"><path d="M0 0Q26 -120 ${8 + k} -260" stroke="#8A5A3A" stroke-width="20" fill="none" stroke-linecap="round"/><g transform="translate(${8 + k} -260)">${[-70, -35, 0, 35, 70].map((a, i) => `<path transform="rotate(${a + Math.sin(t * 2 + i) * 4 - 90})" d="M0 0Q80 -54 170 8Q90 -8 0 0Z" fill="${i % 2 ? '#0E9A96' : '#19C6C0'}"/>`).join('')}<circle r="13" fill="#8A5A3A"/></g></g>`;
+function lobbySVG() {
+  let s = `<defs><linearGradient id="lw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EFEAF7"/></linearGradient></defs><rect width="920" height="900" fill="url(#lw)"/>`;
+  for (let i = 0; i < 24; i++) s += `<rect x="${i * 40 + 6}" y="60" width="26" height="590" rx="4" fill="#C79A63" opacity="${i % 2 ? .55 : .78}"/>`;
+  s += `<rect y="650" width="920" height="250" fill="#F1EEF6"/>`;
+  for (let i = -4; i < 14; i++) s += `<line x1="${i * 100 + 50}" y1="650" x2="${i * 130 - 40}" y2="900" stroke="#D9D2E6" stroke-width="3"/>`;
+  for (let i = 0; i < 5; i++) s += `<line x1="0" y1="${650 + i * i * 14 + i * 20}" x2="920" y2="${650 + i * i * 14 + i * 20}" stroke="#D9D2E6" stroke-width="3"/>`;
+  s += `<rect x="560" y="520" width="320" height="130" rx="12" fill="#341D63" stroke="#CBA54D" stroke-width="5"/><rect x="548" y="500" width="344" height="28" rx="10" fill="#E0C585" stroke="#B88F3A" stroke-width="3"/><rect x="590" y="548" width="260" height="14" fill="#CBA54D" opacity=".7"/>`;
+  s += `<rect x="640" y="426" width="170" height="54" rx="12" fill="#341D63" stroke="#CBA54D" stroke-width="4"/><text x="725" y="464" text-anchor="middle" font-family="General Sans, sans-serif" font-weight="600" font-size="26" letter-spacing="4" fill="#E0C585">RECEPCIÓN</text>`;
+  [180, 460, 740].forEach((x) => { s += `<circle cx="${x}" cy="150" r="52" fill="#FFE9A0" opacity=".28"/><line x1="${x}" y1="0" x2="${x}" y2="96" stroke="#251547" stroke-width="3"/><path d="M${x - 40} 140Q${x} 78 ${x + 40} 140Z" fill="#FFE9A0" stroke="#CBA54D" stroke-width="3"/>`; });
+  s += `<g transform="translate(60 650)"><path d="M0 0Q-60 -90 -34 -170Q4 -100 0 0Z" fill="#12B5B0"/><path d="M0 0Q60 -100 40 -190Q-4 -110 0 0Z" fill="#0E9A96"/><path d="M0 0Q-8 -110 10 -210Q22 -110 0 0Z" fill="#19C6C0"/><path d="M-36 -16h72l-10 64h-52z" fill="#FF6B5B" stroke="#251547" stroke-width="3"/></g>`;
+  return s;
+}
+function terraceSVG(t) {
+  let s = `<defs><linearGradient id="ts" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6DD3EE"/><stop offset="1" stop-color="#FFF1CF"/></linearGradient><linearGradient id="tsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19C6C0"/><stop offset="1" stop-color="#0B8C9C"/></linearGradient></defs><rect width="920" height="900" fill="url(#ts)"/><circle cx="730" cy="190" r="90" fill="#FFC93C"/><circle cx="730" cy="190" r="128" fill="#FFC93C" opacity=".22"/>`;
+  s += `<ellipse cx="${200 + (t * 8) % 40}" cy="150" rx="90" ry="26" fill="#fff" opacity=".9"/><ellipse cx="${470 + (t * 6) % 40}" cy="250" rx="70" ry="20" fill="#fff" opacity=".85"/>`;
+  s += `<rect y="330" width="920" height="240" fill="url(#tsea)"/>`;
+  for (let k = 0; k < 4; k++) { const yy = 365 + k * 44; let d = `M${-80 + ((t * (24 + k * 8)) % 80)} ${yy}`; for (let i = 0; i < 28; i++) d += `q20 ${i % 2 ? 9 : -9} 40 0`; s += `<path d="${d}" stroke="#fff" stroke-width="4" fill="none" opacity="${.8 - k * .12}" stroke-linecap="round"/>`; }
+  s += `<rect y="500" width="920" height="70" fill="#fff" opacity=".14"/>` + Array.from({ length: 26 }, (_, k) => `<line x1="${k * 36}" y1="500" x2="${k * 36}" y2="570" stroke="#fff" stroke-width="3" opacity=".7"/>`).join('') + `<rect y="492" width="920" height="12" fill="#E0C585"/>`;
+  s += `<rect x="50" y="566" width="820" height="92" rx="34" fill="#8EE9E5" stroke="#fff" stroke-width="8"/>`;
+  for (let k = 0; k < 3; k++) { const yy = 596 + k * 22; let d = `M${70 + ((t * 30) % 40) - 40} ${yy}`; for (let i = 0; i < 22; i++) d += `q10 ${i % 2 ? 5 : -5} 20 0`; s += `<path d="${d}" stroke="#fff" stroke-width="3" fill="none" opacity=".9" stroke-linecap="round"/>`; }
+  s += `<rect y="658" width="920" height="242" fill="#D8B678"/>`;
+  for (let i = 0; i < 11; i++) s += `<line x1="0" y1="${658 + i * 24}" x2="920" y2="${658 + i * 24}" stroke="#B88F3A" stroke-width="2" opacity=".4"/>`;
+  s += `<g><line x1="840" y1="640" x2="840" y2="410" stroke="#251547" stroke-width="8"/><path d="M730 440Q840 340 950 440Z" fill="#FF6B5B" stroke="#251547" stroke-width="3"/><path d="M790 440Q840 360 890 440Z" fill="#FFFFFF" opacity=".9"/></g>`;
+  s += palmTree(60, 690, 1, t, 10) + palmTree(890, 700, -1, t, 6);
+  return s;
+}
+function citySea(t) {
+  let s = `<defs><linearGradient id="cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6DD3EE"/><stop offset=".7" stop-color="#FFF1CF"/><stop offset="1" stop-color="#FFE0B0"/></linearGradient><linearGradient id="csea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19C6C0"/><stop offset="1" stop-color="#0A7E92"/></linearGradient></defs><rect width="920" height="900" fill="url(#cs)"/><circle cx="700" cy="170" r="88" fill="#FFC93C"/><circle cx="700" cy="170" r="124" fill="#FFC93C" opacity=".22"/>`;
+  s += `<path d="M0 470Q140 380 300 440T620 450T920 420V500H0Z" fill="#CFC6E6" opacity=".7"/>`;
+  const hs = [70, 120, 90, 160, 100, 140, 80, 130, 96]; s += hs.map((h, i) => `<rect x="${40 + i * 40}" y="${470 - h}" width="30" height="${h + 30}" rx="3" fill="${i % 2 ? '#B9AEDB' : '#A79AD0'}"/>`).join('');
+  s += `<rect y="470" width="920" height="210" fill="url(#csea)"/>`;
+  for (let k = 0; k < 6; k++) { const yy = 500 + k * 32; let d = `M${-120 + ((t * (26 + k * 8) * (k % 2 ? -1 : 1)) % 120)} ${yy}`; for (let i = 0; i < 20; i++) d += `q30 ${i % 2 ? 11 : -11} 60 0`; s += `<path d="${d}" stroke="#fff" stroke-width="4" fill="none" opacity="${.85 - k * .1}" stroke-linecap="round"/>`; }
+  const bx = 600 + Math.sin(t * .6) * 30; s += `<g transform="translate(${bx} 520)"><path d="M-4 -70L-4 0L-50 0Z" fill="#FFFFFF" stroke="#251547" stroke-width="2"/><path d="M4 -60L4 0L40 0Z" fill="#FFC93C" stroke="#251547" stroke-width="2"/><path d="M-56 4H50L36 22H-42Z" fill="#341D63"/></g>`;
+  s += `<path d="M0 690Q300 640 920 680V760H0Z" fill="#F6DCA6"/><rect y="700" width="920" height="200" fill="#E0C585"/><rect y="700" width="920" height="12" fill="#CBA54D"/>`;
+  for (let i = 0; i < 9; i++) s += `<line x1="${i * 120}" y1="712" x2="${i * 170 - 120}" y2="900" stroke="#B88F3A" stroke-width="3" opacity=".35"/>`;
+  s += palmTree(70, 720, 1, t, 10) + palmTree(860, 724, -1, t, 6);
   return s;
 }
 function facade(t) {
@@ -315,7 +359,7 @@ V.push({ title: '¡Llegó la hora de despedirnos!', cap: 'Hoy es nuestro día de
 // 3 Apagar
 V.push({ travel: true, title: 'Primera recomendación', icon: 'bulb', cap: '1. Antes de salir, recuerda dejar todas las luces, aires acondicionados y electrodomésticos apagados', small: true,
   build(st) { this.F = FAM(st, [250, 450, 650, 810], 840, [1.0, 1.1, 1.0, .66]); prop(this.F.C, 'R', REMOTE, true); },
-  bg: (t) => interior({ beds: 450 }, t) +
+  bg: (t) => interior({ sofa: 560 }, t) +
     `<rect x="330" y="60" width="380" height="96" rx="22" fill="#FFFFFF" stroke="#CBA54D" stroke-width="5"/><path d="M356 118h328M356 134h328" stroke="#D9D2E6" stroke-width="5" stroke-linecap="round"/>
      <rect x="630" y="250" width="270" height="170" rx="16" fill="#251547" stroke="#CBA54D" stroke-width="6"/><rect x="740" y="420" width="50" height="40" fill="#251547"/>
      <rect x="30" y="500" width="64" height="100" rx="14" fill="#FFFFFF" stroke="#CBA54D" stroke-width="5"/>`,
@@ -389,7 +433,7 @@ V.push({ travel: true, title: '¡Un último detalle!', icon: 'key', cap: 'Deja l
 // 5 Opinion
 V.push({ travel: true, title: '¡Tu opinión es muy importante!', icon: 'star', cap: '3. Nos encantaría que nos compartieras cómo fue tu experiencia reservando y hospedándote con nosotros', small: true,
   build(st) { this.F = FAM(st, [130, 370, 600, 770], 840); prop(this.F.C, 'R', PHONE, true); },
-  bg: (t) => interior({ win: [560, 110, 300, 630], beds: 20 }, t),
+  bg: () => lobbySVG(),
   frame(t) {
     const { M, C, T, N } = this.F, th = ease((t - 1.0) / .5), hug = ease((t - 1.4) / .5);
     const rM = run(t, 0, -1, .1, .9), rC = run(t, 1, -1, .12, .9), rT = run(t, 2, 1, .1, .9), rN = run(t, 3, 1, .14, .8, 17);
@@ -405,7 +449,7 @@ V.push({ travel: true, title: '¡Tu opinión es muy importante!', icon: 'star', 
 // 6 Gracias
 V.push({ travel: true, title: '¡Gracias por elegirnos!', cap: 'Gracias por permitirnos ser parte de sus días en Cartagena. ¡Fue un placer recibirlos!',
   build(st) { this.F = FAM(st, [270, 440, 610, 745], 840, [1.05, 1.13, 1.03, .72]); },
-  bg: (t) => `<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFE9A0"/><stop offset="1" stop-color="#FFE9A0" stop-opacity="0"/></radialGradient></defs>` + interior({ win: [60, 90, 330, 650], beds: 450 }, t) + `<circle cx="480" cy="520" r="360" fill="url(#glow)" opacity=".7"/>`,
+  bg: (t) => terraceSVG(t) + `<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFE9A0"/><stop offset="1" stop-color="#FFE9A0" stop-opacity="0"/></radialGradient></defs><circle cx="480" cy="520" r="360" fill="url(#glow)" opacity=".45"/>`,
   frame(t) {
     const { M, C, T, N } = this.F, w = (p, a = 25) => Math.sin(t * 9 + p) * a;
     const rM = run(t, 0, -1, .1, 1.0, 15), rC = run(t, 1, -1, .1, 1.0, 15), rT = run(t, 2, 1, .1, 1.0, 15), rN = run(t, 3, 1, .05, .9, 19);
@@ -451,9 +495,9 @@ V.push({ title: '¡Tenemos beneficios para ti!', cap: 'Forma parte de nuestro pl
     return s;
   } });
 // 9 Cartagena
-V.push({ travel: true, title: '¡Cartagena siempre los espera!', cap: '¡Que sigan disfrutando de muchos momentos especiales! Gracias, Camilo y familia', small: true,
+V.push({ travel: true, title: '¡Siempre los esperamos!', cap: 'Recuerda que tenemos varias opciones de hospedaje: Cartagena, Barranquilla, Santa Marta y Bogotá siempre los están esperando', small: true,
   build(st) { this.F = FAM(st, [210, 420, 610, 770], 840); prop(this.F.C, 'L', SUIT, true); prop(this.F.T, 'R', SUIT2, true); },
-  bg: (t) => facade(t),
+  bg: (t) => citySea(t),
   frame(t) {
     const { M, C, T, N } = this.F, t0 = t, u = t - .6, throwK = clamp((u - .9) / .35), w = (p) => Math.sin(t0 * 9 + p) * 25;
     const rM = run(t0, 0, -1, .12, .9), rC = run(t0, 1, -1, .12, .9), rT = run(t0, 2, 1, .1, .9), rN = run(t0, 3, 1, .14, .8, 17);
@@ -466,6 +510,10 @@ V.push({ travel: true, title: '¡Cartagena siempre los espera!', cap: '¡Que sig
     let s = drum(70, 660, .8, t, true) + drum(860, 680, .9, t, true);
     if (t > 1.15) { const k = t - 1.15; for (let i = 0; i < 26; i++) { const a = -Math.PI / 2 + (i / 26 - .5) * 2.6, v = 260 + (i % 5) * 70, x = 800 + Math.cos(a) * v * k, y = 520 + Math.sin(a) * v * k + 420 * k * k; s += `<rect x="${x}" y="${y}" width="16" height="9" rx="3" fill="${['#FFC93C', '#FF5FA2', '#12B5B0', '#FFFFFF', '#FF6B5B'][i % 5]}" transform="rotate(${k * 600 + i * 30} ${x} ${y})" opacity="${clamp(1.6 - k)}"/>`; } }
     s += confetti(t, 10, 3, ['#FFC93C', '#FF5FA2', '#12B5B0'], [0, 120, 920, 700], true);
+    [['Cartagena', 230, 200], ['Barranquilla', 690, 230], ['Santa Marta', 250, 330], ['Bogotá', 680, 350]].forEach(([n, x, y], i) => {
+      const k = back((t0 - CITY_T[i]) / .45); if (k <= 0.001) return;
+      s += `<g transform="translate(${x} ${y + Math.sin(t0 * 2 + i) * 5}) scale(${k})"><rect x="-142" y="-34" width="284" height="68" rx="34" fill="#341D63" stroke="#CBA54D" stroke-width="4"/><circle cx="-110" cy="0" r="9" fill="#FFC93C"/><text x="14" y="12" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="36" fill="#FFFFFF">${n}</text></g>`;
+    });
     return s;
   } });
 
@@ -495,7 +543,8 @@ V.push({ title: '¡Hasta pronto!', final: true });
 
 // ---------------- build DOM ----------------
 // Each panel lasts as long as its narration (seconds, from audio/narration.json) plus a short lead and tail.
-const NARR_DUR = [5.83, 5.82, 6.32, 5.13, 5.14, 5.55, 6.57, 4.61, 7.57, 5.02, 5.46, 5.84];
+const NARR_DUR = [5.77, 5.92, 6.06, 5.19, 5.11, 5.51, 6.7, 4.61, 7.7, 7.99, 5.47, 5.8];
+const CITY_T = [3.26, 4.22, 5.19, 6.1];   // seconds into the cities panel when each city is named
 const DUR = V.map((v, i) => +(NARR_DUR[i] + (i === V.length - 1 ? 1.5 : 1.0)).toFixed(2));
 const START = DUR.map((d, i) => DUR.slice(0, i).reduce((a, b) => a + b, 0));
 const app = document.getElementById('app');
@@ -506,7 +555,7 @@ const slides = V.map((v, i) => {
     el.innerHTML = `<svg class="fxall" id="fxf" viewBox="0 0 1080 1920"></svg>${ttl}
       <img class="logo" id="flogo" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
       <div class="host" id="fhost">Your Host: Claudia Moreno</div>
-      <div class="wa" id="fwa">WhatsApp: 304 673 6241</div>
+      <div class="wa" id="fwa">WhatsApp: 304-673-6241</div>
       <div class="quote" id="fq">«En 77Rentals no despedimos huéspedes, ¡damos la bienvenida a futuras experiencias!»</div>
       <div class="plat" id="fplat">
         <img src="../../brand/platforms/airbnb.svg" style="width:190px" alt="Airbnb">

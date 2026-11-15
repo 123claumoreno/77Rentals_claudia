@@ -13,7 +13,7 @@ NARR = [
  "¡Gracias por elegirnos! Gracias por permitirnos ser parte de sus días en Cartagena. ¡Fue un placer recibirlos!",
  "Recuerda que siempre tendremos las puertas abiertas para recibirlos nuevamente.",
  "Forma parte de nuestro plan de fidelización y disfruta de beneficios especiales por regresar y reservar directamente con nosotros.",
- "¡Que sigan disfrutando de muchos momentos especiales! Gracias, Camilo y familia.",
+ "Recuerda que tenemos varias opciones de hospedaje: Cartagena, Barranquilla, Santa Marta y Bogotá siempre los están esperando.",
  "Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia! Feliz regreso a casa.",
  "No despedimos huéspedes: ¡damos la bienvenida a futuras experiencias! Escríbenos por WhatsApp.",
 ]
