@@ -181,12 +181,26 @@ ev(11, 2.2, "chime", .7, 0, f=1760)
 def load(p):
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", p, "-ar", str(SR), "-ac", "1", "-f", "f32le", "-"], capture_output=True, check=True).stdout
     return np.frombuffer(raw, dtype=np.float32).astype(np.float64)
-voice = np.zeros(N)
+def breath(d=.34):                  # a soft inhale: airy noise that swells and fades
+    t = tt(d); e = np.sin(np.pi * (t / d) ** .8) ** 2
+    return (norm(band(rng.standard_normal(len(t)), 500, 4800)) * .5 + norm(band(rng.standard_normal(len(t)), 150, 500)) * .2) * e
+voice = np.zeros(N); breaths = np.zeros(N)
 for i, d in enumerate(durs):
     p = next((f"{A}/narr-{i:02d}.{e}" for e in ("mp3", "wav") if os.path.exists(f"{A}/narr-{i:02d}.{e}")), None)
     if not p: continue
-    y = load(p); j = int((starts[i] + .45) * SR); y = y[: N - j]; voice[j:j + len(y)] += y
+    y = load(p); j = int((starts[i] + .45) * SR); yy = y[: N - j]; voice[j:j + len(yy)] += yy
+    # breathe in before the first words and after each long pause, like a person reading aloud
+    hop = int(.02 * SR); e = np.array([np.abs(y[k:k + hop]).max() for k in range(0, len(y) - hop, hop)]); on = e > .06 * e.max()
+    idx = np.where(on)[0]
+    if len(idx):
+        marks = [idx[0]]; k = idx[0]
+        for q in range(idx[0], idx[-1]):
+            if not on[q] and on[q + 1] and not on[max(q - 24, 0):q + 1].any(): marks.append(q + 1)   # speech resumes after >= .5 s of silence
+        for m in marks:
+            tb = starts[i] + .45 + m * .02 - .42
+            if tb > starts[i] + .02: bs = breath(); k0 = int(tb * SR); breaths[k0:k0 + len(bs)] += bs[: max(0, N - k0)]
 voice /= max(1e-6, np.abs(voice).max()); voice *= .92
+voice = voice + breaths * .07
 
 # ------------------------------------------------------------------ mix with ducking
 env_v = np.convolve(np.abs(voice), np.ones(int(.12 * SR)) / int(.12 * SR), "same")
