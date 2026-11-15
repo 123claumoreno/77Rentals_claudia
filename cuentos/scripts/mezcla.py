@@ -21,8 +21,8 @@ def frames(i, e, t):
 fr = [frames(i, e, t) for i, (e, t) in enumerate(rows)]
 lead_s = [(defs[e][1] + VOZ_INICIO) / 30 for e, t in rows]
 durs = [x / 30 for x in fr]; total = sum(durs)
-lv = voz[8] if len(voz) > 8 and voz[8] and len(voz[8]['palabras']) == 8 else None
-CITY_T = [((8 + VOZ_INICIO) / 30 + lv['palabras'][[0, 1, 2, 5][i]]['s'] - 0.13) if lv else (34 + 20 * i) / 30 for i in range(4)]
+lv = voz[4] if len(voz) > 4 and voz[4] and len(voz[4]['palabras']) == 15 else None
+CITY_T = [((8 + VOZ_INICIO) / 30 + lv['palabras'][[7, 8, 9, 12][i]]['s'] - 0.13) if lv else (120 + 22 * i) / 30 for i in range(4)]
 starts = np.concatenate([[0], np.cumsum(durs)[:-1]])
 N = int(SR * (total + 0.3))
 rng = np.random.default_rng(11)
@@ -99,9 +99,8 @@ BED = {
   "jet":   stereo(lambda: .6*norm(band(rng.standard_normal(N), 150, 1800)) + .25*np.sin(2*np.pi*180*t_all) + .12*np.sin(2*np.pi*360*t_all)),
 }
 # scene -> {bed: level} or (level, (from, to)) in seconds inside the scene; jet follows a swell
-SCENE_BEDS = {0: {"ocean": .5, "room": .35}, 1: {"ocean": .35, "room": .35}, 2: {"ac": (.55, (0, 3.2)), "room": .3}, 3: {"hall": .5},
-              4: {"hall": .4}, 5: {"lobby": .6}, 6: {"ocean": .65, "wind": .35}, 7: {"room": .25},
-              8: {"ocean": .5, "crowd": .35}, 9: {"jet": "swell", "wind": .35}, 10: {"room": .2}}
+SCENE_BEDS = {0: {"ocean": .5, "room": .35}, 1: {"ac": (.55, (0, 2.4)), "room": .3}, 2: {"hall": .5}, 3: {"ocean": .65, "wind": .35},
+              4: {"ocean": .5, "crowd": .35}, 5: {"jet": "swell", "wind": .35}, 6: {"room": .2}}
 gains = {k: np.zeros(N) for k in BED}
 for i, d in enumerate(durs):
     s0 = starts[i]
@@ -158,27 +157,24 @@ def steps(scene, a, b, n, gain=.8):
     for j in range(n): ev(scene, a + (b - a) * j / max(1, n - 1) + rng.uniform(-.04, .04), "step", gain * rng.uniform(.6, 1), rng.uniform(-.4, .4))
 
 # ---- sound effects, timed to what happens in each scene (local seconds = frame / 30)
-steps(0, 0, 1.3, 9, .6); ev(0, 1.4, "chime", .8, .3); ev(0, 2.6, "chime", .5, -.3, f=1568)
-for j in range(int(durs[1] / .5)): ev(1, .25 + j * .5, "tic" if j % 2 == 0 else "toc", .55, .35)
-ev(1, 1.6, "chime", .5, .3)
-steps(2, 0, 1.4, 10, .5); ev(2, .2, "roll", .9, -.2, d=1.5); ev(2, 1.9, "beep", .8, .4, f=1700); ev(2, 2.33, "click", 1, -.5)
-ev(2, 2.75, "beep", .7, .3, f=1100); ev(2, 2.85, "beep", .7, .3, f=800); ev(2, 3.2, "zap", 1, .5); ev(2, 3.47, "chime", .7, -.3); ev(2, 3.8, "chime", .7, .3, f=1760)
-ev(3, .2, "ding", .5, .5, f=1040); steps(3, .1, 1.4, 8, .5); ev(3, 0, "roll", .8, -.2, d=1.5); ev(3, 1.75, "clank", 1, -.1)
-ev(3, 2.75, "thud", 1, -.1); ev(3, 3.25, "clank", .7, -.1); ev(3, 3.3, "chime", .8)
-steps(4, 0, 1.4, 8, .5)
-for j, f_ in enumerate((1400, 1650, 1900)): ev(4, 1.7 + j * .1, "beep", .8, .4, f=f_)
-ev(4, 2.1, "clank", .7, .4); ev(4, 2.9, "click", .8, .4); ev(4, 3.4, "click", 1, .4); ev(4, 3.75, "chime", .9, 0, f=1568)
-steps(5, 0, 1.5, 9, .5); ev(5, 0, "roll", .8, -.2, d=1.5)
-for j in range(5): ev(5, 1.53 + j * .33, "ding", .5, 0, f=880 * 2 ** (j * 2 / 12))
-steps(6, 0, 1.5, 9, .5); ev(6, 0, "roll", .8, -.2, d=1.5)
-for tm in (1.6, 2.7, 3.6): ev(6, tm, "splash", .7, rng.uniform(-.6, .6))
-ev(7, .0, "whoosh", .7, 0, d=.8); ev(7, .3, "pop", .6); ev(7, 1.0, "chime", .7, -.3, f=1568); ev(7, 1.6, "chime", .6, .3, f=1760); ev(7, 2.8, "chime", .5, -.3); ev(7, 3.4, "chime", .5, .3, f=1568)
-steps(8, 0, 1.5, 9, .5); ev(8, 0, "roll", .8, -.2, d=1.5)
-for tm in CITY_T: ev(8, tm, "pop", .5, rng.uniform(-.4, .4)); ev(8, tm + .02, "chime", .35, 0, f=1760)
-ev(9, durs[9] * .5 - 1.0, "whoosh", 1.0, 0, d=2.2); ev(9, .3, "ding", .5, 0, f=1320)
-for k in range(14): ev(9, (30 + 9 * k + 6) / 30, "beso", .55, rng.uniform(-.5, .5))   # kisses leave the plane windows
-ev(10, .73, "chime", .9, 0, f=1318); ev(10, 1.2, "chime", .6, 0, f=1760); ev(10, 2.3, "chime", .7, 0, f=1568)
-for j, tm in enumerate((.3, .9, 1.5, 2.6, 3.4, 4.6)): ev(10, tm, "pop", .4, rng.uniform(-.6, .6))
+ev(0, 1.2, "chime", .8, .3); ev(0, 2.2, "chime", .5, -.3, f=1568)
+for j in range(int((durs[0] - 2.5) / .5)): ev(0, 2.5 + j * .5, "tic" if j % 2 == 0 else "toc", .55, .35)
+ev(0, 2.47, "pop", .6); ev(0, 2.55, "chime", .6, 0, f=1760)
+ev(1, .5, "beep", .8, .4, f=1700); ev(1, 1.0, "beep", .8, .4, f=1500); ev(1, 1.53, "click", 1, -.5)
+ev(1, 1.93, "beep", .7, .3, f=1100); ev(1, 2.03, "beep", .7, .3, f=800); ev(1, 2.4, "zap", 1, .5); ev(1, 2.67, "chime", .7, -.3); ev(1, 3.0, "chime", .7, .3, f=1760)
+ev(2, .2, "ding", .5, .5, f=1040); ev(2, 1.2, "clank", 1, -.1); ev(2, 2.07, "thud", 1, -.1); ev(2, 2.33, "chime", .8); ev(2, 2.4, "clank", .7, -.1)
+for j, f_ in enumerate((1400, 1650, 1900)): ev(2, 3.2 + j * .13, "beep", .8, -.4, f=f_)
+ev(2, 3.5, "clank", .7, -.4); ev(2, 4.07, "click", .8, -.4); ev(2, 4.53, "click", 1, -.4); ev(2, 4.6, "chime", .9, 0, f=1568)
+for j in range(5): ev(3, .53 + j * .3, "ding", .5, 0, f=880 * 2 ** (j * 2 / 12))
+for tm in (1.0, 2.6, 4.6, 6.0): ev(3, tm, "splash", .7, rng.uniform(-.6, .6))
+ev(3, 3.93, "chime", .8, 0, f=1318)
+ev(4, .1, "whoosh", .7, 0, d=.8); ev(4, .25, "pop", .6); ev(4, 1.0, "chime", .7, -.3, f=1568); ev(4, 1.7, "chime", .6, .3, f=1760)
+ev(4, CITY_T[0] - .4, "whoosh", .6, 0, d=.6)
+for tm in CITY_T: ev(4, tm, "pop", .5, rng.uniform(-.4, .4)); ev(4, tm + .02, "chime", .35, 0, f=1760)
+ev(5, durs[5] * .5 - 1.0, "whoosh", 1.0, 0, d=2.2); ev(5, .3, "ding", .5, 0, f=1320)
+for k in range(14): ev(5, (30 + 9 * k + 6) / 30, "beso", .55, rng.uniform(-.5, .5))   # kisses leave the plane windows
+ev(6, .73, "chime", .9, 0, f=1318); ev(6, 1.2, "chime", .6, 0, f=1760); ev(6, 2.3, "chime", .7, 0, f=1568)
+for j, tm in enumerate((.3, .9, 1.5, 2.6, 3.4, 4.6)): ev(6, tm, "pop", .4, rng.uniform(-.6, .6))
 for i in range(1, len(durs)): put(fx, starts[i] - .6, hit("whoosh", d=1.2), 0, .5)   # the sea wave between scenes
 
 # ------------------------------------------------------------------ narration

@@ -311,3 +311,34 @@ export const Cielo: React.FC = () => {
     </g>
   );
 };
+
+/* hallway with BOTH things: the apartment door on the left (key lockbox goes next to it), the trash chute and the elevator on the right */
+export const PasilloLargo: React.FC<{flap?: number}> = ({flap = 0}) => (
+  <g>
+    <rect x={-20} y={-20} width={1120} height={1400} fill="#efe3cf" />
+    {[0, 1, 2, 3, 4, 5].map((i) => <line key={i} x1={i * 200 - 20} y1={-20} x2={i * 200 - 20} y2={1380} stroke={P.ink} strokeWidth={3} opacity={0.1} />)}
+    <rect x={20} y={450} width={230} height={930} rx={8} fill="#c79a63" {...ln} />
+    <rect x={40} y={480} width={190} height={400} rx={6} fill="#d6ad76" {...ln} strokeWidth={4} />
+    <rect x={40} y={910} width={190} height={430} rx={6} fill="#d6ad76" {...ln} strokeWidth={4} />
+    <rect x={196} y={880} width={16} height={70} rx={8} fill={P.ink} />
+    <rect x={80} y={404} width={110} height={38} rx={8} fill={P.gold} {...ln} />
+    <text x={135} y={435} textAnchor="middle" fontFamily={hand} fontWeight={700} fontSize={36} fill={P.ink}>1204</text>
+    <rect x={770} y={480} width={290} height={900} rx={10} fill="#a8b6c0" {...ln} />
+    <rect x={782} y={492} width={128} height={888} fill="#cdd8de" stroke={P.ink} strokeWidth={4} />
+    <rect x={916} y={492} width={128} height={888} fill="#cdd8de" stroke={P.ink} strokeWidth={4} />
+    <rect x={810} y={410} width={170} height={60} rx={14} fill={P.ink} />
+    <circle cx={846} cy={440} r={9} fill="#4ec27a" />
+    <text x={920} y={456} textAnchor="middle" fontFamily={hand} fontWeight={700} fontSize={48} fill="#4ec27a">12</text>
+    <g transform="translate(610 1290)">
+      <rect x={-68} y={-120} width={136} height={170} rx={14} fill="#b98a5a" {...ln} />
+      <rect x={-52} y={-104} width={104} height={138} rx={8} fill="#2a2030" />
+      <g transform={`translate(-52 -104) scale(${1 - flap * 0.85} 1)`}>
+        <rect x={0} y={0} width={104} height={138} rx={8} fill={P.white} {...ln} strokeWidth={4} />
+        <circle cx={86} cy={70} r={7} fill={P.gold} />
+      </g>
+      <circle cx={0} cy={-170} r={42} fill={P.sea} {...ln} />
+      <path d="M-14 -184 h28 l-3 28 h-22 z M-18 -188 h36 M-6 -192 h12" stroke={P.white} strokeWidth={5} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+    <Piso y={1380} />
+  </g>
+);

@@ -4,7 +4,7 @@ import {AbsoluteFill, Easing, Img, interpolate, random, spring, staticFile, useC
 import {P, Sketch, W, H, hand, ln} from '../story/kit';
 import {Mom} from '../cuento/people';
 import {outfit} from '../theme';
-import {Balcon, Cielo, CiudadMar, Habitacion, Lobby, Maleta, Pasillo, PuertaMadera, Sala, Terraza, Tabla, clampE} from './decor';
+import {Cielo, CiudadMar, Habitacion, Maleta, PasilloLargo, Sala, Terraza, clampE} from './decor';
 import {Cochecito, MAMA, MamaCoche, PLAYA, Pers, VIAJE} from './gente';
 import {VOCES} from '../voz';
 import {VOZ_INICIO} from '../motor/voz';
@@ -27,76 +27,87 @@ const Destello: React.FC<{x: number; y: number; r: number; c?: string}> = ({x, y
   <path d={`M${x} ${y - r}Q${x} ${y} ${x + r} ${y}Q${x} ${y} ${x} ${y + r}Q${x} ${y} ${x - r} ${y}Q${x} ${y} ${x} ${y - r}Z`} fill={c} stroke={P.ink} strokeWidth={2.5} />
 );
 
-/* 1 · hello, in the bedroom with the balcony */
-export const SHola: React.FC = () => {
+/* helper pieces used by several scenes */
+const Bolsa: React.FC<{x?: number; y?: number; s?: number}> = ({x = 0, y = 0, s = 1}) => (
+  <g transform={`translate(${x} ${y}) scale(${s})`}>
+    <path d="M-30 -48 Q-44 4 -26 30 Q0 44 26 30 Q44 4 30 -48 Q0 -62 -30 -48 Z" fill="#5b4a72" {...ln} />
+    <path d="M-16 -56 Q0 -90 16 -56" stroke={P.ink} strokeWidth={6} fill="none" strokeLinecap="round" />
+    <ellipse cx={-12} cy={-12} rx={7} ry={16} fill={P.white} opacity={0.25} />
+  </g>
+);
+const Llave: React.FC = () => (
+  <g>
+    <circle cx={0} cy={-32} r={15} fill={P.gold} {...ln} strokeWidth={4} />
+    <circle cx={0} cy={-32} r={5} fill={P.ink} />
+    <rect x={-4} y={-18} width={8} height={44} rx={3} fill={P.gold} {...ln} strokeWidth={3} />
+    <path d="M4 10 h14 M4 20 h10" stroke={P.ink} strokeWidth={5} strokeLinecap="round" />
+  </g>
+);
+const Celu: React.FC = () => (
+  <g transform="translate(0 -4)"><rect x={-17} y={-62} width={34} height={64} rx={8} fill={P.ink} /><rect x={-13} y={-57} width={26} height={50} rx={4} fill="#9be3f5" /></g>
+);
+/* the family stays where it is (nobody runs in): same spots for the stroller scenes */
+const GRUPO = {mom: 100, camilo: 600, tia: 740, tia2: 860, nino: 975};
+
+/* 1 · hello and check-out, in the surf bedroom: first they greet, then the clock and the suitcases */
+export const SInicio: React.FC = () => {
   const f = useCurrentFrame();
-  const m = camina(f, 10, 150, 0), c = camina(f, 90, 340, 0), t = camina(f, 230, 520, 0), t2 = camina(f, 420, 700, 0), n = camina(f, 1230, 890, 0, 34);
+  const second = f >= 76;
+  const up = interpolate(f, [76, 98], [0, 1], ease);
+  const tic = Math.floor(f / 15);
+  const pack = spring({frame: f - 74, fps: 30, config: {damping: 10}});
   const lk = (p: number) => Math.sin(f / 9 + p) * 0.6;
   return (
     <AbsoluteFill style={{background: '#f2e5cc'}}>
       <Sketch>
-        <Habitacion />
-        <Mom x={m.x} y={1730} s={1.0} walk={m.w} baby hat waveBack={m.t >= 1} smile="open" skin={MAMA.playa.skin} />
-        <Pers r={PLAYA.camilo} x={c.x} y={1740} s={1.12} walk={c.w} wave={c.t >= 1} smile="open" look={c.t >= 1 ? lk(1) : 0} />
-        <Pers r={PLAYA.tia} x={t.x} y={1740} s={1.05} walk={t.w} wave={t.t >= 1} smile="open" look={t.t >= 1 ? lk(3) : 0} />
-        <Pers r={PLAYA.tia2} x={t2.x} y={1740} s={1.05} walk={t2.w} aR={t2.t >= 1 ? 125 + wv(f, 2, 22) : undefined} smile="open" look={t2.t >= 1 ? lk(5) : 0} />
-        <Pers r={PLAYA.nino} x={n.x} y={1740} s={1.22} walk={n.w} aL={n.t >= 1 ? 140 + wv(f, 0, 18) : undefined} aR={n.t >= 1 ? 140 + wv(f, 1, 18) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 20 : 0} smile="open" />
-        {f > 40 && [[150, 1010], [400, 960], [620, 1030], [860, 980]].map(([sx, sy], i) => <Destello key={i} x={sx} y={sy} r={10 + Math.max(0, Math.sin(f / 5 + i * 1.7)) * 26} c={i % 2 ? P.goldSoft : P.white} />)}
-      </Sketch>
-    </AbsoluteFill>
-  );
-};
-
-/* 2 · check-out: the clock at twelve, suitcases, thumbs up */
-export const SCheckout: React.FC = () => {
-  const f = useCurrentFrame();
-  const up = interpolate(f, [26, 46], [0, 1], ease);
-  const tic = Math.floor(f / 15);
-  return (
-    <AbsoluteFill style={{background: '#f2e5cc'}}>
-      <Sketch>
         <Habitacion reloj cartel tic={tic} />
-        <text x={tic % 2 ? 640 : 330} y={tic % 2 ? 560 : 580} textAnchor="middle" fontFamily={hand} fontWeight={700} fontSize={60} fill={P.coral} stroke={P.ink} strokeWidth={2}>{tic % 2 ? 'tac' : 'tic'}</text>
-        <Maleta x={245} y={1772} color={P.coral} />
-        <Maleta x={430} y={1776} color={P.sea} s={0.9} />
-        <Maleta x={610} y={1774} color={P.gold} s={0.85} />
+        {second && <text x={tic % 2 ? 640 : 330} y={tic % 2 ? 560 : 580} textAnchor="middle" fontFamily={hand} fontWeight={700} fontSize={60} fill={P.coral} stroke={P.ink} strokeWidth={2}>{tic % 2 ? 'tac' : 'tic'}</text>}
+        {pack > 0.02 && (
+          <g>
+            <Maleta x={245} y={1772} color={P.coral} s={pack} />
+            <Maleta x={430} y={1776} color={P.sea} s={0.9 * pack} />
+            <Maleta x={610} y={1774} color={P.gold} s={0.85 * pack} />
+          </g>
+        )}
         <Mom x={150} y={1730} s={1.0} baby hat waveBack smile="open" skin={MAMA.playa.skin} />
-        <Pers r={PLAYA.camilo} x={340} y={1740} s={1.12} aR={95 * up} holdR={up > 0.5 ? <Pulgar skin={PLAYA.camilo.skin} /> : undefined} smile="open" look={Math.sin(f / 12) * 0.5} jump={up > 0.9 ? Math.abs(Math.sin(f / 6)) * 8 : 0} />
-        <Pers r={PLAYA.tia} x={520} y={1740} s={1.05} aL={140 + wv(f, 2, 10)} smile="open" look={Math.sin(f / 12 + 2) * 0.5} />
-        <Pers r={PLAYA.tia2} x={700} y={1740} s={1.05} aR={135 + wv(f, 4, 12)} smile="open" look={Math.sin(f / 12 + 4) * 0.5} />
-        <Pers r={PLAYA.nino} x={890} y={1740} s={1.22} aL={120 + wv(f, 0, 20)} aR={120 + wv(f, 1, 20)} jump={Math.abs(Math.sin(f / 5)) * 18} smile="open" />
+        <Pers r={PLAYA.camilo} x={340} y={1740} s={1.12} wave={!second} aL={second ? 0 : undefined} aR={second ? 95 * up : undefined} holdR={second && up > 0.5 ? <Pulgar skin={PLAYA.camilo.skin} /> : undefined} smile="open" look={lk(1)} jump={second && up > 0.9 ? Math.abs(Math.sin(f / 6)) * 8 : 0} />
+        <Pers r={PLAYA.tia} x={520} y={1740} s={1.05} wave smile="open" look={lk(3)} />
+        <Pers r={PLAYA.tia2} x={700} y={1740} s={1.05} aR={125 + wv(f, 2, 22)} smile="open" look={lk(5)} />
+        <Pers r={PLAYA.nino} x={890} y={1740} s={1.22} aL={140 + wv(f, 0, 18)} aR={140 + wv(f, 1, 18)} jump={Math.abs(Math.sin(f / 5)) * 20} smile="open" />
+        {!second && [[150, 1010], [400, 960], [620, 1030], [860, 980]].map(([sx, sy], i) => <Destello key={i} x={sx} y={sy} r={10 + Math.max(0, Math.sin(f / 5 + i * 1.7)) * 26} c={i % 2 ? P.goldSoft : P.white} />)}
       </Sketch>
     </AbsoluteFill>
   );
 };
 
-/* 3 · lights, AC and TV off */
+/* 2 · lights, AC and TV go off */
 export const SApagar: React.FC = () => {
   const f = useCurrentFrame();
-  const m = camina(f, -700, 700, 0, 44), c = camina(f, -330, 540, 6), t = camina(f, -420, 220, 12), t2 = camina(f, -500, 430, 18), n = camina(f, 1350, 320, 4, 34);
-  const off = f >= 70, led = f >= 82, tv = f < 96;
-  const dark = interpolate(f, [70, 84], [0, 0.32], clampE);
-  const press = t.t >= 1 ? interpolate(f, [52, 60, 70], [95, 120, 100], clampE) : undefined;
-  const k1 = spring({frame: f - 104, fps: 30, config: {damping: 11}}), k2 = spring({frame: f - 114, fps: 30, config: {damping: 11}});
+  const off = f >= 46, led = f >= 58, tv = f < 72;
+  const dark = interpolate(f, [46, 60], [0, 0.32], clampE);
+  const press = interpolate(f, [24, 34, 46], [95, 122, 100], clampE);
+  const rm = interpolate(f, [12, 30], [0, 125], clampE);
+  const k1 = spring({frame: f - 80, fps: 30, config: {damping: 11}}), k2 = spring({frame: f - 90, fps: 30, config: {damping: 11}});
   return (
     <AbsoluteFill style={{background: '#f2e5cc'}}>
       <Sketch>
         <Sala tv={tv} ledRojo={led} interruptor={!off} />
-        <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.22} walk={n.w} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 12 : 0} aL={n.t >= 1 ? 40 : undefined} smile="open" />
-        <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aL={t.t >= 1 ? 118 : undefined} smile="open" />
-        <Pers r={VIAJE.tia2} x={t2.x} y={1740} s={1.0} walk={t2.w} aR={t2.t >= 1 ? 125 + wv(f, 3, 16) : undefined} smile="open" />
-        <Pers r={VIAJE.camilo} x={c.x} y={1740} s={1.08} walk={c.w} aL={c.t >= 1 ? interpolate(f, [40, 56], [0, 125], clampE) : undefined} holdL={c.t >= 1 && f > 44 ? <rect x={-9} y={-40} width={18} height={54} rx={7} fill={P.ink} /> : undefined} holdR={<MaletaMano color={P.coral} />} smile="open" />
-        <MamaCoche x={m.x} y={1740} s={0.8} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        {f > 60 && f < 96 && <path d={`M440 1320 Q400 900 ${330 + Math.sin(f / 3) * 4} 580`} stroke={P.gold} strokeWidth={6} strokeDasharray="16 16" fill="none" />}
+        <Maleta x={600} y={1782} color={P.sea} s={0.8} />
+        <Pers r={VIAJE.nino} x={320} y={1740} s={1.12} jump={Math.abs(Math.sin(f / 5)) * 10} aL={40} smile="open" />
+        <Pers r={VIAJE.tia} x={220} y={1740} s={1.0} aL={press} smile="open" />
+        <Pers r={VIAJE.tia2} x={430} y={1740} s={1.0} aR={125 + wv(f, 3, 16)} smile="open" />
+        <Pers r={VIAJE.camilo} x={540} y={1740} s={1.08} aL={rm} holdL={rm > 40 ? <rect x={-9} y={-40} width={18} height={54} rx={7} fill={P.ink} /> : undefined} holdR={<MaletaMano color={P.coral} />} smile="open" />
+        <MamaCoche x={700} y={1740} s={0.8} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
+        {f > 34 && f < 72 && <path d={`M360 1330 Q345 900 ${330 + Math.sin(f / 3) * 4} 580`} stroke={P.gold} strokeWidth={6} strokeDasharray="16 16" fill="none" />}
         <rect x={-20} y={-20} width={1120} height={1960} fill={P.purpleDark} opacity={dark} />
-        {f > 104 && (
+        {f > 80 && (
           <g transform={`translate(190 800) scale(${k1})`}>
             <circle r={66} fill={P.white} {...ln} />
             <path d="M-4 -40 Q40 -30 30 18 Q-6 38 -34 10 Q-30 -26 -4 -40 Z" fill={P.leaf} {...ln} strokeWidth={4} />
             <path d="M-24 30 Q0 0 26 -26" stroke={P.white} strokeWidth={5} fill="none" />
           </g>
         )}
-        {f > 114 && (
+        {f > 90 && (
           <g transform={`translate(820 440) scale(${k2})`}>
             <circle r={66} fill={P.white} {...ln} />
             <path d="M10 -44 L-24 8 H-4 L-12 44 L26 -10 H6 Z" fill={P.gold} {...ln} strokeWidth={4} />
@@ -107,57 +118,22 @@ export const SApagar: React.FC = () => {
   );
 };
 
-/* 4 · trash goes down the chute */
-const Bolsa: React.FC<{x?: number; y?: number; s?: number}> = ({x = 0, y = 0, s = 1}) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`}>
-    <path d="M-30 -48 Q-44 4 -26 30 Q0 44 26 30 Q44 4 30 -48 Q0 -62 -30 -48 Z" fill="#5b4a72" {...ln} />
-    <path d="M-16 -56 Q0 -90 16 -56" stroke={P.ink} strokeWidth={6} fill="none" strokeLinecap="round" />
-    <ellipse cx={-12} cy={-12} rx={7} ry={16} fill={P.white} opacity={0.25} />
-  </g>
-);
-export const SBasura: React.FC = () => {
+/* 3 · hallway: the bag goes down the chute, then the key goes into the lockbox (two things, one scene) */
+export const SPasillo: React.FC = () => {
   const f = useCurrentFrame();
-  const c = camina(f, 90, 340, 0, 42), n = camina(f, -260, 90, 8, 40), t = camina(f, -420, 215, 14, 40), m = camina(f, 1100, 650, 4, 40);
-  const reach = interpolate(f, [44, 58], [0, 90], clampE);
-  const flap = interpolate(f, [52, 62, 96, 106], [0, 1, 1, 0], clampE);
-  const drop = interpolate(f, [60, 82], [0, 1], clampE);
-  const star = spring({frame: f - 96, fps: 30, config: {damping: 10}});
+  const aR = f < 68 ? interpolate(f, [18, 36], [0, 90], clampE) : interpolate(f, [68, 82], [90, 0], clampE);
+  const aL = f < 140 ? interpolate(f, [86, 102], [0, 100], clampE) : interpolate(f, [140, 154], [100, 0], clampE);
+  const flap = interpolate(f, [36, 44, 62, 72], [0, 1, 1, 0], clampE);
+  const drop = interpolate(f, [46, 66], [0, 1], clampE);
+  const star = spring({frame: f - 70, fps: 30, config: {damping: 10}});
+  const open = interpolate(f, [104, 112, 128, 136], [0, 1, 1, 0], clampE);
+  const inside = interpolate(f, [110, 130], [0, 1], clampE);
+  const ok = spring({frame: f - 138, fps: 30, config: {damping: 9}});
   return (
     <AbsoluteFill style={{background: '#f2e5cc'}}>
       <Sketch>
-        <Pasillo flap={flap} />
-        <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.15} walk={n.w} aL={n.t >= 1 ? 120 + wv(f, 0, 16) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 12 : 0} smile="open" />
-        <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aR={t.t >= 1 ? 125 + wv(f, 1, 16) : undefined} smile="open" />
-        <MamaCoche x={m.x} y={1740} s={0.85} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? reach : undefined} holdR={drop < 0.02 ? <Bolsa y={50} s={0.9} /> : undefined} smile="open" />
-        {drop > 0.02 && drop < 1 && <Bolsa x={interpolate(drop, [0, 1], [540, 500])} y={interpolate(drop, [0, 1], [1340, 1360]) + drop * drop * 40} s={0.9 * (1 - drop * 0.6)} />}
-        {f > 96 && <g><Estrella x={430} y={1030} s={1.6 * star} rot={-10} /><Destello x={540} y={940} r={16} c={P.goldSoft} /><Destello x={330} y={1000} r={12} /></g>}
-      </Sketch>
-    </AbsoluteFill>
-  );
-};
-
-/* 5 · the key goes into the small lockbox by the door */
-const Llave: React.FC = () => (
-  <g>
-    <circle cx={0} cy={-32} r={15} fill={P.gold} {...ln} strokeWidth={4} />
-    <circle cx={0} cy={-32} r={5} fill={P.ink} />
-    <rect x={-4} y={-18} width={8} height={44} rx={3} fill={P.gold} {...ln} strokeWidth={3} />
-    <path d="M4 10 h14 M4 20 h10" stroke={P.ink} strokeWidth={5} strokeLinecap="round" />
-  </g>
-);
-export const SLlave: React.FC = () => {
-  const f = useCurrentFrame();
-  const c = camina(f, -250, 415, 0, 42), t = camina(f, -420, 95, 8, 40), t2 = camina(f, -520, 200, 12, 40), n = camina(f, -340, 305, 16, 36);
-  const up = interpolate(f, [44, 62], [0, 118], clampE);
-  const open = interpolate(f, [62, 72, 100, 110], [0, 1, 1, 0], clampE);
-  const inside = interpolate(f, [70, 92], [0, 1], clampE);
-  const ok = spring({frame: f - 112, fps: 30, config: {damping: 9}});
-  return (
-    <AbsoluteFill style={{background: '#f2e5cc'}}>
-      <Sketch>
-        <PuertaMadera />
-        <g transform="translate(600 1330)">
+        <PasilloLargo flap={flap} />
+        <g transform="translate(268 1340)">
           <rect x={-38} y={-52} width={76} height={104} rx={12} fill="#2f2640" {...ln} />
           {inside > 0.02 && inside < 1 && <g transform={`translate(0 ${-30 + inside * 36}) scale(0.5)`}><Llave /></g>}
           <g transform={`translate(-38 0) scale(${1 - open * 0.88} 1)`}>
@@ -166,61 +142,45 @@ export const SLlave: React.FC = () => {
             <rect x={14} y={14} width={48} height={14} rx={6} fill={P.sea} />
           </g>
         </g>
-        <Maleta x={150} y={1778} color={P.sea} s={0.85} />
-        <Maleta x={255} y={1780} color={P.gold} s={0.8} />
-        <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.12} walk={n.w} aL={n.t >= 1 ? 120 + wv(f, 0, 16) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 12 : 0} smile="open" />
-        <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aR={t.t >= 1 ? 130 + wv(f, 1, 14) : undefined} smile="open" />
-        <Pers r={VIAJE.tia2} x={t2.x} y={1740} s={1.0} walk={t2.w} aL={t2.t >= 1 ? 125 + wv(f, 2, 14) : undefined} smile="open" />
-        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? up : undefined} holdR={inside < 0.02 && c.t >= 1 ? <g transform="translate(6 10) rotate(-40)"><Llave /></g> : undefined} smile="open" />
-        {f > 112 && <g transform={`translate(600 1200) scale(${ok})`}><circle r={46} fill={P.leaf} {...ln} /><path d="M-22 2 l14 14 l30 -32" stroke={P.white} strokeWidth={10} fill="none" strokeLinecap="round" strokeLinejoin="round" /></g>}
+        <Maleta x={330} y={1782} color={P.sea} s={0.8} />
+        <Maleta x={580} y={1784} color={P.gold} s={0.8} />
+        <Pers r={VIAJE.tia} x={150} y={1740} s={1.0} aR={125 + wv(f, 1, 16)} smile="open" />
+        <Pers r={VIAJE.tia2} x={250} y={1740} s={1.0} aL={undefined} aR={0} smile="open" />
+        <Pers r={VIAJE.nino} x={390} y={1740} s={1.1} aL={120 + wv(f, 0, 16)} jump={Math.abs(Math.sin(f / 5)) * 10} smile="open" />
+        <Pers r={VIAJE.camilo} x={490} y={1740} s={1.08} aR={aR} aL={aL} holdR={drop < 0.02 ? <Bolsa y={50} s={0.9} /> : undefined} holdL={f >= 86 && inside < 0.02 ? <g transform="translate(-4 10) rotate(40)"><Llave /></g> : undefined} smile="open" />
+        <MamaCoche x={700} y={1740} s={0.8} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
+        {drop > 0.02 && drop < 1 && <Bolsa x={interpolate(drop, [0, 1], [668, 612])} y={interpolate(drop, [0, 1], [1400, 1340]) + drop * drop * 40} s={0.9 * (1 - drop * 0.6)} />}
+        {f > 70 && f < 118 && <g><Estrella x={640} y={1060} s={1.5 * star} rot={-10} /><Destello x={730} y={980} r={16} c={P.goldSoft} /></g>}
+        {f > 138 && <g transform={`translate(268 1210) scale(${ok})`}><circle r={46} fill={P.leaf} {...ln} /><path d="M-22 2 l14 14 l30 -32" stroke={P.white} strokeWidth={10} fill="none" strokeLinecap="round" strokeLinejoin="round" /></g>}
       </Sketch>
     </AbsoluteFill>
   );
 };
 
-/* 6 · opinion: stars appear one by one */
-export const SOpinion: React.FC = () => {
+/* 4 · terrace: first the opinion (stars one by one), then the thank-you wave with heads turning */
+export const STerraza: React.FC = () => {
   const f = useCurrentFrame();
-  const m = camina(f, -700, 100, 0, 44), c = camina(f, 1300, 600, 6), t = camina(f, 1500, 740, 12), t2 = camina(f, 1600, 860, 16), n = camina(f, 1400, 975, 4, 34);
-  const up = interpolate(f, [44, 62], [0, 118], clampE);
-  const pos: [number, number][] = [[190, 640], [340, 560], [520, 520], [700, 560], [860, 640]];
-  return (
-    <AbsoluteFill style={{background: '#f2e5cc'}}>
-      <Sketch>
-        <Lobby />
-        <MamaCoche x={m.x} y={1740} s={0.85} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        <Maleta x={510} y={1782} color={P.sea} s={0.8} />
-        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? up : undefined} holdR={up > 60 ? <g transform="translate(0 -4)"><rect x={-17} y={-62} width={34} height={64} rx={8} fill={P.ink} /><rect x={-13} y={-57} width={26} height={50} rx={4} fill="#9be3f5" /></g> : undefined} smile="open" />
-        <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aL={t.t >= 1 ? interpolate(f, [60, 76], [0, 80], clampE) : undefined} smile="open" />
-        <Pers r={VIAJE.tia2} x={t2.x} y={1740} s={1.0} walk={t2.w} aR={t2.t >= 1 ? 125 + wv(f, 2, 16) : undefined} smile="open" />
-        <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.12} walk={n.w} aL={n.t >= 1 ? 130 + wv(f, 0, 16) : undefined} aR={n.t >= 1 ? 130 + wv(f, 1, 16) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 18 : 0} smile="open" />
-        {pos.map(([sx, sy], i) => {
-          const k = spring({frame: f - (46 + i * 10), fps: 30, config: {damping: 9}});
-          return k > 0.01 ? <g key={i}><Estrella x={sx} y={sy} s={1.05 * k} rot={Math.sin(f / 8 + i) * 8} />{k > 0.9 && <Destello x={sx + 56} y={sy - 46} r={8 + Math.max(0, Math.sin(f / 4 + i)) * 12} />}</g> : null;
-        })}
-      </Sketch>
-    </AbsoluteFill>
-  );
-};
-
-/* 7 · thank you: waving goodbye on the terrace; heads turn to look at each other */
-export const SGracias: React.FC = () => {
-  const f = useCurrentFrame();
-  const m = camina(f, -700, 100, 0, 44), c = camina(f, -330, 600, 6), t = camina(f, -420, 740, 12), t2 = camina(f, -520, 860, 16), n = camina(f, 1350, 975, 4, 34);
+  const second = f >= 118;
+  const up = interpolate(f, [6, 26], [0, 118], clampE);
   const g1 = Math.sin(f / 9) * 0.9, g2 = Math.sin(f / 9 + 1.9) * 0.9;
-  const there = (x: {t: number}) => x.t >= 1;
+  const fade = interpolate(f, [108, 120], [1, 0], clampE);
+  const pos: [number, number][] = [[190, 640], [340, 560], [520, 520], [700, 560], [860, 640]];
   return (
     <AbsoluteFill style={{background: '#f2e5cc'}}>
       <Sketch>
         <Terraza />
         <Maleta x={500} y={1782} color={P.coral} s={0.85} />
-        <MamaCoche x={m.x} y={1740} s={0.85} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1740} s={1.08} walk={c.w} aR={there(c) ? 120 + wv(f, 0, 22) : undefined} look={there(c) ? -g1 : 0} smile="open" />
-        <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aL={there(t) ? 120 + wv(f, 2, 22) : undefined} look={there(t) ? g2 : 0} smile="open" />
-        <Pers r={VIAJE.tia2} x={t2.x} y={1740} s={1.0} walk={t2.w} aR={there(t2) ? 125 + wv(f, 3, 22) : undefined} look={there(t2) ? -g2 : 0} smile="open" />
-        <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.12} walk={n.w} aR={there(n) ? 130 + wv(f, 1, 22) : undefined} look={there(n) ? -g2 : 0} jump={there(n) ? Math.abs(Math.sin(f / 5)) * 10 : 0} smile="open" />
-        {f > 50 && [0, 1, 2, 3, 4, 5].map((i) => {
-          const tt = ((f - 50 + i * 24) % 140) / 140;
+        <MamaCoche x={GRUPO.mom} y={1740} s={0.85} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
+        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={GRUPO.camilo} y={1740} s={1.08} aR={second ? 120 + wv(f, 0, 22) : up} holdR={!second && up > 60 ? <Celu /> : undefined} look={second ? -g1 : 0} smile="open" />
+        <Pers r={VIAJE.tia} x={GRUPO.tia} y={1740} s={1.0} aL={second ? 120 + wv(f, 2, 22) : interpolate(f, [40, 56], [0, 80], clampE)} look={second ? g2 : 0} smile="open" />
+        <Pers r={VIAJE.tia2} x={GRUPO.tia2} y={1740} s={1.0} aR={second ? 125 + wv(f, 3, 22) : 0} look={second ? -g2 : 0} smile="open" />
+        <Pers r={VIAJE.nino} x={GRUPO.nino} y={1740} s={1.12} aL={second ? undefined : 130 + wv(f, 0, 16)} aR={130 + wv(f, 1, 22)} look={second ? g1 : 0} jump={Math.abs(Math.sin(f / 5)) * 10} smile="open" />
+        {pos.map(([sx, sy], i) => {
+          const k = spring({frame: f - (16 + i * 9), fps: 30, config: {damping: 9}}) * fade;
+          return k > 0.01 ? <g key={i}><Estrella x={sx} y={sy} s={1.05 * k} rot={Math.sin(f / 8 + i) * 8} />{k > 0.9 && <Destello x={sx + 56} y={sy - 46} r={8 + Math.max(0, Math.sin(f / 4 + i)) * 12} />}</g> : null;
+        })}
+        {second && [0, 1, 2, 3, 4, 5].map((i) => {
+          const tt = ((f - 118 + i * 24) % 140) / 140;
           return <path key={i} transform={`translate(${160 + i * 150 + Math.sin(f / 9 + i) * 18} ${1250 - tt * 720}) scale(${0.5 + (i % 3) * 0.12})`} d="M0 22C-44 -8 -34 -46 -14 -46 -4 -46 0 -36 0 -36S4 -46 14 -46C34 -46 44 -8 0 22Z" fill={[P.coral, P.gold, '#f0a0b8'][i % 3]} stroke={P.ink} strokeWidth={5} opacity={Math.sin(tt * Math.PI)} />;
         })}
       </Sketch>
@@ -228,66 +188,54 @@ export const SGracias: React.FC = () => {
   );
 };
 
-/* 8 · benefits card with the logo and a gold ribbon */
-export const SBeneficios: React.FC = () => {
+/* 5 · benefits card, then the four cities by the sea (the tags appear when the narrator says each one) */
+export const SBenCiu: React.FC = () => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const lv = VOCES['camilo-1204']?.[4];
+  const exacto = !!lv && lv.palabras.length === 15;
+  const idx = [7, 8, 9, 12];
+  const cuando = (i: number) => (exacto ? 8 + VOZ_INICIO + Math.round(lv!.palabras[idx[i]].s * 30) - 4 : 120 + i * 22);
+  const tExit = cuando(0) - 12;
   const k = spring({frame: f - 4, fps, config: {damping: 12}});
-  const shine = interpolate(f, [30, 70], [-300, 1200], clampE);
-  return (
-    <AbsoluteFill style={{background: 'radial-gradient(circle at 50% 45%, #fff3d6, #f1d8a6)'}}>
-      <Sketch>
-        <Tabla x={120} y={1180} s={1.1} rot={-12} c1={P.sea} c2={P.coral} />
-        <Tabla x={960} y={1220} s={1.0} rot={10} c1={P.coral} c2={P.white} />
-        {Array.from({length: 14}).map((_, i) => <Destello key={i} x={random(`bx${i}`) * W} y={480 + random(`by${i}`) * 1100} r={8 + Math.max(0, Math.sin(f / 6 + i * 2.1)) * 22} c={i % 2 ? P.goldSoft : P.white} />)}
-      </Sketch>
-      <div style={{position: 'absolute', left: 120, top: 640, width: 840, height: 640, transform: `scale(${k}) rotate(${(1 - k) * -14 - 2}deg)`}}>
-        <div style={{position: 'absolute', inset: 0, background: P.purpleDark, border: `8px solid ${P.gold}`, borderRadius: 54, boxShadow: '0 24px 0 rgba(58,18,72,.25)', overflow: 'hidden'}}>
-          <Img src={staticFile('img/logo.jpeg')} style={{position: 'absolute', left: 120, top: 30, width: 600, borderRadius: 24}} />
-          <div style={{position: 'absolute', left: 0, right: 0, bottom: 44, textAlign: 'center', fontFamily: outfit, fontWeight: 600, fontSize: 46, letterSpacing: '0.2em', color: P.goldSoft}}>HUÉSPED FRECUENTE</div>
-          <div style={{position: 'absolute', top: 0, bottom: 0, left: shine, width: 120, background: 'linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0))', transform: 'skewX(-20deg)'}} />
-        </div>
-        <svg width={840} height={640} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
-          <path d="M-30 540 L150 640 H-30 Z" fill={P.gold} stroke={P.ink} strokeWidth={5} strokeLinejoin="round" />
-          <g transform="translate(420 -6)">
-            <path d="M0 0 L-100 -56 V50 Z M0 0 L100 -56 V50 Z" fill={P.gold} stroke={P.ink} strokeWidth={5} strokeLinejoin="round" />
-            <circle r={30} fill={P.goldSoft} stroke={P.ink} strokeWidth={5} />
-          </g>
-        </svg>
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-/* 9 · four cities, by the sea */
-export const SCiudades: React.FC = () => {
-  const f = useCurrentFrame();
-  const m = camina(f, -700, 100, 0, 44), c = camina(f, -330, 600, 6), t = camina(f, -420, 740, 12), t2 = camina(f, -520, 860, 16), n = camina(f, 1350, 975, 4, 34);
+  const exit = interpolate(f, [tExit, tExit + 14], [1, 0], clampE);
+  const shine = interpolate(f, [24, 64], [-300, 1200], clampE);
   const tags: [string, number, number][] = [['Cartagena', 250, 560], ['Barranquilla', 760, 640], ['Santa Marta', 270, 780], ['Bogotá', 740, 860]];
-  const lv = VOCES['camilo-1204']?.[8];
-  const cuando = (i: number) => (lv && lv.palabras.length === 8 ? 8 + VOZ_INICIO + Math.round(lv.palabras[[0, 1, 2, 5][i]].s * 30) - 4 : 34 + i * 20);
   const g = Math.sin(f / 9) * 0.7;
   return (
     <AbsoluteFill style={{background: '#f2e5cc'}}>
       <Sketch>
         <CiudadMar />
         {tags.map(([name, tx, ty], i) => {
-          const k = spring({frame: f - cuando(i), fps: 30, config: {damping: 10}});
-          return k > 0.01 ? (
-            <g key={name} transform={`translate(${tx} ${ty + Math.sin(f / 14 + i) * 5}) scale(${k})`}>
+          const kk = spring({frame: f - cuando(i), fps: 30, config: {damping: 10}});
+          return kk > 0.01 ? (
+            <g key={name} transform={`translate(${tx} ${ty + Math.sin(f / 14 + i) * 5}) scale(${kk})`}>
               <rect x={-168} y={-44} width={336} height={88} rx={44} fill={P.purpleDeep} {...ln} />
               <circle cx={-126} cy={0} r={12} fill={P.gold} />
               <text x={14} y={16} textAnchor="middle" fontFamily={hand} fontWeight={700} fontSize={56} fill={P.white}>{name}</text>
             </g>
           ) : null;
         })}
-        <MamaCoche x={m.x} y={1760} s={0.85} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        <Maleta x={505} y={1802} color={P.sea} s={0.8} />
-        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1760} s={1.08} walk={c.w} aR={c.t >= 1 ? 120 + wv(f, 0, 22) : undefined} look={c.t >= 1 ? -g : 0} smile="open" />
-        <Pers r={VIAJE.tia} x={t.x} y={1760} s={1.0} walk={t.w} aL={t.t >= 1 ? 120 + wv(f, 2, 22) : undefined} look={t.t >= 1 ? g : 0} smile="open" />
-        <Pers r={VIAJE.tia2} x={t2.x} y={1760} s={1.0} walk={t2.w} aR={t2.t >= 1 ? 125 + wv(f, 3, 22) : undefined} look={t2.t >= 1 ? -g : 0} smile="open" />
-        <Pers r={VIAJE.nino} x={n.x} y={1760} s={1.12} walk={n.w} aR={n.t >= 1 ? 130 + wv(f, 1, 22) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 10 : 0} smile="open" />
+        <MamaCoche x={GRUPO.mom} y={1760} s={0.85} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
+        <Pers r={VIAJE.camilo} x={GRUPO.camilo} y={1760} s={1.08} aR={120 + wv(f, 0, 22)} look={-g} smile="open" />
+        <Pers r={VIAJE.tia} x={GRUPO.tia} y={1760} s={1.0} aL={120 + wv(f, 2, 22)} look={g} smile="open" />
+        <Pers r={VIAJE.tia2} x={GRUPO.tia2} y={1760} s={1.0} aR={125 + wv(f, 3, 22)} look={-g} smile="open" />
+        <Pers r={VIAJE.nino} x={GRUPO.nino} y={1760} s={1.12} aR={130 + wv(f, 1, 22)} jump={Math.abs(Math.sin(f / 5)) * 10} smile="open" />
       </Sketch>
+      <div style={{position: 'absolute', left: 150, top: 560, width: 780, height: 520, transform: `scale(${k * exit}) rotate(${(1 - k) * -14 - 2 + (1 - exit) * 12}deg)`, opacity: exit}}>
+        <div style={{position: 'absolute', inset: 0, background: P.purpleDark, border: `8px solid ${P.gold}`, borderRadius: 54, boxShadow: '0 24px 0 rgba(58,18,72,.25)', overflow: 'hidden'}}>
+          <Img src={staticFile('img/logo.jpeg')} style={{position: 'absolute', left: 110, top: 24, width: 560, borderRadius: 24}} />
+          <div style={{position: 'absolute', left: 0, right: 0, bottom: 34, textAlign: 'center', fontFamily: outfit, fontWeight: 600, fontSize: 42, letterSpacing: '0.2em', color: P.goldSoft}}>HUÉSPED FRECUENTE</div>
+          <div style={{position: 'absolute', top: 0, bottom: 0, left: shine, width: 120, background: 'linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0))', transform: 'skewX(-20deg)'}} />
+        </div>
+        <svg width={780} height={520} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
+          <path d="M-30 440 L130 520 H-30 Z" fill={P.gold} stroke={P.ink} strokeWidth={5} strokeLinejoin="round" />
+          <g transform="translate(390 -6)">
+            <path d="M0 0 L-90 -50 V46 Z M0 0 L90 -50 V46 Z" fill={P.gold} stroke={P.ink} strokeWidth={5} strokeLinejoin="round" />
+            <circle r={28} fill={P.goldSoft} stroke={P.ink} strokeWidth={5} />
+          </g>
+        </svg>
+      </div>
     </AbsoluteFill>
   );
 };

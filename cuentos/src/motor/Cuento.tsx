@@ -57,7 +57,7 @@ const Tarjeta: React.FC<{texto: string; dur: number; voz?: LineaVoz; llena?: boo
           transform: `scale(${0.85 + 0.15 * pop}) rotate(-1deg)`,
           fontFamily: hand,
           fontWeight: 700,
-          fontSize: 72,
+          fontSize: words.length > 12 ? 60 : 72,
           lineHeight: 1.08,
           color: P.purpleDeep,
           textAlign: 'center',
