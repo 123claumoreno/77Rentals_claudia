@@ -92,8 +92,8 @@ function charSVG(k) {
     straw: `<path d="M56 40Q58 -6 100 -6Q142 -6 144 40Z" fill="#F0D58C" stroke="#CBA54D" stroke-width="3"/><rect x="56" y="22" width="88" height="12" fill="#FF6B5B"/><ellipse cx="100" cy="40" rx="86" ry="17" fill="#E8C97A" stroke="#CBA54D" stroke-width="3"/>`,
     bucket: `<path d="M64 36Q66 4 100 4Q134 4 136 36Z" fill="#12B5B0" stroke="#251547" stroke-width="2"/><path d="M48 42Q100 20 152 42Q100 54 48 42Z" fill="#12B5B0" stroke="#251547" stroke-width="2"/><rect x="66" y="22" width="68" height="8" fill="#FFC93C"/>`, pareo: '' }[c.acc] || '';
   const head = `<circle cx="59" cy="68" r="9" fill="${S}"/><circle cx="141" cy="68" r="9" fill="${S}"/><ellipse cx="100" cy="64" rx="42" ry="45" fill="${S}"/>`;
-  const baby = c.acc === 'straw' ? `<g class="baby"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/><g class="bArm"><circle cx="179" cy="206" r="9" fill="${S}"/></g></g>` : '';
-  return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${body}${neck}${baby}${arm('L')}${arm('R')}${backHair}${head}${frontHair}${face}${accs}</svg>`;
+  const baby = c.acc === 'straw' ? `<g class="baby"><g transform="translate(0 28) translate(153 200) scale(1.42) translate(-153 -200)"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/><g class="bArm"><circle cx="180" cy="204" r="10" fill="${S}"/></g></g></g>` : '';
+  return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${body}${neck}${arm('L')}${backHair}${head}${frontHair}${face}${accs}${baby}${arm('R')}</svg>`;
 }
 function mk(stage, key, x, y, s) {
   const el = document.createElement('div'); el.className = 'fig'; el.innerHTML = charSVG(key); stage.appendChild(el);
@@ -114,7 +114,7 @@ function pose(f, o = {}) {
   const bl = ((t + f.x * 0.003) % 2.7) > 2.6 ? 0.1 : 1;
   f.eyes.style.transformOrigin = '100px 64px'; f.eyes.style.transform = `scaleY(${bl})`;
   f.mc.style.display = open ? 'none' : ''; f.mo.style.display = open ? '' : 'none';
-  if (f.bArm) { f.bArm.style.transformOrigin = '170px 200px'; f.bArm.style.transform = `rotate(${Math.sin(t * 9) * 25}deg)`; }
+  if (f.bArm) { f.bArm.style.transformOrigin = '170px 200px'; f.bArm.style.transform = `rotate(${Math.sin(t * 9) * 45}deg)`; }
 }
 
 // ---------------- props ----------------
