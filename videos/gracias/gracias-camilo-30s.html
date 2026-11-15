@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gracias Camilo 30 s, video 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* 1080x1920 vertical, 30 s. Frames are drawn by render(t) so the export is deterministic.
+     Text stays inside y 250..1670. Scene accents (coral, turquoise, sun, pink, sky) are vivid party colors
+     requested by the owner for this piece; purple, gold and white anchor the brand, and the closing card is brand only. */
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
+    --coral: #FF6B5B; --turq: #12B5B0; --sun: #FFC93C; --pink: #FF5FA2; --sky: #4DA8FF;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--purple-logo); }
+  body { font-family: var(--font-body); position: relative; }
+  .scene { position: absolute; inset: 0; overflow: hidden; transform: translateX(1080px); }
+  .txt { position: absolute; left: 80px; right: 80px; top: 290px; text-align: center; }
+  .kicker { display: inline-block; font-size: 36px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 12px 28px; border-radius: 999px; }
+  .title { font-family: var(--font-heading); font-weight: 500; font-optical-sizing: auto; font-size: 112px; line-height: 1.05; margin-top: 30px; text-wrap: balance; }
+  .title em { font-style: italic; }
+  .sub { font-size: 52px; line-height: 1.3; margin-top: 30px; text-wrap: balance; font-weight: 500; }
+  .fx { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .stage { position: absolute; inset: 0; }
+  .fig { position: absolute; width: 200px; height: 400px; transform-origin: 50% 0; }
+  .fig svg { width: 100%; height: 100%; overflow: visible; display: block; }
+  .a { opacity: 0; }
+
+  .s1 { background: var(--sun); color: var(--purple-dark); }
+  .s2 { background: var(--turq); color: var(--purple-dark); }
+  .s3 { background: var(--purple-dark); color: var(--white); }
+  .s4 { background: var(--sky); color: var(--purple-dark); }
+  .s5 { background: var(--coral); color: var(--purple-dark); }
+  .s6 { background: var(--purple-light); color: var(--purple); }
+  .s7 { background: var(--pink); color: var(--purple-dark); }
+  .s8 { background: var(--purple-logo); color: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 90px; }
+
+  .card { position: absolute; left: 90px; right: 90px; height: 330px; background: var(--white); border-radius: 44px; box-shadow: 0 14px 0 rgba(52,29,99,.12); display: flex; align-items: center; gap: 44px; padding: 0 56px; }
+  .card .ico { width: 190px; height: 190px; flex: none; }
+  .card h3 { font-family: var(--font-heading); font-weight: 500; font-size: 68px; line-height: 1.05; color: var(--purple); }
+  .card p { font-size: 40px; line-height: 1.3; margin-top: 12px; color: var(--muted, #6F677E); }
+  .tick { position: absolute; right: -22px; top: -22px; width: 100px; height: 100px; border-radius: 50%; background: var(--turq); display: flex; align-items: center; justify-content: center; }
+  .tick svg { width: 58px; height: 58px; }
+
+  .s8 .logo { width: 560px; display: block; }
+  .s8 .plat { margin-top: 70px; width: 880px; background: var(--white); border-radius: 40px; padding: 38px 40px; display: flex; align-items: center; justify-content: space-around; }
+  .s8 .plat img { display: block; object-fit: contain; }
+  .s8 .find { font-size: 36px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); margin-top: 70px; }
+  .s8 .wa { font-size: 46px; line-height: 1.45; margin-top: 26px; }
+  .s8 .wa b { color: var(--gold-light); font-weight: 600; }
+  .s8 .more { margin-top: 18px; font-size: 34px; color: var(--gold-light); }
+</style>
+</head>
+<body>
+<div class="scene s1" id="s1">
+  <svg class="fx" id="fx1" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="background:var(--purple-dark);color:var(--sun)">Buenos días, Camilo</div>
+    <div class="title a">¿Vacaciones o <em style="color:var(--white)">rumba</em>? Ustedes hicieron las dos</div>
+  </div>
+  <div class="stage" id="st1"></div>
+</div>
+<div class="scene s2" id="s2">
+  <svg class="fx" id="fx2" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="background:var(--purple-dark);color:var(--white)">Murano Élite · Cartagena</div>
+    <div class="title a">Apartamento <em style="color:var(--white)">1204</em>, su casa en la ciudad</div>
+    <div class="sub a">Con piscina y vista al mar</div>
+  </div>
+  <div class="stage" id="st2"></div>
+</div>
+<div class="scene s3" id="s3">
+  <svg class="fx" id="fx3" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="background:var(--sun);color:var(--purple-dark)">Fiestas de la Independencia</div>
+    <div class="title a">Cartagena de fiesta, <em style="color:var(--sun)">ustedes de rumba</em></div>
+  </div>
+  <div class="stage" id="st3"></div>
+</div>
+<div class="scene s4" id="s4">
+  <svg class="fx" id="fx4" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="background:var(--purple-dark);color:var(--white)">Gracias por preferirnos</div>
+    <div class="title a">Gracias por <em style="color:var(--white)">tantas risas</em>, grandes y chiquitos</div>
+  </div>
+  <div class="stage" id="st4"></div>
+</div>
+<div class="scene s5" id="s5">
+  <svg class="fx" id="fx5" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="background:var(--purple-dark);color:var(--white)">Ojo al reloj</div>
+    <div class="title a">Hoy el check out es <em style="color:var(--white)">máximo a las 12:00 m</em></div>
+    <div class="sub a">Entra el equipo de aseo. ¿A qué hora salen?</div>
+  </div>
+</div>
+<div class="scene s6" id="s6">
+  <svg class="fx" id="fx6" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="background:var(--purple);color:var(--white)">Antes de salir</div>
+    <div class="title a" style="font-size:100px">Dos detalles y <em style="color:var(--coral)">listo</em></div>
+  </div>
+  <div class="card a" style="top:690px">
+    <svg class="ico" viewBox="0 0 120 120" fill="none" stroke="#341D63" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M42 74c-10-8-14-16-14-28a32 32 0 0164 0c0 12-4 20-14 28v10H42z" fill="#FFC93C"/><path d="M46 96h28M50 106h20"/><path d="M14 14l92 92" stroke="#FF6B5B" stroke-width="9"/></svg>
+    <div><h3>Todo apagado</h3><p>Luces, aires y electrodomésticos</p></div>
+    <div class="tick"><svg viewBox="0 0 60 60" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 31l12 12 24-26"/></svg></div>
+  </div>
+  <div class="card a" style="top:1090px">
+    <svg class="ico" viewBox="0 0 120 120" fill="none" stroke="#341D63" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="40" width="92" height="66" rx="10" fill="#12B5B0"/><rect x="30" y="54" width="60" height="22" rx="5" fill="#fff"/><circle cx="60" cy="25" r="11" fill="#CBA54D"/><path d="M60 36v12" stroke-width="7"/><circle cx="60" cy="25" r="3" fill="#341D63"/></svg>
+    <div><h3>Llaves en la cajita</h3><p>La de seguridad pegada a la puerta</p></div>
+    <div class="tick"><svg viewBox="0 0 60 60" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 31l12 12 24-26"/></svg></div>
+  </div>
+</div>
+<div class="scene s7" id="s7">
+  <svg class="fx" id="fx7" viewBox="0 0 1920 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="background:var(--purple-dark);color:var(--white)">Foto del recuerdo</div>
+    <div class="title a">¿Nos cuentas cómo les fue y <em style="color:var(--white)">nos mandas una foto</em>?</div>
+    <div class="sub a">Con tu permiso, la compartimos</div>
+  </div>
+  <div class="stage" id="st7"></div>
+  <div id="flash" style="position:absolute;inset:0;background:#fff;opacity:0"></div>
+</div>
+<div class="scene s8" id="s8">
+  <img class="logo a" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <div class="plat a">
+    <img src="../../brand/platforms/despegar.svg" style="height:100px" alt="Despegar">
+    <img src="../../brand/platforms/booking.svg" style="height:52px" alt="Booking.com">
+    <img src="../../brand/platforms/airbnb.svg" style="height:82px" alt="Airbnb">
+  </div>
+  <div class="find a">¡Vuelvan pronto!</div>
+  <div class="wa a"><b>Escríbenos por WhatsApp</b><br>+57 304 673 6241<br>77rentals.com</div>
+  <div class="more a">También en Santa Marta y Bogotá</div>
+</div>
+
+<script>
+const ease = (x) => (x = Math.max(0, Math.min(1, x)), 1 - Math.pow(1 - x, 3));
+const back = (x) => { x = Math.max(0, Math.min(1, x)); const c = 1.70158; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const INK = '#251547';
+
+// Paper-doll people with faces. Palette colors plus party accents.
+function person(kind, c, idx) {
+  const hairs = {
+    long: `<path d="M58 66c-6-52 78-62 84 0c4 26-6 44-10 52l-10-60c-30 8-50-6-58 0l-4 60c-4-8-4-30-2-52z" fill="${c.hair}"/>`,
+    short: `<path d="M60 58c0-44 80-44 80 0c-26-14-54-14-80 0z" fill="${c.hair}"/>`,
+    cap: `<path d="M58 56c2-40 82-40 84 0z" fill="${c.hair}"/><rect x="100" y="48" width="64" height="12" rx="6" fill="${c.hair}"/>`,
+    tuft: `<path d="M70 40c10-26 50-26 60 0c-18-8-42-8-60 0z" fill="${c.hair}"/>`,
+  };
+  const body = kind === 'mom' ? `<path d="M52 114h96l22 150H30z" fill="${c.top}"/>` : `<rect x="54" y="112" width="92" height="150" rx="42" fill="${c.top}"/>`;
+  const legs = `<g class="legL"><rect x="68" y="250" width="30" height="130" rx="15" fill="${c.legs}"/></g><g class="legR"><rect x="102" y="250" width="30" height="130" rx="15" fill="${c.legs}"/></g>`;
+  const arms = `<g class="armL"><rect x="30" y="118" width="24" height="110" rx="12" fill="${c.top}"/><circle cx="42" cy="232" r="15" fill="${c.skin}"/></g><g class="armR"><rect x="146" y="118" width="24" height="110" rx="12" fill="${c.top}"/><circle cx="158" cy="232" r="15" fill="${c.skin}"/></g>`;
+  const face = `<g class="eyes"><circle cx="85" cy="58" r="6.5" fill="${INK}"/><circle cx="115" cy="58" r="6.5" fill="${INK}"/></g>
+    <circle cx="72" cy="76" r="8" fill="#FF6B5B" opacity=".45"/><circle cx="128" cy="76" r="8" fill="#FF6B5B" opacity=".45"/>
+    <path class="mc" d="M84 76Q100 91 116 76" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+    <path class="mo" d="M82 74Q100 104 118 74Z" fill="${INK}" style="display:none"/><path class="mo" d="M92 90Q100 84 108 90Q100 96 92 90Z" fill="#FF5FA2" style="display:none"/>`;
+  const shades = `<g class="shades" style="display:none"><rect x="68" y="48" width="29" height="20" rx="9" fill="${INK}"/><rect x="103" y="48" width="29" height="20" rx="9" fill="${INK}"/><path d="M96 54h8" stroke="${INK}" stroke-width="4"/></g>`;
+  const hat = `<g class="hat" style="display:none"><path d="M72 28L100 -34 128 28z" fill="${c.hat}"/><circle cx="100" cy="-36" r="9" fill="#FFFFFF"/><path d="M80 14l36 -4M86 0l26 -4" stroke="#FFFFFF" stroke-width="5" opacity=".7"/></g>`;
+  const baby = kind === 'mom' ? `<g class="baby"><rect x="128" y="170" width="50" height="62" rx="24" fill="${c.baby}"/><circle cx="153" cy="152" r="27" fill="${c.skin}"/><path d="M128 146c4-24 46-24 50 0c-14-8-36-8-50 0z" fill="${c.hair}"/><circle cx="144" cy="152" r="3.5" fill="${INK}"/><circle cx="162" cy="152" r="3.5" fill="${INK}"/><path d="M146 163Q153 170 160 163" fill="none" stroke="${INK}" stroke-width="3.5" stroke-linecap="round"/><path d="M135 128l18 -24 18 24z" class="bhat" fill="${c.hat}" style="display:none"/></g>` : '';
+  return `<svg viewBox="0 0 200 400">${legs}${body}${arms}<circle cx="100" cy="62" r="40" fill="${c.skin}"/>${hairs[c.style]}${face}${shades}${hat}${baby}</svg>`;
+}
+const SKIN = '#F6CFA3';
+const PAL = {
+  s1: { tops: ['#FF6B5B', '#341D63', '#FFFFFF', '#FF5FA2'], hair: INK, legs: INK, hats: ['#FF5FA2', '#12B5B0', '#FF6B5B', '#FFC93C'] },
+  s2: { tops: ['#FFC93C', '#FF6B5B', '#FFFFFF', '#341D63'], hair: INK, legs: '#341D63', hats: ['#FF5FA2', '#FFC93C', '#FF6B5B', '#FFFFFF'] },
+  s3: { tops: ['#FFC93C', '#FF5FA2', '#12B5B0', '#FF6B5B'], hair: '#F1EEF6', legs: '#5B3F94', hats: ['#FFC93C', '#FF5FA2', '#12B5B0', '#FF6B5B'] },
+  s4: { tops: ['#FFC93C', '#FFFFFF', '#FF5FA2', '#341D63'], hair: INK, legs: INK, hats: ['#FF5FA2', '#FFC93C', '#FF6B5B', '#FFFFFF'] },
+  s7: { tops: ['#FFC93C', '#341D63', '#12B5B0', '#FFFFFF'], hair: INK, legs: INK, hats: ['#FFC93C', '#12B5B0', '#FF6B5B', '#FFFFFF'] },
+};
+function family(id, key, xs, baseY, K) {
+  const st = document.getElementById(id), P = PAL[key];
+  const defs = [['mom', 1.0, 'long'], ['dad', 1.06, 'short'], ['adult', 1.0, 'cap'], ['boy', 0.62, 'tuft']];
+  defs.forEach((d, i) => {
+    const el = document.createElement('div');
+    el.className = 'fig';
+    Object.assign(el.dataset, { i, k: d[0], s: d[1] * K, x: xs[i], y: baseY });
+    el.innerHTML = person(d[0], { skin: SKIN, hair: P.hair, top: P.tops[i], legs: P.legs, style: d[2], baby: P.tops[(i + 1) % 4] === '#FFFFFF' ? '#FFC93C' : '#FFFFFF', hat: P.hats[i] }, i);
+    st.appendChild(el);
+  });
+}
+family('st1', 's1', [210, 430, 650, 850], 1560, 1.4);
+family('st2', 's2', [210, 430, 650, 850], 1480, 1.1);
+family('st3', 's3', [210, 430, 650, 850], 1560, 1.4);
+family('st4', 's4', [230, 440, 650, 840], 1560, 1.4);
+family('st7', 's7', [330, 480, 620, 740], 1580, 1.3);
+
+// ---------- poses ----------
+function pose(stId, local, mode, opts = {}) {
+  document.querySelectorAll('#' + stId + ' .fig').forEach((el) => {
+    const i = +el.dataset.i, s = +el.dataset.s, x = +el.dataset.x, y = +el.dataset.y, kid = el.dataset.k === 'boy', mom = el.dataset.k === 'mom';
+    const ph = i * 0.8;
+    let px = x, py = 0, swing = 0, armL = 0, armR = 0, rot = 0, sy = 1, open = false;
+    if (mode === 'wake') {
+      const k = back((local - i * 0.1) / 0.8); py = (1 - k) * 700;
+      armR = Math.sin(local * 9 + ph) * 40 + 140; armL = mom ? 0 : -(Math.sin(local * 9 + ph + 1) * 30 + 40);
+      rot = Math.sin(local * 5 + ph) * 4; open = local > 1.0;
+    } else if (mode === 'pool') {
+      const k = Math.sin(local * 4 + ph); py = -Math.abs(k) * 22; rot = k * 5;
+      armR = Math.sin(local * 4 + ph) * 55 + 70; armL = mom ? 0 : -(Math.sin(local * 4 + ph + 2) * 55 + 70); open = true;
+    } else if (mode === 'dance') {
+      const b = Math.abs(Math.sin(local * 6 + ph)); py = -b * (kid ? 90 : 60);
+      rot = Math.sin(local * 6 + ph) * 9; swing = Math.sin(local * 12 + ph) * 22;
+      armR = Math.sin(local * 6 + ph) > 0 ? 150 : 40; armL = mom ? 0 : (Math.sin(local * 6 + ph) > 0 ? -40 : -150); open = true;
+    } else if (mode === 'cheer') {
+      const k = Math.max(0, Math.sin((local * 4 - i * 0.12) * Math.PI)); py = -k * (kid ? 140 : 90); sy = 1 + (k < .04 ? -.05 : .02);
+      armR = k * 150 + 20; armL = mom ? 0 : -(k * 150 + 20); open = true;
+    } else if (mode === 'selfie') {
+      const l = local * 6; py = -Math.abs(Math.sin(l + ph)) * 20; rot = (i - 1.5) * 3 + Math.sin(l + ph) * 3;
+      armR = Math.sin(l * 1.4 + ph) * 40 + 130; armL = mom ? 0 : -(Math.sin(l * 1.4 + ph) * 40 + 130); open = local > 1.7;
+    }
+    const tx = px - 100, ty = y - 400 * s + py;
+    el.style.transform = `translate(${tx}px, ${ty}px) rotate(${rot}deg) scale(${s}, ${s * sy})`;
+    const q = (n) => el.querySelector(n);
+    q('.legL').style.transformOrigin = '83px 250px'; q('.legL').style.transform = `rotate(${swing}deg)`;
+    q('.legR').style.transformOrigin = '117px 250px'; q('.legR').style.transform = `rotate(${-swing}deg)`;
+    q('.armL').style.transformOrigin = '42px 124px'; q('.armL').style.transform = `rotate(${armL}deg)`;
+    q('.armR').style.transformOrigin = '158px 124px'; q('.armR').style.transform = `rotate(${-armR}deg)`;
+    // blink every ~2.5 s, offset per person
+    const bl = ((local + i * 0.7) % 2.6) > 2.5 ? 0.1 : 1;
+    q('.eyes').style.transformOrigin = '100px 58px'; q('.eyes').style.transform = `scaleY(${bl})`;
+    el.querySelectorAll('.mc').forEach((m) => (m.style.display = open ? 'none' : ''));
+    el.querySelectorAll('.mo').forEach((m) => (m.style.display = open ? '' : 'none'));
+    q('.shades').style.display = opts.shades ? '' : 'none';
+    q('.hat').style.display = opts.hats ? '' : 'none';
+    const bh = q('.bhat'); if (bh) bh.style.display = opts.hats ? '' : 'none';
+    if (opts.shades) { q('.eyes').style.display = 'none'; } else { q('.eyes').style.display = ''; }
+  });
+}
+
+// ---------- fx ----------
+function waves(t, color, y0, n, op, w = 6) {
+  let s = '';
+  for (let k = 0; k < n; k++) {
+    const y = y0 + k * 62, off = (t * (60 + k * 18) * (k % 2 ? -1 : 1)) % 270;
+    let d = `M${-270 + off} ${y}`;
+    for (let x = 0; x < 12; x++) d += ` q 67.5 ${x % 2 ? 36 : -36} 135 0`;
+    s += `<path d="${d}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round" opacity="${op - k * .18}"/>`;
+  }
+  return s;
+}
+function confetti(t, colors, n, seed, up = true) {
+  let h = '';
+  for (let i = 0; i < n; i++) {
+    const r = (Math.sin(i * 91.7 + seed) + 1) / 2, r2 = (Math.sin(i * 47.3 + seed * 2) + 1) / 2;
+    const x = 40 + r * 1000 + Math.sin(t * 2 + i) * 18;
+    const y = up ? 1800 - ((t * (90 + r2 * 140) + r2 * 1700) % 1700) : -100 + ((t * (120 + r2 * 160) + r2 * 1900) % 2000);
+    const sz = 10 + r2 * 14, c = colors[i % colors.length];
+    h += i % 3 ? `<circle cx="${x}" cy="${y}" r="${sz * .7}" fill="${c}"/>` : `<rect x="${x}" y="${y}" width="${sz * 1.6}" height="${sz * .7}" rx="3" fill="${c}" transform="rotate(${t * 200 + i * 40} ${x} ${y})"/>`;
+  }
+  return h;
+}
+function hearts(t, colors) {
+  let h = '';
+  for (let i = 0; i < 11; i++) {
+    const r = (Math.sin(i * 71.3) + 1) / 2, r2 = (Math.sin(i * 33.9 + 2) + 1) / 2;
+    const x = 80 + r * 920 + Math.sin(t * 2 + i) * 16, y = 1750 - ((t * (80 + r2 * 80) + r2 * 1500) % 1500), s = 0.7 + r2 * 0.9;
+    h += `<path transform="translate(${x} ${y}) scale(${s})" d="M0 14c-26-18-24-40-8-40 8 0 8 8 8 8s0-8 8-8c16 0 18 22-8 40z" fill="${colors[i % colors.length]}"/>`;
+  }
+  return h;
+}
+function fireworks(t, colors) {
+  let h = '';
+  const spots = [[220, 1000], [820, 880], [540, 1150], [150, 1300], [900, 1280]];
+  spots.forEach(([cx, cy], i) => {
+    const l = ((t * 0.9 + i * 0.37) % 1), r = ease(l) * 190, op = 1 - Math.pow(l, 2), c = colors[i % colors.length];
+    for (let a = 0; a < 12; a++) {
+      const ang = a * Math.PI / 6, x1 = cx + Math.cos(ang) * r * .55, y1 = cy + Math.sin(ang) * r * .55, x2 = cx + Math.cos(ang) * r, y2 = cy + Math.sin(ang) * r;
+      h += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="9" stroke-linecap="round" opacity="${op}"/>`;
+    }
+    h += `<circle cx="${cx}" cy="${cy}" r="${r * .3}" fill="${c}" opacity="${op * .6}"/>`;
+  });
+  return h;
+}
+function bunting(t, colors) {
+  let h = `<path d="M-20 215Q540 330 1100 215" fill="none" stroke="#FFFFFF" stroke-width="5"/>`;
+  for (let i = 0; i < 11; i++) {
+    const x = i * 100 + 20, y = 215 + Math.sin((x / 1080) * Math.PI) * 78;
+    h += `<path transform="rotate(${Math.sin(t * 3 + i) * 6} ${x} ${y})" d="M${x - 36} ${y}L${x + 36} ${y}L${x} ${y + 84}Z" fill="${colors[i % colors.length]}"/>`;
+  }
+  return h;
+}
+function rays(t, cx, cy, r0, r1, color) {
+  let h = '';
+  for (let a = 0; a < 16; a++) {
+    const ang = a * Math.PI / 8 + t * .4;
+    h += `<line x1="${cx + Math.cos(ang) * r0}" y1="${cy + Math.sin(ang) * r0}" x2="${cx + Math.cos(ang) * r1}" y2="${cy + Math.sin(ang) * r1}" stroke="${color}" stroke-width="12" stroke-linecap="round"/>`;
+  }
+  return h;
+}
+
+// ---------- scenes ----------
+const SC = [[0, 3.8], [3.5, 7.2], [6.9, 10.9], [10.6, 14.4], [14.1, 18.5], [18.2, 22.6], [22.3, 26], [25.7, 30]];
+const pop = (el, local, delay) => { const k = back((local - 0.12 - delay) / 0.55); el.style.opacity = clamp(k * 3); el.style.transform = `translateY(${(1 - k) * 90}px) scale(${.7 + .3 * k})`; };
+function appear(sceneEl, local, gap = 0.22) { sceneEl.querySelectorAll('.a').forEach((el, i) => pop(el, local, i * gap)); }
+
+function render(t) {
+  SC.forEach(([a, b], i) => {
+    const el = document.getElementById('s' + (i + 1));
+    const k = ease((t - a) / 0.45);
+    el.style.transform = `translateX(${(1 - k) * 1080}px)`;
+    el.style.display = t >= a - 0.01 && t <= b + 0.6 ? '' : 'none';
+    el.style.zIndex = i;
+    if (t >= a - 0.01) appear(el, t - a, i === 7 ? 0.3 : 0.22);
+  });
+  const L = (i) => t - SC[i][0];
+  // 1: sunrise, waves, wake-up
+  const t1 = L(0);
+  document.getElementById('fx1').innerHTML = rays(t1, 540, 1080 - ease(t1 / 1.6) * 40, 270, 340, '#FF6B5B') + `<circle cx="540" cy="${1080 - ease(t1 / 1.6) * 40}" r="240" fill="#FF6B5B"/>` + waves(t1, '#251547', 1580, 4, .9) + confetti(t1, ['#FF5FA2', '#12B5B0', '#FFFFFF', '#341D63'], 16, 5);
+  pose('st1', t1, 'wake', {});
+  // 2: pool, sign 1204
+  const t2 = L(1), pk = back((t2 - 0.5) / 0.7);
+  document.getElementById('fx2').innerHTML =
+    `<circle cx="930" cy="${900 - ease(t2 / 2) * 20}" r="100" fill="#FFC93C"/>` +
+    `<g transform="translate(540 ${880}) scale(${pk}) rotate(${Math.sin(t2 * 3) * 3})"><rect x="-230" y="-95" width="460" height="190" rx="40" fill="#FFFFFF"/><rect x="-212" y="-77" width="424" height="154" rx="28" fill="none" stroke="#FFC93C" stroke-width="8"/><text x="0" y="40" text-anchor="middle" font-family="Fraunces, serif" font-size="128" font-weight="500" fill="#341D63">1204</text></g>` +
+    `<rect x="60" y="1500" width="960" height="190" rx="60" fill="#8EE9E5"/>` + waves(t2, '#FFFFFF', 1545, 3, .95, 7) + confetti(t2, ['#FFC93C', '#FF5FA2', '#FFFFFF', '#FF6B5B'], 12, 9);
+  pose('st2', t2, 'pool', { shades: true });
+  // 3: fiestas
+  const t3 = L(2);
+  document.getElementById('fx3').innerHTML = fireworks(t3, ['#FFC93C', '#FF5FA2', '#12B5B0', '#FF6B5B', '#FFFFFF']) + bunting(t3, ['#FFC93C', '#FF5FA2', '#12B5B0', '#FF6B5B']) + confetti(t3, ['#FFC93C', '#FF5FA2', '#12B5B0', '#FF6B5B', '#FFFFFF'], 34, 2, false) + waves(t3, '#FFC93C', 1600, 3, .8);
+  pose('st3', t3, 'dance', { hats: true });
+  // 4: thanks
+  const t4 = L(3);
+  document.getElementById('fx4').innerHTML = rays(t4, 540, 1180, 420, 520, '#FFFFFF') + hearts(t4, ['#FF5FA2', '#FFC93C', '#FFFFFF', '#FF6B5B']);
+  pose('st4', t4, 'cheer', {});
+  // 5: clock
+  const t5 = L(4), sweep = ease(t5 / 1.8), ang = (180 + sweep * 180) * Math.PI / 180, pulse = 1 + Math.sin(t5 * 8) * .03 * (t5 > 1.8 ? 1 : 0);
+  let ticks = ''; for (let k = 0; k < 12; k++) { const a = k * Math.PI / 6; ticks += `<line x1="${540 + Math.cos(a) * 220}" y1="${1240 + Math.sin(a) * 220}" x2="${540 + Math.cos(a) * 250}" y2="${1240 + Math.sin(a) * 250}" stroke="#341D63" stroke-width="${k % 3 ? 8 : 16}" stroke-linecap="round"/>`; }
+  document.getElementById('fx5').innerHTML =
+    `<g transform="translate(540 1240) scale(${pulse}) translate(-540 -1240)"><circle cx="540" cy="1240" r="300" fill="#FFFFFF" stroke="#251547" stroke-width="18"/>${ticks}` +
+    `<line x1="540" y1="1240" x2="540" y2="1030" stroke="#251547" stroke-width="18" stroke-linecap="round"/><line x1="540" y1="1240" x2="${540 + Math.sin(ang) * 200}" y2="${1240 - Math.cos(ang) * 200}" stroke="#FF6B5B" stroke-width="14" stroke-linecap="round"/><circle cx="540" cy="1240" r="22" fill="#251547"/></g>` +
+    `<circle cx="300" cy="940" r="40" fill="#FFC93C" transform="rotate(${Math.sin(t5 * 10) * 14} 300 940)"/><circle cx="780" cy="940" r="40" fill="#FFC93C" transform="rotate(${-Math.sin(t5 * 10) * 14} 780 940)"/>` + waves(t5, '#251547', 1600, 3, .7);
+  // 6: checklist
+  const t6 = L(5);
+  document.getElementById('fx6').innerHTML = confetti(t6, ['#FFC93C', '#FF5FA2', '#12B5B0', '#FF6B5B'], 10, 4, false);
+  // 7: selfie
+  const t7 = L(6);
+  document.getElementById('fx7').innerHTML = `<g transform="translate(0 0)">` + confetti(t7, ['#FFC93C', '#12B5B0', '#FFFFFF', '#FF6B5B'], 14, 8) + `</g>` +
+    `<g transform="translate(540 ${960 + Math.sin(t7 * 5) * 10}) rotate(${Math.sin(t7 * 4) * 5})"><rect x="-130" y="-85" width="260" height="170" rx="30" fill="#251547"/><rect x="-60" y="-110" width="120" height="40" rx="14" fill="#251547"/><circle cx="0" cy="0" r="62" fill="#FFFFFF"/><circle cx="0" cy="0" r="42" fill="#4DA8FF"/><circle cx="14" cy="-14" r="12" fill="#FFFFFF" opacity=".8"/><circle cx="92" cy="-52" r="12" fill="#FFC93C"/></g>`;
+  document.getElementById('fx7').setAttribute('viewBox', '0 0 1080 1920'); document.getElementById('fx7').setAttribute('width', 1080);
+  pose('st7', t7, 'selfie', { hats: false });
+  const fl = t7 > 1.6 ? Math.max(0, 1 - (t7 - 1.6) / 0.35) : 0; document.getElementById('flash').style.opacity = fl;
+}
+render(0);
+</script>
+</body>
+</html>
