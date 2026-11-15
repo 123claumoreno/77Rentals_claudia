@@ -104,8 +104,8 @@ function charSVG(k, outfit) {
   const pack = c.pack ? `<rect x="38" y="126" width="124" height="112" rx="30" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/>` : '';
   const strap = c.pack ? `<path d="M72 116L74 206M128 116L126 206" stroke="#FF6B5B" stroke-width="12" stroke-linecap="round"/><rect x="66" y="196" width="68" height="12" rx="6" fill="#E0C585"/>` : '';
   const head = `<circle cx="59" cy="68" r="9" fill="${S}"/><circle cx="141" cy="68" r="9" fill="${S}"/><ellipse cx="100" cy="64" rx="42" ry="45" fill="${S}"/>`;
-  const baby = c.hasBaby ? `<g class="baby"><g transform="translate(0 28) translate(153 200) scale(1.42) translate(-153 -200)"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>${c.babyHat === false ? '' : '<path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/>'}<g class="bArm"><circle cx="180" cy="204" r="10" fill="${S}"/></g></g></g>` : '';
-  return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${pack}${body}${strap}${neck}${arm('L')}${backHair}${head}${frontHair}${face}${accs}${baby}${arm('R')}</svg>`;
+  const baby = c.hasBaby ? `<g class="baby"><g transform="translate(-8 16) translate(153 200) scale(.82) translate(-153 -200)"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>${c.babyHat === false ? '' : '<path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/>'}<g class="bArm"><circle cx="180" cy="204" r="10" fill="${S}"/></g></g></g>` : '';
+  return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${pack}${body}${strap}${neck}${arm('L')}${backHair}${head}${frontHair}${face}${accs}${arm('R')}${baby}</svg>`;
 }
 function strollerSVG(u) {
   const S = CH.mama.skin, H = CH.mama.hair;
@@ -114,10 +114,10 @@ function strollerSVG(u) {
   <path d="M46 150L36 172M174 150L184 172" stroke="#251547" stroke-width="8" stroke-linecap="round"/>
   <path d="M24 100Q24 32 110 32Q196 32 196 100Z" fill="url(#${u}c)" stroke="#251547" stroke-width="3"/><path d="M30 94Q110 68 190 94" stroke="#CBA54D" stroke-width="7" fill="none"/>
   <path d="M34 104H186L172 156Q110 170 48 156Z" fill="#12B5B0" stroke="#251547" stroke-width="3"/>
-  <rect x="82" y="96" width="56" height="52" rx="22" fill="#FF6B5B" stroke="rgba(0,0,0,.12)" stroke-width="2"/>
+  <g transform="translate(110 132) scale(.76) translate(-110 -132)"><rect x="82" y="96" width="56" height="52" rx="22" fill="#FF6B5B" stroke="rgba(0,0,0,.12)" stroke-width="2"/>
   <circle cx="110" cy="76" r="31" fill="url(#${u}b)"/><path d="M80 70Q84 40 110 42Q136 40 140 70Q124 56 110 60Q96 56 80 70Z" fill="${H}"/>
   <circle cx="99" cy="78" r="4.5" fill="#3A2216"/><circle cx="121" cy="78" r="4.5" fill="#3A2216"/><circle cx="92" cy="90" r="6" fill="#FF6B5B" opacity=".35"/><circle cx="128" cy="90" r="6" fill="#FF6B5B" opacity=".35"/><path d="M101 90Q110 100 119 90" stroke="#3A1A1A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-  <g class="sArm"><circle cx="142" cy="112" r="11" fill="url(#${u}b)"/></g>
+  <g class="sArm"><circle cx="142" cy="112" r="11" fill="url(#${u}b)"/></g></g>
   <path d="M30 116Q110 134 190 116L174 158Q110 172 46 158Z" fill="#19C6C0" stroke="#251547" stroke-width="3"/><path d="M32 118Q110 136 188 118" stroke="#CBA54D" stroke-width="8" fill="none" stroke-linecap="round"/>
   <circle cx="38" cy="172" r="26" fill="#251547"/><circle cx="38" cy="172" r="11" fill="#CBA54D"/><circle cx="182" cy="172" r="26" fill="#251547"/><circle cx="182" cy="172" r="11" fill="#CBA54D"/>
   <path d="M40 104L40 22M180 104L180 22" stroke="#251547" stroke-width="8" stroke-linecap="round"/><path d="M26 20H194" stroke="#CBA54D" stroke-width="12" stroke-linecap="round"/></svg>`;
@@ -280,7 +280,7 @@ V.push({ title: '¡Hola, Camilo y familia!', cap: '¡Hola, Camilo! ¡Hola, famil
   } });
 // 2 Check-out
 V.push({ title: '¡Llegó la hora de despedirnos!', cap: 'Hoy es nuestro día de check-out. Recuerda que la hora máxima de salida es a las 12:00 del mediodía',
-  build(st) { this.F = FAM(st, [190, 380, 580, 760], 840); prop(this.F.C, 'L', SUIT, true); prop(this.F.C, 'R', THUMB(1), false); prop(this.F.T, 'L', SUIT2, true); },
+  build(st) { this.F = FAM(st, [190, 380, 580, 760], 840); prop(this.F.C, 'R', THUMB(1), false); },
   bg: (t) => interior({ win: [640, 200, 230, 540], plant: 60 }, t) +
     `<g transform="translate(150 150)"><rect x="-120" y="-50" width="240" height="100" rx="22" fill="#CBA54D" stroke="#251547" stroke-width="4"/><rect x="-108" y="-38" width="216" height="76" rx="14" fill="#341D63"/><text x="0" y="22" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="72" fill="#FFFFFF">1204</text></g>`,
   frame(t) {
