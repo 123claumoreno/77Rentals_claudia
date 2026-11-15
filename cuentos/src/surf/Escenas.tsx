@@ -6,6 +6,8 @@ import {Mom} from '../cuento/people';
 import {outfit} from '../theme';
 import {Balcon, Cielo, CiudadMar, Habitacion, Lobby, Maleta, Pasillo, PuertaMadera, Sala, Terraza, Tabla, clampE} from './decor';
 import {Cochecito, MAMA, MamaCoche, PLAYA, Pers, VIAJE} from './gente';
+import {VOCES} from '../voz';
+import {VOZ_INICIO} from '../motor/voz';
 
 const ease = {...clampE, easing: Easing.inOut(Easing.cubic)};
 const camina = (f: number, de: number, a: number, ini: number, dur = 38) => {
@@ -257,13 +259,15 @@ export const SCiudades: React.FC = () => {
   const f = useCurrentFrame();
   const m = camina(f, -700, 100, 0, 44), c = camina(f, -330, 600, 6), t = camina(f, -420, 740, 12), t2 = camina(f, -520, 860, 16), n = camina(f, 1350, 975, 4, 34);
   const tags: [string, number, number][] = [['Cartagena', 250, 560], ['Barranquilla', 760, 640], ['Santa Marta', 270, 780], ['Bogotá', 740, 860]];
+  const lv = VOCES['camilo-1204']?.[8];
+  const cuando = (i: number) => (lv && lv.palabras.length === 8 ? 8 + VOZ_INICIO + Math.round(lv.palabras[[0, 1, 2, 5][i]].s * 30) - 4 : 34 + i * 20);
   const g = Math.sin(f / 9) * 0.7;
   return (
     <AbsoluteFill style={{background: '#f2e5cc'}}>
       <Sketch>
         <CiudadMar />
         {tags.map(([name, tx, ty], i) => {
-          const k = spring({frame: f - (34 + i * 20), fps: 30, config: {damping: 10}});
+          const k = spring({frame: f - cuando(i), fps: 30, config: {damping: 10}});
           return k > 0.01 ? (
             <g key={name} transform={`translate(${tx} ${ty + Math.sin(f / 14 + i) * 5}) scale(${k})`}>
               <rect x={-168} y={-44} width={336} height={88} rx={44} fill={P.purpleDeep} {...ln} />
@@ -336,24 +340,24 @@ export const SCierre: React.FC = () => {
   const {fps} = useVideoConfig();
   const logo = spring({frame: f - 22, fps, config: {damping: 13}});
   const line = (d: number) => interpolate(f - d, [0, 14], [0, 1], clampE);
-  const logos: [string, number][] = [['airbnb', 200], ['booking', 300], ['despegar', 210], ['hotels', 280], ['tripadvisor', 280]];
+  const logos: [string, number][] = [['airbnb', 190], ['booking', 280], ['despegar', 200], ['hotels', 260], ['tripadvisor', 260]];
   return (
     <AbsoluteFill style={{background: `radial-gradient(circle at 50% 38%, ${P.purple}, ${P.purpleDeep} 55%, ${P.purpleDark})`}}>
       <Sketch>
         {Array.from({length: 22}).map((_, i) => <Destello key={i} x={random(`cx${i}`) * W} y={random(`cy${i}`) * H} r={6 + Math.max(0, Math.sin(f / 7 + i * 1.9)) * 18} c={i % 3 ? P.goldSoft : P.white} />)}
       </Sketch>
-      <div style={{position: 'absolute', top: 250, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-        <Img src={staticFile('img/logo.jpeg')} style={{width: 470, borderRadius: 36, border: `5px solid ${P.goldSoft}`, transform: `scale(${logo}) rotate(${(1 - logo) * -10}deg)`, boxShadow: '0 20px 60px rgba(0,0,0,.4)'}} />
+      <div style={{position: 'absolute', top: 470, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <Img src={staticFile('img/logo.jpeg')} style={{width: 400, borderRadius: 36, border: `5px solid ${P.goldSoft}`, transform: `scale(${logo}) rotate(${(1 - logo) * -10}deg)`, boxShadow: '0 20px 60px rgba(0,0,0,.4)'}} />
       </div>
-      <div style={{position: 'absolute', top: 760, left: 50, right: 50, textAlign: 'center'}}>
-        <div style={{opacity: line(34), fontFamily: hand, fontWeight: 700, fontSize: 104, color: P.goldSoft, lineHeight: 1}}>¡Hasta pronto, Camilo y familia!</div>
+      <div style={{position: 'absolute', top: 880, left: 50, right: 50, textAlign: 'center'}}>
+        <div style={{opacity: line(34), fontFamily: hand, fontWeight: 700, fontSize: 96, color: P.goldSoft, lineHeight: 1}}>¡Hasta pronto, Camilo y familia!</div>
         <div style={{opacity: line(46), marginTop: 30, fontFamily: outfit, fontWeight: 600, fontSize: 54, color: P.white, letterSpacing: '0.06em'}}>77rentals.com</div>
         <div style={{opacity: line(54), marginTop: 26, display: 'inline-block', background: P.gold, border: `4px solid ${P.ink}`, borderRadius: 999, padding: '14px 38px', fontFamily: outfit, fontWeight: 600, fontSize: 42, color: P.purpleDark}}>WhatsApp +57 304 673 6241</div>
         <div style={{opacity: line(62), marginTop: 16, fontFamily: hand, fontWeight: 600, fontSize: 56, color: P.goldSoft}}>Claudia · tu anfitriona</div>
       </div>
-      <div style={{position: 'absolute', left: 70, right: 70, top: 1330, opacity: line(70), transform: `translateY(${(1 - line(70)) * 40}px)`}}>
-        <div style={{textAlign: 'center', fontFamily: outfit, fontWeight: 600, fontSize: 34, letterSpacing: '0.2em', color: P.goldSoft, marginBottom: 18}}>ENCUÉNTRANOS EN</div>
-        <div style={{background: P.white, border: `5px solid ${P.ink}`, borderRadius: 38, padding: '30px 34px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '26px 40px', boxShadow: `8px 10px 0 ${P.purple}`}}>
+      <div style={{position: 'absolute', left: 70, right: 70, top: 1470, opacity: line(70), transform: `translateY(${(1 - line(70)) * 40}px)`}}>
+        <div style={{textAlign: 'center', fontFamily: outfit, fontWeight: 600, fontSize: 30, letterSpacing: '0.2em', color: P.goldSoft, marginBottom: 12}}>ENCUÉNTRANOS EN</div>
+        <div style={{background: P.white, border: `5px solid ${P.ink}`, borderRadius: 38, padding: '22px 30px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '18px 34px', boxShadow: `8px 10px 0 ${P.purple}`}}>
           {logos.map(([n, w]) => <Img key={n} src={staticFile(`plataformas/${n}.svg`)} style={{width: w}} />)}
         </div>
       </div>

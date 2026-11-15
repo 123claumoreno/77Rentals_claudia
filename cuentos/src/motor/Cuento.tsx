@@ -29,7 +29,7 @@ export const timeline = (h: Historia) => {
     const def = ESCENAS[e.escena as EscenaId];
     if (!def) throw new Error(`Escena desconocida en "${h.id}": ${e.escena}`);
     const voz = vozDe(h, i, e.texto);
-    const secs = voz ? VOZ_INICIO / FPS + voz.dur + 0.7 : readSeconds(e.texto, h.ritmo);
+    const secs = voz ? VOZ_INICIO / FPS + voz.dur + (h.ritmo?.colaVoz ?? 0.7) : readSeconds(e.texto, h.ritmo);
     const dur = Math.max(def.min, def.lead + Math.ceil(secs * FPS) + (h.ritmo ? h.ritmo.cola : TAIL));
     const s = {from: at, dur, lead: def.lead, voz, i, ...e};
     at += dur;

@@ -20,7 +20,7 @@ export type Historia = {
   /** transition between scenes: 'mariposas' (default, the Macondo butterflies) or 'ola' (a sea wave, for the surf story) */
   transicion?: 'mariposas' | 'ola';
   /** reading pace without a voice: seconds per word, seconds of base, frames after the line (default: 0.36, 1.8, 26) */
-  ritmo?: {palabra: number; base: number; cola: number};
+  ritmo?: {palabra: number; base: number; cola: number; colaVoz?: number};
   /** the very first frame already shows the line card (no pop-in), so thumbnails are never empty */
   primerCuadroLleno?: boolean;
 };

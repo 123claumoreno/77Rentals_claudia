@@ -1,8 +1,14 @@
 {
   "voz": {
-    "nombre": "",
-    "id": ""
+    "nombre": "Lina",
+    "id": "yfUfwZTRubVrsUZWqzwp"
   },
-  "modelo": "eleven_v4",
-  "ajustes": null
+  "modelo": "eleven_multilingual_v2",
+  "ajustes": {
+    "stability": 0.4,
+    "similarity_boost": 0.8,
+    "style": 0.3,
+    "use_speaker_boost": true,
+    "speed": 1.0
+  }
 }

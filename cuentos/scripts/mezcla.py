@@ -9,11 +9,20 @@ SR = 44100
 # ---- scene lengths, exactly as src/motor/Cuento.tsx computes them (no voice)
 esc = open("src/motor/escenas.ts").read(); hist = open("src/historias/camilo-1204.ts").read()
 defs = {m[0]: (int(m[1]), int(m[2])) for m in re.findall(r"(\w+): \{comp: \w+, min: (\d+), lead: (\d+)", esc)}
-rit = re.search(r"palabra: ([\d.]+), base: ([\d.]+), cola: (\d+)", hist); pal, base, cola = float(rit[1]), float(rit[2]), int(rit[3])
+rit = re.search(r"palabra: ([\d.]+), base: ([\d.]+), cola: (\d+)(?:, colaVoz: ([\d.]+))?", hist); pal, base, cola = float(rit[1]), float(rit[2]), int(rit[3]); cola_voz = float(rit[4]) if rit[4] else 0.7
 rows = re.findall(r"escena: '(\w+)', texto: '([^']*)'", hist)
-fr = [max(defs[e][0], defs[e][1] + math.ceil((base + len(t.split()) * pal) * 30) + cola) for e, t in rows]
+VOZ_JSON = "src/voz/camilo-1204.json"
+voz = json.load(open(VOZ_JSON)) if os.path.exists(VOZ_JSON) else []
+VOZ_INICIO = 6
+def frames(i, e, t):
+    l = voz[i] if i < len(voz) else None
+    secs = (VOZ_INICIO / 30 + l["dur"] + cola_voz) if (l and l["texto"] == t) else (base + len(t.split()) * pal)
+    return max(defs[e][0], defs[e][1] + math.ceil(secs * 30) + cola)
+fr = [frames(i, e, t) for i, (e, t) in enumerate(rows)]
+lead_s = [(defs[e][1] + VOZ_INICIO) / 30 for e, t in rows]
 durs = [x / 30 for x in fr]; total = sum(durs)
-CITY_T = [(34 + 20 * i) / 30 for i in range(4)]
+lv = voz[8] if len(voz) > 8 and voz[8] and len(voz[8]['palabras']) == 8 else None
+CITY_T = [((8 + VOZ_INICIO) / 30 + lv['palabras'][[0, 1, 2, 5][i]]['s'] - 0.13) if lv else (34 + 20 * i) / 30 for i in range(4)]
 starts = np.concatenate([[0], np.cumsum(durs)[:-1]])
 N = int(SR * (total + 0.3))
 rng = np.random.default_rng(11)
@@ -178,18 +187,18 @@ def breath(d=.34):                  # a soft inhale: airy noise that swells and 
     return (norm(band(rng.standard_normal(len(t)), 500, 4800)) * .5 + norm(band(rng.standard_normal(len(t)), 150, 500)) * .2) * e
 voice = np.zeros(N); breaths = np.zeros(N)
 for i, d in enumerate(durs):
-    p = next((f"{A}/narr-{i:02d}.{e}" for e in ("mp3", "wav") if os.path.exists(f"{A}/narr-{i:02d}.{e}")), None)
-    if not p: continue
-    y = load(p); j = int((starts[i] + .45) * SR); yy = y[: N - j]; voice[j:j + len(yy)] += yy
+    p = f"public/voz/camilo-1204/s{i + 1}.mp3"
+    if not os.path.exists(p) or i >= len(voz) or not voz[i]: continue
+    y = load(p); t0 = starts[i] + lead_s[i]; j = int(t0 * SR); yy = y[: N - j]; voice[j:j + len(yy)] += yy
     # breathe in before the first words and after each long pause, like a person reading aloud
     hop = int(.02 * SR); e = np.array([np.abs(y[k:k + hop]).max() for k in range(0, len(y) - hop, hop)]); on = e > .06 * e.max()
     idx = np.where(on)[0]
     if len(idx):
-        marks = [idx[0]]; k = idx[0]
+        marks = [idx[0]]
         for q in range(idx[0], idx[-1]):
-            if not on[q] and on[q + 1] and not on[max(q - 24, 0):q + 1].any(): marks.append(q + 1)   # speech resumes after >= .5 s of silence
+            if not on[q] and on[q + 1] and not on[max(q - 24, 0):q + 1].any(): marks.append(q + 1)
         for m in marks:
-            tb = starts[i] + .45 + m * .02 - .42
+            tb = t0 + m * .02 - .42
             if tb > starts[i] + .02: bs = breath(); k0 = int(tb * SR); breaths[k0:k0 + len(bs)] += bs[: max(0, N - k0)]
 voice /= max(1e-6, np.abs(voice).max()); voice *= .92
 voice = voice + breaths * .07
