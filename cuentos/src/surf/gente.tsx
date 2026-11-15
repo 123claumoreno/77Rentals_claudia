@@ -15,14 +15,16 @@ export type Ropa = {
 };
 
 const SK = {camilo: '#ebc6a0', tia: '#e4b690', nino: '#efcdab', mama: '#ecc19c', bebe: '#f3d2b3'};
-export const PLAYA: Record<'camilo' | 'tia' | 'nino', Ropa> = {
+export const PLAYA: Record<'camilo' | 'tia' | 'tia2' | 'nino', Ropa> = {
   camilo: {skin: SK.camilo, hair: '#3b2a22', hairStyle: 'short', top: P.purple, topStyle: 'bare', bottom: P.purpleDeep, bottomStyle: 'trunks', zapato: 'chancla', zapatoColor: P.gold, gorro: 'vueltiao', gafas: true},
   tia: {skin: SK.tia, hair: '#2c1c18', hairStyle: 'curly', top: P.sea, topStyle: 'suit', bottom: P.white, bottomStyle: 'pareo', zapato: 'chancla', zapatoColor: P.gold},
+  tia2: {skin: '#eac4a0', hair: '#5a3a2a', hairStyle: 'long', top: P.leaf, topStyle: 'suit', bottom: P.white, bottomStyle: 'pareo', zapato: 'chancla', zapatoColor: P.coral},
   nino: {skin: SK.nino, hair: '#4a2e20', hairStyle: 'curly', top: P.gold, topStyle: 'bare', bottom: P.gold, bottomStyle: 'trunks', zapato: 'chancla', zapatoColor: P.sea, gorro: 'pescador', gorroColor: P.coral, kid: true},
 };
-export const VIAJE: Record<'camilo' | 'tia' | 'nino', Ropa> = {
+export const VIAJE: Record<'camilo' | 'tia' | 'tia2' | 'nino', Ropa> = {
   camilo: {skin: SK.camilo, hair: '#3b2a22', hairStyle: 'short', top: P.purple, topStyle: 'tee', bottom: '#6b8fb5', bottomStyle: 'jeans', zapato: 'tenis', gorro: 'gorra'},
   tia: {skin: SK.tia, hair: '#2c1c18', hairStyle: 'curly', top: P.sea, topStyle: 'tee', bottom: P.purpleDeep, bottomStyle: 'jeans', zapato: 'tenis'},
+  tia2: {skin: '#eac4a0', hair: '#5a3a2a', hairStyle: 'long', top: P.leaf, topStyle: 'tee', bottom: '#6b8fb5', bottomStyle: 'jeans', zapato: 'tenis'},
   nino: {skin: SK.nino, hair: '#4a2e20', hairStyle: 'curly', top: P.goldSoft, topStyle: 'tee', bottom: '#6b8fb5', bottomStyle: 'jeans', zapato: 'tenis', mochila: P.coral, kid: true},
 };
 export const MAMA = {playa: {skin: SK.mama, dress: P.coral, dressLight: '#f6b9a3', hat: true}, viaje: {skin: SK.mama, dress: '#8fc1a4', dressLight: '#c3e0cf', hat: false}};
