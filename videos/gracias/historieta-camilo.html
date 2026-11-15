@@ -104,8 +104,8 @@ function charSVG(k, outfit) {
   const pack = c.pack ? `<rect x="38" y="126" width="124" height="112" rx="30" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/>` : '';
   const strap = c.pack ? `<path d="M72 116L74 206M128 116L126 206" stroke="#FF6B5B" stroke-width="12" stroke-linecap="round"/><rect x="66" y="196" width="68" height="12" rx="6" fill="#E0C585"/>` : '';
   const head = `<circle cx="59" cy="68" r="9" fill="${S}"/><circle cx="141" cy="68" r="9" fill="${S}"/><ellipse cx="100" cy="64" rx="42" ry="45" fill="${S}"/>`;
-  const baby = c.hasBaby ? `<g class="baby"><g transform="translate(-8 16) translate(153 200) scale(.82) translate(-153 -200)"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>${c.babyHat === false ? '' : '<path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/>'}<g class="bArm"><circle cx="180" cy="204" r="10" fill="${S}"/></g></g></g>` : '';
-  return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${pack}${body}${strap}${neck}${arm('L')}<g class="head">${backHair}${head}${frontHair}${face}${accs}</g>${arm('R')}${baby}</svg>`;
+  const baby = c.hasBaby ? `<g class="baby"><g transform="translate(-27 -6) translate(153 200) scale(.9) translate(-153 -200)"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>${c.babyHat === false ? '' : '<path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/>'}<g class="bArm"><circle cx="180" cy="204" r="10" fill="${S}"/></g></g></g>` : '';
+  return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${pack}${body}${strap}${neck}${arm('L')}<g class="head">${backHair}${head}${frontHair}${face}${accs}</g>${baby}${arm('R')}</svg>`;
 }
 function strollerSVG(u) {
   const S = CH.mama.skin, H = CH.mama.hair;
@@ -127,7 +127,7 @@ function mk(stage, key, x, y, s) {
   const q = (n) => el.querySelector(n);
   let stroller = null;
   if (key === 'mama' && CUR.outfit === 'travel') { stroller = document.createElement('div'); stroller.className = 'fig'; stroller.style.width = '220px'; stroller.style.height = '200px'; stroller.style.transformOrigin = '110px 190px'; stroller.innerHTML = strollerSVG('st' + (++UID)); stage.appendChild(stroller); }
-  return { stroller, el, key, x, y, s, legL: q('.legL'), legR: q('.legR'), armL: q('.armL'), armR: q('.armR'), head: q('.head'), eyes: q('.eyes'), mc: q('.mc'), mo: q('.mo'), piL: q('.pLi'), piR: q('.pRi'), pL: q('.pL'), pR: q('.pR'), bArm: q('.bArm'), propL: null, propR: null };
+  return { babyArms: !!q('.baby'), stroller, el, key, x, y, s, legL: q('.legL'), legR: q('.legR'), armL: q('.armL'), armR: q('.armR'), head: q('.head'), eyes: q('.eyes'), mc: q('.mc'), mo: q('.mo'), piL: q('.pLi'), piR: q('.pRi'), pL: q('.pL'), pR: q('.pR'), bArm: q('.bArm'), propL: null, propR: null };
 }
 function prop(f, side, svg, upright = true) { f['pi' + side].innerHTML = svg; f['prop' + side] = { upright }; }
 function pose(f, o = {}) {
@@ -139,12 +139,12 @@ function pose(f, o = {}) {
   f.legL.style.transformOrigin = '83px 258px'; f.legL.style.transform = `rotate(${leg}deg)`;
   f.legR.style.transformOrigin = '117px 258px'; f.legR.style.transform = `rotate(${-leg}deg)`;
   f.armL.style.transformOrigin = '45px 128px'; f.armL.style.transform = `rotate(${aL}deg)`;
-  f.armR.style.transformOrigin = '155px 128px'; f.armR.style.transform = `rotate(${-aR}deg)`;
+  f.armR.style.transformOrigin = '155px 128px'; f.armR.style.transform = `rotate(${f.babyArms ? 28 - Math.sin(t * 3) * 3 : -aR}deg)`;
   if (f.propL && f.propL.upright) f.piL.style.transform = `rotate(${-aL}deg)`;
   if (f.propR && f.propR.upright) f.piR.style.transform = `rotate(${aR}deg)`;
   const bl = ((t + f.x * 0.003) % 2.7) > 2.6 ? 0.1 : 1;
-  f.eyes.style.transformOrigin = '100px 64px'; f.eyes.style.transform = `translate(${look * 3}px,0) scaleY(${bl})`;
-  f.head.style.transformOrigin = '100px 112px'; f.head.style.transform = `translate(${look * 4}px,0) rotate(${look * 7}deg)`;
+  f.eyes.style.transformOrigin = '100px 64px'; f.eyes.style.transform = `translate(${look * 5}px,0) scaleY(${bl})`;
+  f.head.style.transformOrigin = '100px 112px'; f.head.style.transform = `translate(${look * 11}px,0) rotate(${look * 15}deg) scaleX(${1 - Math.abs(look) * .1})`;
   f.mc.style.display = open ? 'none' : ''; f.mo.style.display = open ? '' : 'none';
   if (f.bArm) { f.bArm.style.transformOrigin = '170px 200px'; f.bArm.style.transform = `rotate(${Math.sin(t * 9) * 45}deg)`; }
 }
@@ -210,18 +210,27 @@ function windowView(x, y, w, h, t) {
   <ellipse cx="${x + w * .28}" cy="${y + h * .16}" rx="${w * .13}" ry="${w * .04}" fill="#fff" opacity=".9"/>
   <g>${SKYLINE(x + 10, w - 20, sy)}</g><rect x="${x}" y="${sy}" width="${w}" height="${h}" fill="url(#sea)"/>`;
   for (let k = 0; k < 5; k++) { const yy = sy + 30 + k * 40; let d = `M${x - 80 + ((t * (30 + k * 10)) % 80)} ${yy}`; for (let i = 0; i < Math.ceil(w / 40) + 4; i++) d += `q20 ${i % 2 ? 10 : -10} 40 0`; s += `<path d="${d}" stroke="#fff" stroke-width="4" fill="none" opacity="${.8 - k * .1}" stroke-linecap="round"/>`; }
+  s += `<rect x="${x}" y="${y + h - 150}" width="${w}" height="90" fill="#FFFFFF" opacity=".16"/>` + Array.from({ length: Math.floor(w / 36) + 1 }, (_, k) => `<line x1="${x + k * 36}" y1="${y + h - 150}" x2="${x + k * 36}" y2="${y + h - 60}" stroke="#FFFFFF" stroke-width="3" opacity=".7"/>`).join('') + `<rect x="${x}" y="${y + h - 158}" width="${w}" height="10" fill="#E0C585"/><rect x="${x}" y="${y + h - 62}" width="${w}" height="62" fill="#D8B678"/><path d="M${x} ${y + h - 36}H${x + w}" stroke="#B88F3A" stroke-width="3"/>`;
   s += `</g><path d="M${x + w / 2} ${y}V${y + h}" stroke="#FFFFFF" stroke-width="10"/>`;
   return s;
 }
+function bedsSVG(x0, FY) {
+  let s = '';
+  for (let i = 0; i < 2; i++) { const bx = x0 + i * 232;
+    s += `<g transform="translate(${bx} ${FY})"><rect x="0" y="-132" width="210" height="76" rx="12" fill="#5B3AA0" stroke="#251547" stroke-width="3"/><rect x="24" y="-96" width="68" height="30" rx="14" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="118" y="-96" width="68" height="30" rx="14" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="6" y="-70" width="198" height="58" rx="12" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="3"/><rect x="6" y="-46" width="198" height="14" fill="#CBA54D" opacity=".85"/><rect x="-2" y="-18" width="214" height="22" rx="6" fill="#3B2055"/></g>`; }
+  return s + `<rect x="${x0 + 213}" y="${FY - 62}" width="16" height="62" rx="4" fill="#CBA54D"/>`;
+}
 function interior(o, t) {
+  const FY = o.beds !== undefined ? 650 : 760;
   let s = `<defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EDE8F6"/></linearGradient>
   <linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EBD7A6"/><stop offset="1" stop-color="#CBA54D"/></linearGradient>
   <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FDDF0"/><stop offset="1" stop-color="#FFF1CF"/></linearGradient>
   <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19C6C0"/><stop offset="1" stop-color="#0B8C9C"/></linearGradient></defs>
-  <rect width="920" height="900" fill="url(#wl)"/><rect y="760" width="920" height="140" fill="url(#fl)"/>`;
-  for (let i = 1; i < 6; i++) s += `<line x1="0" y1="${760 + i * 24}" x2="920" y2="${760 + i * 24}" stroke="#B88F3A" stroke-width="2" opacity=".35"/>`;
-  s += `<rect y="744" width="920" height="18" fill="#FFFFFF" stroke="#E4DEF0" stroke-width="2"/>`;
-  if (o.win) s += windowView(o.win[0], o.win[1], o.win[2], o.win[3], t);
+  <rect width="920" height="900" fill="url(#wl)"/><rect y="${FY}" width="920" height="${900 - FY}" fill="url(#fl)"/>`;
+  for (let i = 1; i < (900 - FY) / 24; i++) s += `<line x1="0" y1="${FY + i * 24}" x2="920" y2="${FY + i * 24}" stroke="#B88F3A" stroke-width="2" opacity=".35"/>`;
+  s += `<rect y="${FY - 16}" width="920" height="18" fill="#FFFFFF" stroke="#E4DEF0" stroke-width="2"/>`;
+  if (o.win) s += windowView(o.win[0], o.win[1], o.win[2], o.beds !== undefined ? Math.min(o.win[3], FY - o.win[1] - 8) : o.win[3], t);
+  if (o.beds !== undefined) s += bedsSVG(o.beds, FY);
   if (o.curtain) s += `<path d="M${o.win[0] - 40} 40Q${o.win[0] + 10} 300 ${o.win[0] - 20} 750H${o.win[0] - 120}V40Z" fill="#5B3AA0"/><path d="M${o.win[0] - 90} 40Q${o.win[0] - 60} 300 ${o.win[0] - 80} 750" stroke="#341D63" stroke-width="5" fill="none"/>`;
   if (o.plant) s += `<g transform="translate(${o.plant} 750)"><path d="M0 0Q-50 -80 -30 -150Q0 -90 0 0Z" fill="#12B5B0"/><path d="M0 0Q50 -90 34 -170Q-4 -100 0 0Z" fill="#0E9A96"/><path d="M0 0Q-10 -100 8 -190Q18 -100 0 0Z" fill="#19C6C0"/><path d="M-34 0h68l-10 56h-48z" transform="translate(0 -14)" fill="#FF6B5B" stroke="#251547" stroke-width="3"/></g>`;
   return s;
@@ -272,7 +281,7 @@ const V = [];
 // 1 Hola
 V.push({ title: '¡Hola, Camilo y familia!', cap: '¡Hola, Camilo! ¡Hola, familia! Esperamos que hayan disfrutado muchísimo su estadía',
   build(st) { this.F = FAM(st, [210, 410, 600, 770], 840); },
-  bg: (t) => interior({ win: [470, 90, 380, 650], curtain: true, plant: 80 }, t),
+  bg: (t) => interior({ win: [470, 90, 380, 650], beds: 20 }, t),
   frame(t) {
     const { M, C, T, N } = this.F, w = (p) => Math.sin(t * 9 + p) * 28;
     const rM = run(t, 0, -1, .16, .9), rC = run(t, 1, -1, .16, .9), rT = run(t, 2, 1, .16, .9), rN = run(t, 3, 1, .1, .8, 17);
@@ -280,14 +289,14 @@ V.push({ title: '¡Hola, Camilo y familia!', cap: '¡Hola, Camilo! ¡Hola, famil
     pose(C, { ...rC, aR: rC.mov ? swing(t, 1) + 8 : 112 + w(1), aL: rC.mov ? -swing(t, 1) + 8 : 3, open: t > .4, t });
     pose(T, { ...rT, aL: rT.mov ? swing(t, 2) + 8 : 108 + w(2), aR: rT.mov ? -swing(t, 2) + 8 : 4, open: t > .4, t });
     pose(N, { ...rN, aL: rN.mov ? 40 : 130 + w(3), aR: rN.mov ? 40 : 125 + w(4), open: t > .3, t, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 6)) * 14) });
-    let s = bunting(0, t, ['#FFC93C', '#FF6B5B', '#12B5B0', '#FFFFFF'], 36);
+    let s = '';
     [[150, 330], [380, 270], [560, 300], [760, 410], [300, 450]].forEach(([x, y], i) => { const k = Math.max(0, Math.sin(t * 6 + i * 1.7)); s += spark(x, y, 10 + k * 26, i % 2 ? '#FFC93C' : '#FFFFFF'); });
     return s;
   } });
 // 2 Check-out
 V.push({ title: '¡Llegó la hora de despedirnos!', cap: 'Hoy es nuestro día de check-out. Recuerda que la hora máxima de salida es a las 12:00 del mediodía',
   build(st) { this.F = FAM(st, [190, 380, 580, 760], 840); prop(this.F.C, 'R', THUMB(1), false); },
-  bg: (t) => interior({ win: [640, 200, 230, 540], plant: 60 }, t) +
+  bg: (t) => interior({ win: [640, 200, 230, 540], beds: 20 }, t) +
     `<g transform="translate(205 150)"><rect x="-170" y="-70" width="340" height="140" rx="26" fill="#CBA54D" stroke="#251547" stroke-width="4"/><rect x="-157" y="-57" width="314" height="114" rx="16" fill="#341D63"/><text x="0" y="-18" text-anchor="middle" font-family="General Sans, sans-serif" font-weight="600" font-size="27" letter-spacing="5" fill="#E0C585">APARTAMENTO</text><text x="0" y="42" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="70" fill="#FFFFFF">1204</text></g>`,
   frame(t) {
     const { M, C, T, N } = this.F, th = ease((t - 1.1) / .5);
@@ -306,7 +315,7 @@ V.push({ title: '¡Llegó la hora de despedirnos!', cap: 'Hoy es nuestro día de
 // 3 Apagar
 V.push({ travel: true, title: 'Primera recomendación', icon: 'bulb', cap: '1. Antes de salir, recuerda dejar todas las luces, aires acondicionados y electrodomésticos apagados', small: true,
   build(st) { this.F = FAM(st, [250, 450, 650, 810], 840, [1.0, 1.1, 1.0, .66]); prop(this.F.C, 'R', REMOTE, true); },
-  bg: (t) => interior({ plant: 0 }, t) +
+  bg: (t) => interior({ beds: 450 }, t) +
     `<rect x="330" y="60" width="380" height="96" rx="22" fill="#FFFFFF" stroke="#CBA54D" stroke-width="5"/><path d="M356 118h328M356 134h328" stroke="#D9D2E6" stroke-width="5" stroke-linecap="round"/>
      <rect x="630" y="250" width="270" height="170" rx="16" fill="#251547" stroke="#CBA54D" stroke-width="6"/><rect x="740" y="420" width="50" height="40" fill="#251547"/>
      <rect x="30" y="500" width="64" height="100" rx="14" fill="#FFFFFF" stroke="#CBA54D" stroke-width="5"/>`,
@@ -380,7 +389,7 @@ V.push({ travel: true, title: '¡Un último detalle!', icon: 'key', cap: 'Deja l
 // 5 Opinion
 V.push({ travel: true, title: '¡Tu opinión es muy importante!', icon: 'star', cap: '3. Nos encantaría que nos compartieras cómo fue tu experiencia reservando y hospedándote con nosotros', small: true,
   build(st) { this.F = FAM(st, [130, 370, 600, 770], 840); prop(this.F.C, 'R', PHONE, true); },
-  bg: (t) => interior({ win: [560, 110, 300, 630], plant: 0 }, t),
+  bg: (t) => interior({ win: [560, 110, 300, 630], beds: 20 }, t),
   frame(t) {
     const { M, C, T, N } = this.F, th = ease((t - 1.0) / .5), hug = ease((t - 1.4) / .5);
     const rM = run(t, 0, -1, .1, .9), rC = run(t, 1, -1, .12, .9), rT = run(t, 2, 1, .1, .9), rN = run(t, 3, 1, .14, .8, 17);
@@ -396,16 +405,16 @@ V.push({ travel: true, title: '¡Tu opinión es muy importante!', icon: 'star', 
 // 6 Gracias
 V.push({ travel: true, title: '¡Gracias por elegirnos!', cap: 'Gracias por permitirnos ser parte de sus días en Cartagena. ¡Fue un placer recibirlos!',
   build(st) { this.F = FAM(st, [270, 440, 610, 745], 840, [1.05, 1.13, 1.03, .72]); },
-  bg: (t) => `<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFE9A0"/><stop offset="1" stop-color="#FFE9A0" stop-opacity="0"/></radialGradient></defs>` + interior({ win: [60, 90, 330, 650], plant: 860 }, t) + `<circle cx="480" cy="520" r="360" fill="url(#glow)" opacity=".7"/>`,
+  bg: (t) => `<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFE9A0"/><stop offset="1" stop-color="#FFE9A0" stop-opacity="0"/></radialGradient></defs>` + interior({ win: [60, 90, 330, 650], beds: 450 }, t) + `<circle cx="480" cy="520" r="360" fill="url(#glow)" opacity=".7"/>`,
   frame(t) {
     const { M, C, T, N } = this.F, w = (p, a = 25) => Math.sin(t * 9 + p) * a;
     const rM = run(t, 0, -1, .1, 1.0, 15), rC = run(t, 1, -1, .1, 1.0, 15), rT = run(t, 2, 1, .1, 1.0, 15), rN = run(t, 3, 1, .05, .9, 19);
     // heads turn from side to side as if they were looking at each other
-    const lk = (p) => Math.sin(t * 2.4 + p);
-    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t, 0) + 8 : 100 + w(0), open: true, t, look: rM.mov ? 0 : lk(0) });
-    pose(C, { ...rC, aL: rC.mov ? swing(t, 1) + 8 : 4, aR: rC.mov ? -swing(t, 1) + 8 : 100 + w(1), open: true, t, look: rC.mov ? 0 : lk(1.7) });
-    pose(T, { ...rT, aL: rT.mov ? swing(t, 2) + 8 : 100 + w(2), aR: rT.mov ? -swing(t, 2) + 8 : 4, open: true, t, look: rT.mov ? 0 : lk(3.4) });
-    pose(N, { ...rN, aL: rN.mov ? 40 : 4, aR: rN.mov ? 40 : 125 + w(3, 28), open: true, t, look: rN.mov ? 0 : lk(5.1), dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 5)) * 8) });
+    const g1 = Math.sin(t * 3.2), g2 = Math.sin(t * 3.2 + 1.9);   // pairs look at each other, then away
+    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t, 0) + 8 : 100 + w(0), open: true, t, look: rM.mov ? 0 : g1 });
+    pose(C, { ...rC, aL: rC.mov ? swing(t, 1) + 8 : 4, aR: rC.mov ? -swing(t, 1) + 8 : 100 + w(1), open: true, t, look: rC.mov ? 0 : -g1 });
+    pose(T, { ...rT, aL: rT.mov ? swing(t, 2) + 8 : 100 + w(2), aR: rT.mov ? -swing(t, 2) + 8 : 4, open: true, t, look: rT.mov ? 0 : g2 });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 4, aR: rN.mov ? 40 : 125 + w(3, 28), open: true, t, look: rN.mov ? 0 : -g2, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 5)) * 8) });
     let s = '';
     if (t > 1.5) { const k = back((t - 1.5) / .45); s += `<g transform="translate(450 ${300 - 30 * ease((t - 1.5) / 1)}) scale(${k * (1 + Math.sin(t * 7) * .06)})">${heart(0, 0, 1.9, '#FF6B5B')}</g>`; }
     for (let i = 0; i < 7; i++) { const x = 100 + (i * 131) % 760, y = 800 - ((t * (70 + i * 14) + i * 140) % 700); s += heart(x, y, .42 + (i % 3) * .1, ['#FF5FA2', '#FFC93C', '#FF6B5B'][i % 3], Math.sin(t * 3 + i) * 12); }
@@ -444,7 +453,7 @@ V.push({ title: '¡Tenemos beneficios para ti!', cap: 'Forma parte de nuestro pl
 // 9 Cartagena
 V.push({ travel: true, title: '¡Cartagena siempre los espera!', cap: '¡Que sigan disfrutando de muchos momentos especiales! Gracias, Camilo y familia', small: true,
   build(st) { this.F = FAM(st, [210, 420, 610, 770], 840); prop(this.F.C, 'L', SUIT, true); prop(this.F.T, 'R', SUIT2, true); },
-  bg: (t) => facade(t) + papel(110, t, ['#FF6B5B', '#FFC93C', '#12B5B0', '#FF5FA2']) + bunting(0, t, ['#FFC93C', '#FF6B5B', '#12B5B0', '#FFFFFF', '#FF5FA2'], 36),
+  bg: (t) => facade(t),
   frame(t) {
     const { M, C, T, N } = this.F, t0 = t, u = t - .6, throwK = clamp((u - .9) / .35), w = (p) => Math.sin(t0 * 9 + p) * 25;
     const rM = run(t0, 0, -1, .12, .9), rC = run(t0, 1, -1, .12, .9), rT = run(t0, 2, 1, .1, .9), rN = run(t0, 3, 1, .14, .8, 17);
