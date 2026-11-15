@@ -14,7 +14,7 @@ export const camilo1204: Historia = {
   voz: true,
   escenas: [
     {escena: 'inicio1204', texto: '¡Hola, Camilo y familia! Hoy es el check-out: salida máxima, 12 del mediodía.', dicho: '¡Hola, Camilo y familia! Hoy es el chek aut: salida máxima, doce del mediodía.'},
-    {escena: 'apagar', texto: 'Antes de salir les damos algunas recomendaciones: luces, aires y electrodomésticos apagados.'},
+    {escena: 'apagar', texto: 'Antes de tu check-out, aquí algunas recomendaciones: luces, aires y electrodomésticos apagados.', dicho: 'Antes de tu chek aut, aquí algunas recomendaciones: luces, aires y electrodomésticos apagados.'},
     {escena: 'pasillo1204', texto: 'La basura va al chute, y la llave a la cajita de seguridad.'},
     {escena: 'terraza1204', texto: 'Cuéntennos cómo fue su experiencia reservando y hospedándose con nosotros. ¡Gracias por elegirnos!'},
     {escena: 'benciu1204', texto: 'Beneficios para quienes vuelven y reservan directo. Cartagena, Barranquilla, Santa Marta y Bogotá los esperan.'},
