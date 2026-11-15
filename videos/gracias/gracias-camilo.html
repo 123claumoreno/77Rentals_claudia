@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gracias Camilo, video 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* 1080x1920 vertical, 15 s. Frames are drawn by render(t) so the export is deterministic. Text stays inside y 250..1670. */
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--purple-logo); }
+  body { font-family: var(--font-body); position: relative; }
+  .scene { position: absolute; inset: 0; opacity: 0; overflow: hidden; }
+  .txt { position: absolute; left: 90px; right: 90px; top: 300px; text-align: center; }
+  .kicker { font-size: 36px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+  .title { font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 118px; line-height: 1.06; margin-top: 26px; text-wrap: balance; }
+  .title em { font-style: italic; }
+  .sub { font-size: 50px; line-height: 1.35; margin-top: 36px; text-wrap: balance; }
+  .rule { width: 140px; height: 8px; border-radius: 4px; margin: 40px auto 0; }
+  .fx { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; pointer-events: none; }
+  .stage { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+  .fig { position: absolute; width: 200px; height: 400px; transform-origin: 50% 0; }
+  .fig svg { width: 100%; height: 100%; overflow: visible; display: block; }
+  .s1 { background: var(--gold-light); color: var(--purple); }
+  .s2 { background: var(--purple-light); color: var(--purple); }
+  .s3 { background: var(--purple); color: var(--white); }
+  .s4 { background: var(--purple-logo); color: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 100px; }
+  .s4 .logo { width: 480px; display: block; }
+  .s4 .ask { font-family: var(--font-heading); font-size: 78px; line-height: 1.12; margin-top: 70px; text-wrap: balance; }
+  .s4 .ask em { color: var(--gold-light); }
+  .s4 .row { display: flex; align-items: center; gap: 40px; margin-top: 64px; text-align: left; }
+  .s4 .qr { background: var(--white); padding: 18px; border-radius: 26px; flex: none; }
+  .s4 .qr img { width: 190px; height: 190px; display: block; }
+  .s4 .t { font-size: 42px; line-height: 1.5; }
+  .s4 .t b { display: block; color: var(--gold-light); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="scene s1" id="s1">
+  <svg class="fx" id="fx1" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="color:var(--purple)">Murano Élite · Cartagena</div>
+    <div class="title a">Camilo,<br><em>gracias</em> por elegirnos</div>
+    <div class="rule a" style="background:var(--purple)"></div>
+  </div>
+  <div class="stage" id="st1"></div>
+</div>
+<div class="scene s2" id="s2">
+  <svg class="fx" id="fx2" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="color:var(--purple)">Grandes y pequeños</div>
+    <div class="title a">Un viaje<br><em style="color:var(--purple)">en familia</em></div>
+    <div class="rule a" style="background:var(--gold)"></div>
+  </div>
+  <div class="stage" id="st2"></div>
+</div>
+<div class="scene s3" id="s3">
+  <svg class="fx" id="fx3" viewBox="0 0 1080 1920"></svg>
+  <div class="txt">
+    <div class="kicker a" style="color:var(--gold-light)">Cerca al mar</div>
+    <div class="title a">Gracias por dejarnos ser parte de <em style="color:var(--gold-light)">su viaje</em></div>
+  </div>
+  <div class="stage" id="st3"></div>
+</div>
+<div class="scene s4" id="s4">
+  <img class="logo a" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <div class="ask a">¿Nos cuentas cómo fue tu experiencia y compartes <em>una foto del viaje</em>?</div>
+  <div class="row a">
+    <div class="qr"><img src="../../posters/checkout/qr-whatsapp.svg" alt="QR WhatsApp"></div>
+    <div class="t"><b>Escríbenos por WhatsApp</b>+57 304 673 6241<br>77rentals.com</div>
+  </div>
+</div>
+
+<script>
+const ns = 'http://www.w3.org/2000/svg';
+const ease = (x) => (x = Math.max(0, Math.min(1, x)), 1 - Math.pow(1 - x, 3));
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+
+// Paper-doll people: no faces, simple shapes, palette colors only.
+function person(kind, c) {
+  const hair = c.hair;
+  const head = `<circle cx="100" cy="62" r="40" fill="${c.skin}"/>`;
+  const hairs = {
+    long: `<path d="M58 66c-6-52 78-62 84 0c4 26-6 44-10 52l-10-60c-30 8-50-6-58 0l-4 60c-4-8-4-30-2-52z" fill="${hair}"/>`,
+    short: `<path d="M60 58c0-44 80-44 80 0c-26-14-54-14-80 0z" fill="${hair}"/>`,
+    cap: `<path d="M58 56c2-40 82-40 84 0z" fill="${hair}"/><rect x="100" y="48" width="64" height="12" rx="6" fill="${hair}"/>`,
+    tuft: `<path d="M70 40c10-26 50-26 60 0c-18-8-42-8-60 0z" fill="${hair}"/>`,
+    none: `<path d="M84 26c8-6 24-6 32 0c-10-2-22-2-32 0z" fill="${hair}"/>`,
+  };
+  const body = kind === 'mom'
+    ? `<path d="M52 114h96l22 150H30z" fill="${c.top}"/>`
+    : `<rect x="54" y="112" width="92" height="150" rx="42" fill="${c.top}"/>`;
+  const legs = `<g class="legL"><rect x="68" y="250" width="30" height="130" rx="15" fill="${c.legs}"/></g><g class="legR"><rect x="102" y="250" width="30" height="130" rx="15" fill="${c.legs}"/></g>`;
+  const arms = `<g class="armL"><rect x="30" y="118" width="24" height="110" rx="12" fill="${c.top}"/></g><g class="armR"><rect x="146" y="118" width="24" height="110" rx="12" fill="${c.top}"/></g>`;
+  const baby = kind === 'mom' ? `<g class="baby"><rect x="128" y="168" width="50" height="62" rx="24" fill="${c.baby}"/><circle cx="153" cy="152" r="26" fill="${c.skin}"/><path d="M130 146c4-22 44-22 48 0c-14-8-34-8-48 0z" fill="${hair}"/></g>` : '';
+  return `<svg viewBox="0 0 200 400">${legs}${body}${arms}${head}${hairs[c.style]}${baby}</svg>`;
+}
+
+// Four palettes so the family never looks the same on two backgrounds.
+const PAL = {
+  s1: { skin: '#FFFFFF', hair: '#251547', a: '#341D63', b: '#CBA54D', c: '#FFFFFF', baby: '#FFFFFF', legs: '#251547' },
+  s2: { skin: '#E0C585', hair: '#251547', a: '#CBA54D', b: '#341D63', c: '#3B2055', baby: '#CBA54D', legs: '#251547' },
+  s3: { skin: '#E0C585', hair: '#F1EEF6', a: '#CBA54D', b: '#FFFFFF', c: '#E0C585', baby: '#FFFFFF', legs: '#251547' },
+};
+function family(id, pal, baseY, spread) {
+  const st = document.getElementById(id);
+  const P = PAL[pal];
+  // [kind, scale, top color, hair style, x center]
+  const defs = [
+    ['mom', 1.0, P.a, 'long'], ['dad', 1.06, P.b, 'short'], ['adult', 1.0, P.c, 'cap'],
+    ['boy', 0.62, P.a, 'tuft'],
+  ];
+  const xs = [210, 430, 650, 850].map((x) => x + spread);
+  defs.forEach((d, i) => {
+    const el = document.createElement('div');
+    el.className = 'fig';
+    el.dataset.i = i; el.dataset.k = d[0]; el.dataset.s = d[1]; el.dataset.x = xs[i]; el.dataset.y = baseY;
+    el.innerHTML = person(d[0], { skin: P.skin, hair: P.hair, top: d[2], legs: P.legs, style: d[3], baby: P.baby });
+    st.appendChild(el);
+  });
+}
+family('st1', 's1', 1450, 0);
+family('st2', 's2', 1450, 0);
+family('st3', 's3', 1450, 0);
+
+function confetti(t, colors, count, seed) {
+  let h = '';
+  for (let i = 0; i < count; i++) {
+    const r = (Math.sin(i * 91.7 + seed) + 1) / 2, r2 = (Math.sin(i * 47.3 + seed * 2) + 1) / 2;
+    const x = 40 + r * 1000, y = 1750 - ((t * (70 + r2 * 120) + r2 * 1700) % 1500) - 100;
+    h += `<circle cx="${x + Math.sin(t * 2 + i) * 18}" cy="${y}" r="${8 + r2 * 10}" fill="${colors[i % colors.length]}" opacity=".85"/>`;
+  }
+  return h;
+}
+function hearts(t, color) {
+  let h = '';
+  for (let i = 0; i < 9; i++) {
+    const r = (Math.sin(i * 71.3) + 1) / 2, r2 = (Math.sin(i * 33.9 + 2) + 1) / 2;
+    const x = 80 + r * 920, y = 1700 - ((t * (60 + r2 * 60) + r2 * 1400) % 1300);
+    const s = 0.5 + r2 * 0.7;
+    h += `<path transform="translate(${x + Math.sin(t * 2 + i) * 14} ${y}) scale(${s})" d="M0 14c-26-18-24-40-8-40 8 0 8 8 8 8s0-8 8-8c16 0 18 22-8 40z" fill="${color}" opacity=".8"/>`;
+  }
+  return h;
+}
+
+function pose(stId, local, mode) {
+  document.querySelectorAll('#' + stId + ' .fig').forEach((el) => {
+    const i = +el.dataset.i, s = +el.dataset.s * 1.4, x = +el.dataset.x, y = +el.dataset.y;
+    const ph = i * 0.9;
+    let px = x, bob = 0, swing = 0, arm = 0, rot = 0, sy = 1;
+    if (mode === 'walk') {
+      const arrive = ease((local - i * 0.12) / 1.6);
+      px = x - (1 - arrive) * 900;
+      const moving = arrive < 1 ? 1 : 0;
+      swing = moving * Math.sin(local * 9 + ph) * 26;
+      bob = moving ? Math.abs(Math.sin(local * 9 + ph)) * -14 : Math.sin(local * 3 + ph) * -3;
+      arm = -swing;
+    } else if (mode === 'jump') {
+      const k = Math.max(0, Math.sin((local * 3.4 - i * 0.18) * Math.PI));
+      bob = -k * (i === 3 ? 70 : 46);
+      arm = k * -130; sy = 1 + (k < 0.05 ? -0.03 : 0.02);
+    } else if (mode === 'wave') {
+      bob = Math.sin(local * 3 + ph) * -5;
+      arm = i === 3 ? Math.sin(local * 8) * 40 - 130 : (i % 2 ? Math.sin(local * 7 + ph) * 25 - 120 : 0);
+      rot = Math.sin(local * 2.2 + ph) * 1.5;
+    }
+    el.style.transform = `translate(${px - 100}px, ${y - 400 * s + bob}px) scale(${s}, ${s * sy}) rotate(${rot}deg)`;
+    const q = (n) => el.querySelector(n);
+    if (q('.legL')) { q('.legL').style.transformOrigin = '83px 250px'; q('.legL').style.transform = `rotate(${swing}deg)`; }
+    if (q('.legR')) { q('.legR').style.transformOrigin = '117px 250px'; q('.legR').style.transform = `rotate(${-swing}deg)`; }
+    if (q('.armL')) { q('.armL').style.transformOrigin = '42px 124px'; q('.armL').style.transform = `rotate(${-arm * (el.dataset.k === 'mom' ? 0 : 1)}deg)`; }
+    if (q('.armR')) { q('.armR').style.transformOrigin = '158px 124px'; q('.armR').style.transform = `rotate(${arm}deg)`; }
+  });
+}
+
+function appear(sceneEl, local, delays) {
+  sceneEl.querySelectorAll('.a').forEach((el, i) => {
+    const k = ease((local - 0.15 - (delays ? delays[i] : i * 0.18)) / 0.7);
+    el.style.opacity = k;
+    el.style.transform = `translateY(${(1 - k) * 50}px)`;
+  });
+}
+
+// Scene windows: [start, end]. Each fades 0.4 s in and out.
+const SC = [[0, 3.8], [3.6, 7.6], [7.4, 11.4], [11.2, 15]];
+function render(t) {
+  SC.forEach(([a, b], i) => {
+    const el = document.getElementById('s' + (i + 1));
+    const op = clamp((t - a) / 0.4) * clamp((b - t) / 0.4);
+    el.style.opacity = i === 0 ? clamp((b - t) / 0.4) : op;
+    el.style.zIndex = i;
+    if (t >= a - 0.01 && t <= b) appear(el, t - a);
+  });
+  document.getElementById('fx1').innerHTML = `<circle cx="540" cy="${1180 - ease(t / 3) * 120}" r="230" fill="#FFFFFF" opacity=".75"/>` +
+    (() => { const s = []; for (let k = 0; k < 4; k++) { const y = 1500 + k * 62, off = (t * (60 + k * 18) * (k % 2 ? -1 : 1)) % 270; let d = `M${-270 + off} ${y}`; for (let x = 0; x < 12; x++) d += ` q 67.5 ${x % 2 ? 36 : -36} 135 0`; s.push(`<path d="${d}" fill="none" stroke="#341D63" stroke-width="6" stroke-linecap="round" opacity="${0.9 - k * 0.2}"/>`); } return s.join(''); })();
+  const t2 = t - 3.6, t3 = t - 7.4;
+  document.getElementById('fx2').innerHTML = confetti(t2, ['#CBA54D', '#341D63', '#E0C585', '#3B2055'], 26, 3);
+  document.getElementById('fx3').innerHTML = hearts(t3, '#CBA54D') + (() => { const s = []; for (let k = 0; k < 4; k++) { const y = 1500 + k * 62, off = (t3 * (60 + k * 18) * (k % 2 ? -1 : 1)) % 270; let d = `M${-270 + off} ${y}`; for (let x = 0; x < 12; x++) d += ` q 67.5 ${x % 2 ? 36 : -36} 135 0`; s.push(`<path d="${d}" fill="none" stroke="#E0C585" stroke-width="6" stroke-linecap="round" opacity="${0.9 - k * 0.2}"/>`); } return s.join(''); })();
+  pose('st1', t, 'walk');
+  pose('st2', t2, 'jump');
+  pose('st3', t3, 'wave');
+  appear(document.getElementById('s4'), t - 11.2, [0, 0.35, 0.8]);
+}
+render(0);
+</script>
+</body>
+</html>
