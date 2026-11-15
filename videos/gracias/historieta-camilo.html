@@ -50,22 +50,31 @@ const INK = '#2A1A12';
 // ---------------- the five characters (fixed faces, skin, hair and clothes) ----------------
 const CH = {
   camilo: { skin: '#D9A072', hair: '#2A1A12', kind: 'trunks', top: '#341D63', top2: '#5B3AA0', legs: '#341D63', accent: '#CBA54D', sandal: '#E0C585', style: 'short', acc: 'shades' },
-  mama:   { skin: '#EDBE92', hair: '#3A2216', kind: 'suit', top: '#CBA54D', top2: '#EBD38F', legs: '#CBA54D', accent: '#FF6B5B', sandal: '#FF6B5B', style: 'long', acc: 'straw' },
+  mama:   { hasBaby: true, skin: '#EDBE92', hair: '#3A2216', kind: 'suit', top: '#CBA54D', top2: '#EBD38F', legs: '#CBA54D', accent: '#FF6B5B', sandal: '#FF6B5B', style: 'long', acc: 'straw' },
   tia:    { skin: '#B97B52', hair: '#1F1410', kind: 'suit', top: '#12B5B0', top2: '#55D9D4', legs: '#12B5B0', accent: '#FFC93C', sandal: '#FFC93C', style: 'curly', acc: 'pareo' },
   nino:   { skin: '#D9A072', hair: '#2A1A12', kind: 'trunks', top: '#FFC93C', top2: '#FFE380', legs: '#FFC93C', accent: '#FF6B5B', sandal: '#12B5B0', style: 'tuft', acc: 'bucket' },
 };
+const TR = {
+  camilo: { kind: 'tee', legs: '#4A6A9E', accent: '#FFFFFF', sandal: '#FFFFFF', acc: 'none' },
+  mama:   { kind: 'tee', legs: '#4A6A9E', accent: '#FFFFFF', sandal: '#FFFFFF', acc: 'none', babyHat: false },
+  tia:    { kind: 'tee', legs: '#341D63', accent: '#FFFFFF', sandal: '#FFFFFF', acc: 'none' },
+  nino:   { kind: 'tee', legs: '#4A6A9E', accent: '#FFFFFF', sandal: '#FFFFFF', acc: 'none' },
+};
+const CUR = { outfit: 'beach' };
 let UID = 0;
-function charSVG(k) {
-  const c = CH[k], u = 'g' + (++UID);
+function charSVG(k, outfit) {
+  const c = outfit === 'travel' ? { ...CH[k], ...TR[k] } : CH[k], u = 'g' + (++UID);
   const defs = `<defs>
     <radialGradient id="${u}s" cx=".4" cy=".3" r=".85"><stop offset="0" stop-color="${mix(c.skin, '#FFFFFF', .38)}"/><stop offset=".6" stop-color="${c.skin}"/><stop offset="1" stop-color="${mix(c.skin, '#000000', .2)}"/></radialGradient>
     <linearGradient id="${u}t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c.top2}"/><stop offset="1" stop-color="${c.top}"/></linearGradient>
     <linearGradient id="${u}h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${mix(c.hair, '#FFFFFF', .28)}"/><stop offset="1" stop-color="${c.hair}"/></linearGradient></defs>`;
   const S = `url(#${u}s)`, T = `url(#${u}t)`, H = `url(#${u}h)`, ln = 'rgba(0,0,0,.12)';
-  const leg = (x, cls) => `<g class="${cls}"><rect x="${x}" y="256" width="30" height="116" rx="13" fill="${S}" stroke="${ln}" stroke-width="2"/>${c.kind === 'trunks' ? `<rect x="${x - 1}" y="246" width="32" height="68" rx="12" fill="${c.legs}" stroke="${ln}" stroke-width="2"/><rect x="${x + 12}" y="246" width="6" height="68" fill="${c.accent}"/>` : ''}<path d="M${x - 6} 381Q${x + 10} 368 ${x + 36} 381L${x + 34} 389Q${x + 10} 395 ${x - 4} 389Z" fill="${c.sandal}" stroke="${ln}" stroke-width="2"/><path d="M${x + 4} 378Q${x + 12} 362 ${x + 26} 378" stroke="${c.accent}" stroke-width="5" fill="none" stroke-linecap="round"/></g>`;
+  const leg = (x, cls) => `<g class="${cls}"><rect x="${x}" y="256" width="30" height="116" rx="13" fill="${c.kind === 'tee' ? c.legs : S}" stroke="${ln}" stroke-width="2"/>${c.kind === 'trunks' ? `<rect x="${x - 1}" y="246" width="32" height="68" rx="12" fill="${c.legs}" stroke="${ln}" stroke-width="2"/><rect x="${x + 12}" y="246" width="6" height="68" fill="${c.accent}"/>` : ''}${c.kind === 'tee' ? `<ellipse cx="${x + 10}" cy="380" rx="25" ry="13" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><path d="M${x - 14} 384Q${x + 10} 394 ${x + 34} 384" stroke="${c.top}" stroke-width="4" fill="none" stroke-linecap="round"/>` : `<path d="M${x - 6} 381Q${x + 10} 368 ${x + 36} 381L${x + 34} 389Q${x + 10} 395 ${x - 4} 389Z" fill="${c.sandal}" stroke="${ln}" stroke-width="2"/><path d="M${x + 4} 378Q${x + 12} 362 ${x + 26} 378" stroke="${c.accent}" stroke-width="5" fill="none" stroke-linecap="round"/>`}</g>`;
   const legs = leg(68, 'legL') + leg(102, 'legR');
   const torso = `<path d="M56 118Q100 104 144 118L152 266Q100 280 48 266Z" fill="${S}" stroke="${ln}" stroke-width="2"/>`;
-  const wear = c.kind === 'trunks'
+  const wear = c.kind === 'tee'
+    ? `<path d="M54 118Q100 104 146 118L154 270Q100 284 46 270Z" fill="${T}" stroke="${ln}" stroke-width="2"/><path d="M84 110Q100 130 116 110" stroke="${mix(c.top, '#000000', .25)}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M52 258Q100 272 148 258" stroke="${mix(c.legs, '#000000', .3)}" stroke-width="8" fill="none"/>`
+    : c.kind === 'trunks'
     ? `<path d="M49 238Q100 252 151 238L152 270Q100 284 48 270Z" fill="${c.legs}" stroke="${ln}" stroke-width="2"/><path d="M52 252Q100 266 148 252" stroke="${c.accent}" stroke-width="5" fill="none"/>`
     : `<path d="M62 152Q100 182 138 152L148 266Q100 280 52 266Z" fill="${T}" stroke="${ln}" stroke-width="2"/><path d="M72 154L86 112M128 154L114 112" stroke="${c.top}" stroke-width="10" stroke-linecap="round"/><path d="M70 200Q100 212 130 200" stroke="${c.accent}" stroke-width="5" fill="none" stroke-linecap="round"/>`
       + (c.acc === 'pareo' ? `<path d="M44 248Q100 232 156 248L174 336Q100 352 26 336Z" fill="#FFFFFF" stroke="${c.top}" stroke-width="3" opacity=".95"/><path d="M60 262L52 340M100 258V346M140 262L148 340" stroke="${c.top}" stroke-width="5" opacity=".55"/>` : '');
@@ -73,7 +82,7 @@ function charSVG(k) {
   const neck = `<rect x="86" y="96" width="28" height="30" rx="10" fill="${mix(c.skin, '#000000', .12)}"/>`;
   const arm = (side) => {
     const x = side === 'L' ? 32 : 142, hx = side === 'L' ? 45 : 155;
-    return `<g class="arm${side}"><rect x="${x}" y="120" width="26" height="74" rx="13" fill="${S}" stroke="${ln}" stroke-width="2"/><rect x="${x + 3}" y="184" width="20" height="56" rx="10" fill="${S}"/><circle cx="${hx}" cy="240" r="14" fill="${S}"/><g class="p${side}" transform="translate(${hx} 240)"><g class="p${side}i"></g></g></g>`;
+    return `<g class="arm${side}"><rect x="${x}" y="120" width="26" height="74" rx="13" fill="${S}" stroke="${ln}" stroke-width="2"/><rect x="${x + 3}" y="184" width="20" height="56" rx="10" fill="${S}"/>${c.kind === 'tee' ? `<rect x="${x}" y="118" width="26" height="56" rx="13" fill="${T}" stroke="${ln}" stroke-width="2"/>` : ''}<circle cx="${hx}" cy="240" r="14" fill="${S}"/><g class="p${side}" transform="translate(${hx} 240)"><g class="p${side}i"></g></g></g>`;
   };
   const backHair = { long: `<path d="M52 62Q48 8 100 8Q152 8 148 62L154 156Q132 168 126 126L74 126Q68 168 46 156Z" fill="${H}"/>`,
     curly: [[62, 34], [82, 20], [104, 16], [126, 22], [142, 38], [150, 62], [50, 62], [144, 82], [56, 82]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="21" fill="${H}"/>`).join(''), short: '', tuft: '' }[c.style];
@@ -92,11 +101,11 @@ function charSVG(k) {
     straw: `<path d="M56 40Q58 -6 100 -6Q142 -6 144 40Z" fill="#F0D58C" stroke="#CBA54D" stroke-width="3"/><rect x="56" y="22" width="88" height="12" fill="#FF6B5B"/><ellipse cx="100" cy="40" rx="86" ry="17" fill="#E8C97A" stroke="#CBA54D" stroke-width="3"/>`,
     bucket: `<path d="M64 36Q66 4 100 4Q134 4 136 36Z" fill="#12B5B0" stroke="#251547" stroke-width="2"/><path d="M48 42Q100 20 152 42Q100 54 48 42Z" fill="#12B5B0" stroke="#251547" stroke-width="2"/><rect x="66" y="22" width="68" height="8" fill="#FFC93C"/>`, pareo: '' }[c.acc] || '';
   const head = `<circle cx="59" cy="68" r="9" fill="${S}"/><circle cx="141" cy="68" r="9" fill="${S}"/><ellipse cx="100" cy="64" rx="42" ry="45" fill="${S}"/>`;
-  const baby = c.acc === 'straw' ? `<g class="baby"><g transform="translate(0 28) translate(153 200) scale(1.42) translate(-153 -200)"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/><g class="bArm"><circle cx="180" cy="204" r="10" fill="${S}"/></g></g></g>` : '';
+  const baby = c.hasBaby ? `<g class="baby"><g transform="translate(0 28) translate(153 200) scale(1.42) translate(-153 -200)"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>${c.babyHat === false ? '' : '<path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/>'}<g class="bArm"><circle cx="180" cy="204" r="10" fill="${S}"/></g></g></g>` : '';
   return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${body}${neck}${arm('L')}${backHair}${head}${frontHair}${face}${accs}${baby}${arm('R')}</svg>`;
 }
 function mk(stage, key, x, y, s) {
-  const el = document.createElement('div'); el.className = 'fig'; el.innerHTML = charSVG(key); stage.appendChild(el);
+  const el = document.createElement('div'); el.className = 'fig'; el.innerHTML = charSVG(key, CUR.outfit); stage.appendChild(el);
   const q = (n) => el.querySelector(n);
   return { el, key, x, y, s, legL: q('.legL'), legR: q('.legR'), armL: q('.armL'), armR: q('.armR'), eyes: q('.eyes'), mc: q('.mc'), mo: q('.mo'), piL: q('.pLi'), piR: q('.pRi'), pL: q('.pL'), pR: q('.pR'), bArm: q('.bArm'), propL: null, propR: null };
 }
@@ -163,6 +172,7 @@ const clock = (cx, cy, r, t) => {
 const ICON = {
   bulb: '<svg viewBox="0 0 60 60" fill="none" stroke="#FFC93C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 38c-6-4-9-9-9-16a19 19 0 0138 0c0 7-3 12-9 16v6H20z" fill="#FFC93C"/><path d="M22 52h16"/></svg>',
   star: '<svg viewBox="0 0 60 60"><path d="' + starPath(30, 31, 28) + '" fill="#FFC93C" stroke="#CBA54D" stroke-width="3" stroke-linejoin="round"/></svg>',
+  plane: '<svg viewBox="0 0 60 60"><path d="M54 30L36 24 28 6H22L26 24 12 26 8 18H4L6 30 4 42H8L12 34 26 36 22 54H28L36 36 54 30Z" fill="#FFC93C" stroke="#CBA54D" stroke-width="2" stroke-linejoin="round"/></svg>',
   heart: '<svg viewBox="0 0 60 60"><path d="M30 52C4 32 10 8 22 8c6 0 8 6 8 6s2-6 8-6c12 0 18 24-8 44z" fill="#FF6B5B"/></svg>',
 };
 
@@ -260,7 +270,7 @@ V.push({ title: '¡Llegó la hora de despedirnos!', cap: 'Hoy es nuestro día de
     return s;
   } });
 // 3 Apagar
-V.push({ title: 'Primera recomendación', icon: 'bulb', cap: '1. Antes de salir, recuerda dejar todas las luces, aires acondicionados y electrodomésticos apagados', small: true,
+V.push({ travel: true, title: 'Primera recomendación', icon: 'bulb', cap: '1. Antes de salir, recuerda dejar todas las luces, aires acondicionados y electrodomésticos apagados', small: true,
   build(st) { this.F = FAM(st, [250, 450, 650, 810], 840, [1.0, 1.1, 1.0, .66]); prop(this.F.C, 'R', REMOTE, true); },
   bg: (t) => interior({ plant: 0 }, t) +
     `<rect x="330" y="60" width="380" height="96" rx="22" fill="#FFFFFF" stroke="#CBA54D" stroke-width="5"/><path d="M356 118h328M356 134h328" stroke="#D9D2E6" stroke-width="5" stroke-linecap="round"/>
@@ -286,7 +296,7 @@ V.push({ title: 'Primera recomendación', icon: 'bulb', cap: '1. Antes de salir,
     return s;
   } });
 // 4 Basura
-V.push({ title: '¡Ayúdanos a mantener todo en orden!', cap: '2. Deposita la basura en el chute de basuras del edificio antes de salir', 
+V.push({ travel: true, title: '¡Ayúdanos a mantener todo en orden!', cap: '2. Deposita la basura en el chute de basuras del edificio antes de salir', 
   build(st) { this.F = FAM(st, [130, 150, 670, 810], 840, [1.0, 1.1, .98, .66]); prop(this.F.C, 'R', BAG, true); this.F.T.x = 610; this.F.M.x = 740; this.F.N.x = 860; },
   bg: () => hallBG() + `<g><rect x="400" y="440" width="120" height="150" rx="14" fill="#CBA54D"/><rect x="410" y="450" width="100" height="130" rx="10" fill="#FFFFFF" stroke="#9A8FB8" stroke-width="3"/><circle cx="440" cy="515" r="7" fill="#CBA54D"/><g transform="translate(460 395)"><circle r="40" fill="#12B5B0" stroke="#251547" stroke-width="4"/><path d="M-14 -12h28l-3 26h-22zM-18 -16h36M-6 -20h12" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g>`,
   frame(t) {
@@ -304,7 +314,7 @@ V.push({ title: '¡Ayúdanos a mantener todo en orden!', cap: '2. Deposita la ba
     return s;
   } });
 // 5 Opinion
-V.push({ title: '¡Tu opinión es muy importante!', icon: 'star', cap: '3. Nos encantaría que nos compartieras cómo fue tu experiencia reservando y hospedándote con nosotros', small: true,
+V.push({ travel: true, title: '¡Tu opinión es muy importante!', icon: 'star', cap: '3. Nos encantaría que nos compartieras cómo fue tu experiencia reservando y hospedándote con nosotros', small: true,
   build(st) { this.F = FAM(st, [130, 370, 600, 770], 840); prop(this.F.C, 'R', PHONE, true); },
   bg: (t) => interior({ win: [560, 110, 300, 630], plant: 0 }, t),
   frame(t) {
@@ -319,7 +329,7 @@ V.push({ title: '¡Tu opinión es muy importante!', icon: 'star', cap: '3. Nos e
     return s;
   } });
 // 6 Gracias
-V.push({ title: '¡Gracias por elegirnos!', cap: 'Gracias por permitirnos ser parte de sus días en Cartagena. ¡Fue un placer recibirlos!',
+V.push({ travel: true, title: '¡Gracias por elegirnos!', cap: 'Gracias por permitirnos ser parte de sus días en Cartagena. ¡Fue un placer recibirlos!',
   build(st) { this.F = FAM(st, [240, 420, 590, 730], 840, [1.05, 1.13, 1.03, .72]); },
   bg: (t) => `<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFE9A0"/><stop offset="1" stop-color="#FFE9A0" stop-opacity="0"/></radialGradient></defs>` + interior({ win: [60, 90, 330, 650], plant: 860 }, t) + `<circle cx="480" cy="520" r="360" fill="url(#glow)" opacity=".7"/>`,
   frame(t) {
@@ -364,7 +374,7 @@ V.push({ title: '¡Tenemos beneficios para ti!', cap: 'Forma parte de nuestro pl
     return s;
   } });
 // 9 Cartagena
-V.push({ title: '¡Cartagena siempre los espera!', cap: '¡Que sigan disfrutando de muchos momentos especiales! Gracias, Camilo y familia', small: true,
+V.push({ travel: true, title: '¡Cartagena siempre los espera!', cap: '¡Que sigan disfrutando de muchos momentos especiales! Gracias, Camilo y familia', small: true,
   build(st) { this.F = FAM(st, [210, 420, 610, 770], 840); prop(this.F.C, 'L', SUIT, true); prop(this.F.T, 'R', SUIT2, true); },
   bg: (t) => facade(t) + papel(110, t, ['#FF6B5B', '#FFC93C', '#12B5B0', '#FF5FA2']) + bunting(0, t, ['#FFC93C', '#FF6B5B', '#12B5B0', '#FFFFFF', '#FF5FA2'], 36),
   frame(t) {
@@ -378,10 +388,34 @@ V.push({ title: '¡Cartagena siempre los espera!', cap: '¡Que sigan disfrutando
     s += confetti(t, 10, 3, ['#FFC93C', '#FF5FA2', '#12B5B0'], [0, 120, 920, 700], true);
     return s;
   } });
-// 10 Final (custom layout)
+
+// 10 Avión a Bogotá
+const cloud = (x, y, k) => `<g transform="translate(${x} ${y}) scale(${k})" fill="#FFFFFF" opacity=".95"><ellipse cx="0" cy="0" rx="80" ry="30"/><ellipse cx="-40" cy="-22" rx="44" ry="30"/><ellipse cx="30" cy="-30" rx="52" ry="36"/></g>`;
+const winFace = (cx, cy, k, kid) => { const c = CH[k]; return `<circle cx="${cx}" cy="${cy}" r="17" fill="#9BE3F5" stroke="#251547" stroke-width="3"/><clipPath id="wf${cx}"><circle cx="${cx}" cy="${cy}" r="15"/></clipPath><g clip-path="url(#wf${cx})"><circle cx="${cx}" cy="${cy + 5 + (kid ? 3 : 0)}" r="${kid ? 9 : 11}" fill="${c.skin}"/><path d="M${cx - 12} ${cy + 1}Q${cx} ${cy - 16} ${cx + 12} ${cy + 1}Q${cx} ${cy - 5} ${cx - 12} ${cy + 1}Z" fill="${c.hair}"/><circle cx="${cx - 4}" cy="${cy + 5}" r="1.8" fill="#2A1A12"/><circle cx="${cx + 4}" cy="${cy + 5}" r="1.8" fill="#2A1A12"/><path d="M${cx - 4} ${cy + 10}Q${cx} ${cy + 14} ${cx + 4} ${cy + 10}" stroke="#3A1A1A" stroke-width="1.8" fill="none" stroke-linecap="round"/></g>`; };
+V.push({ travel: true, title: '¡Rumbo a Bogotá!', icon: 'plane', cap: 'Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia! Feliz regreso a casa', small: true,
+  build(st) {},
+  bg: (t) => {
+    const p = t / 3.6, sm = p * p * (3 - 2 * p), px = -300 + sm * 1520, py = 700 - 0.36 * (px - 100) - 20 + Math.sin(t * 3) * 8;
+    let s = `<defs><linearGradient id="ps" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4DB8E8"/><stop offset=".65" stop-color="#BDEBFA"/><stop offset="1" stop-color="#FFE9B8"/></linearGradient></defs><rect width="920" height="900" fill="url(#ps)"/><circle cx="740" cy="170" r="90" fill="#FFC93C"/><circle cx="740" cy="170" r="125" fill="#FFC93C" opacity=".25"/>`;
+    s += cloud(((t * -70) % 1200) + 1000, 200, 1.1) + cloud(((t * -45 + 400) % 1200) + 900, 520, .9) + cloud(((t * -100 + 700) % 1300) + 1000, 760, 1.3);
+    s += `<path d="M100 760Q460 560 820 470" stroke="#FFFFFF" stroke-width="7" stroke-dasharray="4 22" stroke-linecap="round" fill="none"/>`;
+    s += `<g transform="translate(150 800)"><rect x="-120" y="-40" width="240" height="80" rx="40" fill="#341D63" stroke="#fff" stroke-width="4"/><text x="0" y="14" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="44" fill="#fff">Cartagena</text></g>`;
+    s += `<g transform="translate(770 380)"><rect x="-100" y="-40" width="200" height="80" rx="40" fill="#CBA54D" stroke="#fff" stroke-width="4"/><text x="0" y="14" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="44" fill="#251547">Bogotá</text></g>`;
+    s += `<g transform="translate(${px} ${py}) rotate(-12)"><path d="M-250 -34L-292 -128L-206 -128L-150 -34Z" fill="#341D63" stroke="#251547" stroke-width="3" stroke-linejoin="round"/><path d="M-262 -70L-196 -70" stroke="#CBA54D" stroke-width="9"/>
+      <path d="M-30 20L-140 150L-50 150L90 20Z" fill="#E9E4F3" stroke="#251547" stroke-width="3" stroke-linejoin="round"/><ellipse cx="-60" cy="118" rx="30" ry="15" fill="#CFC6E6" stroke="#251547" stroke-width="3"/>
+      <path d="M-290 0Q-290 -36 -236 -40L170 -40Q296 -34 308 0Q296 32 170 36L-236 36Q-290 32 -290 0Z" fill="#FFFFFF" stroke="#251547" stroke-width="4"/>
+      <path d="M-282 8H296" stroke="#CBA54D" stroke-width="11"/><path d="M250 -36Q300 -30 308 0Q298 14 262 18Z" fill="#CBA54D" stroke="#251547" stroke-width="3"/>
+      ${winFace(-170, -8, 'camilo')}${winFace(-100, -8, 'mama')}${winFace(-30, -8, 'tia')}${winFace(40, -8, 'nino', true)}${winFace(110, -8, 'mama', true)}</g>`;
+    for (let i = 0; i < 5; i++) { const k = (t * 1.2 + i * .2) % 1; s += `<circle cx="${px - 300 - k * 260}" cy="${py + 60 + k * 90}" r="${10 - k * 6}" fill="#fff" opacity="${.9 - k}"/>`; }
+    return s;
+  },
+  frame(t) { let s = ''; for (let i = 0; i < 6; i++) s += heart(80 + i * 150, 900 - ((t * (60 + i * 12) + i * 160) % 900), .35, ['#FF6B5B', '#FF5FA2', '#FFC93C'][i % 3], Math.sin(t * 3 + i) * 12); return s; } });
+// 11 Final (custom layout)
 V.push({ title: '¡Hasta pronto!', final: true });
 
 // ---------------- build DOM ----------------
+const DUR = V.map((v, i) => (i === V.length - 1 ? 4.0 : 3.6));
+const START = DUR.map((d, i) => DUR.slice(0, i).reduce((a, b) => a + b, 0));
 const app = document.getElementById('app');
 const slides = V.map((v, i) => {
   const el = document.createElement('div'); el.className = 'slide' + (v.final ? ' final' : ''); el.id = 'sl' + i;
@@ -403,16 +437,16 @@ const slides = V.map((v, i) => {
     el.innerHTML = `${ttl}<div class="panel"><svg class="bg" id="bg${i}" viewBox="0 0 920 900"></svg><div class="stage" id="st${i}"></div><svg class="fx" id="fx${i}" viewBox="0 0 920 900"></svg></div><div class="cap${v.small ? ' small' : ''}" id="cap${i}">${v.cap}</div>`;
   }
   app.appendChild(el);
-  if (v.build) v.build(document.getElementById('st' + i));
+  if (v.build) { CUR.outfit = v.travel ? 'travel' : 'beach'; v.build(document.getElementById('st' + i)); }
   return el;
 });
 
 function render(t) {
   V.forEach((v, i) => {
-    const el = slides[i], local = t - i * 3;
-    el.style.display = local > -0.02 && local < 3.7 ? '' : 'none';
+    const el = slides[i], local = t - START[i];
+    el.style.display = local > -0.02 && local < DUR[i] + 0.7 ? '' : 'none';
     el.style.zIndex = i;
-    if (local <= -0.02 || local >= 3.7) return;
+    if (local <= -0.02 || local >= DUR[i] + 0.7) return;
     const lt = Math.max(0, local), k = i === 0 ? 1 : ease(local / .35);
     el.style.transform = `translateX(${(1 - k) * 1080}px)`;
     const tt = el.querySelector('.ttl'); const kk = back((lt - .1) / .5); tt.style.opacity = clamp(kk * 3); tt.style.transform = `translateY(${(1 - kk) * -40}px)`;
