@@ -477,55 +477,70 @@
   ]
  },
  {
-  "texto": "Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia!",
-  "dicho": "Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia!",
+  "texto": "Regresan a Bogotá y nos mandan besos desde el avión. ¡Buen viaje!",
+  "dicho": "Regresan a Bogotá y nos mandan besos desde el avión. ¡Buen viaje!",
   "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 3.921,
+  "dur": 4.208,
   "palabras": [
    {
-    "w": "Hoy",
+    "w": "Regresan",
     "s": 0,
-    "e": 0.267
-   },
-   {
-    "w": "regresan",
-    "s": 0.348,
-    "e": 0.778
+    "e": 0.453
    },
    {
     "w": "a",
-    "s": 0.848,
-    "e": 0.871
+    "s": 0.511,
+    "e": 0.534
    },
    {
-    "w": "Bogotá.",
-    "s": 0.906,
-    "e": 1.521
-   },
-   {
-    "w": "¡Buen",
-    "s": 1.695,
-    "e": 2.043
-   },
-   {
-    "w": "viaje,",
-    "s": 2.101,
-    "e": 2.45
-   },
-   {
-    "w": "Camilo",
-    "s": 2.485,
-    "e": 2.856
+    "w": "Bogotá",
+    "s": 0.58,
+    "e": 1.022
    },
    {
     "w": "y",
-    "s": 2.879,
+    "s": 1.103,
+    "e": 1.138
+   },
+   {
+    "w": "nos",
+    "s": 1.219,
+    "e": 1.347
+   },
+   {
+    "w": "mandan",
+    "s": 1.405,
+    "e": 1.718
+   },
+   {
+    "w": "besos",
+    "s": 1.8,
+    "e": 2.113
+   },
+   {
+    "w": "desde",
+    "s": 2.159,
+    "e": 2.368
+   },
+   {
+    "w": "el",
+    "s": 2.392,
+    "e": 2.45
+   },
+   {
+    "w": "avión.",
+    "s": 2.508,
     "e": 2.902
    },
    {
-    "w": "familia!",
-    "s": 2.961,
-    "e": 3.855
+    "w": "¡Buen",
+    "s": 2.926,
+    "e": 3.309
+   },
+   {
+    "w": "viaje!",
+    "s": 3.379,
+    "e": 4.133
    }
   ]
  },

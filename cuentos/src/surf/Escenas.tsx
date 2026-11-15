@@ -15,6 +15,8 @@ const camina = (f: number, de: number, a: number, ini: number, dur = 38) => {
   return {x: de + (a - de) * t, w: t > 0 && t < 1 ? f : 0, t};
 };
 const wv = (f: number, p = 0, a = 24) => Math.sin(f * 0.4 + p) * a;
+/* a suitcase hanging from the hand (kept upright by the puppet) */
+const MaletaMano: React.FC<{color: string}> = ({color}) => <g transform="translate(0 150)"><Maleta x={0} y={0} color={color} s={0.8} /></g>;
 const Pulgar: React.FC<{skin: string}> = ({skin}) => <ellipse cx={0} cy={-18} rx={11} ry={22} fill={skin} {...ln} strokeWidth={4} />;
 const Estrella: React.FC<{x: number; y: number; s: number; rot?: number}> = ({x, y, s, rot = 0}) => {
   let d = '';
@@ -83,7 +85,7 @@ export const SApagar: React.FC = () => {
         <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.22} walk={n.w} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 12 : 0} aL={n.t >= 1 ? 40 : undefined} smile="open" />
         <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aL={t.t >= 1 ? 118 : undefined} smile="open" />
         <Pers r={VIAJE.tia2} x={t2.x} y={1740} s={1.0} walk={t2.w} aR={t2.t >= 1 ? 125 + wv(f, 3, 16) : undefined} smile="open" />
-        <Pers r={VIAJE.camilo} x={c.x} y={1740} s={1.08} walk={c.w} aL={c.t >= 1 ? interpolate(f, [40, 56], [0, 125], clampE) : undefined} holdL={c.t >= 1 && f > 44 ? <rect x={-9} y={-40} width={18} height={54} rx={7} fill={P.ink} /> : undefined} smile="open" />
+        <Pers r={VIAJE.camilo} x={c.x} y={1740} s={1.08} walk={c.w} aL={c.t >= 1 ? interpolate(f, [40, 56], [0, 125], clampE) : undefined} holdL={c.t >= 1 && f > 44 ? <rect x={-9} y={-40} width={18} height={54} rx={7} fill={P.ink} /> : undefined} holdR={<MaletaMano color={P.coral} />} smile="open" />
         <MamaCoche x={m.x} y={1740} s={0.8} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
         {f > 60 && f < 96 && <path d={`M440 1320 Q400 900 ${330 + Math.sin(f / 3) * 4} 580`} stroke={P.gold} strokeWidth={6} strokeDasharray="16 16" fill="none" />}
         <rect x={-20} y={-20} width={1120} height={1960} fill={P.purpleDark} opacity={dark} />
@@ -127,7 +129,7 @@ export const SBasura: React.FC = () => {
         <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.15} walk={n.w} aL={n.t >= 1 ? 120 + wv(f, 0, 16) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 12 : 0} smile="open" />
         <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aR={t.t >= 1 ? 125 + wv(f, 1, 16) : undefined} smile="open" />
         <MamaCoche x={m.x} y={1740} s={0.85} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        <Pers r={VIAJE.camilo} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? reach : undefined} holdR={drop < 0.02 ? <Bolsa y={50} s={0.9} /> : undefined} smile="open" />
+        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? reach : undefined} holdR={drop < 0.02 ? <Bolsa y={50} s={0.9} /> : undefined} smile="open" />
         {drop > 0.02 && drop < 1 && <Bolsa x={interpolate(drop, [0, 1], [540, 500])} y={interpolate(drop, [0, 1], [1340, 1360]) + drop * drop * 40} s={0.9 * (1 - drop * 0.6)} />}
         {f > 96 && <g><Estrella x={430} y={1030} s={1.6 * star} rot={-10} /><Destello x={540} y={940} r={16} c={P.goldSoft} /><Destello x={330} y={1000} r={12} /></g>}
       </Sketch>
@@ -164,10 +166,12 @@ export const SLlave: React.FC = () => {
             <rect x={14} y={14} width={48} height={14} rx={6} fill={P.sea} />
           </g>
         </g>
+        <Maleta x={150} y={1778} color={P.sea} s={0.85} />
+        <Maleta x={255} y={1780} color={P.gold} s={0.8} />
         <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.12} walk={n.w} aL={n.t >= 1 ? 120 + wv(f, 0, 16) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 12 : 0} smile="open" />
         <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aR={t.t >= 1 ? 130 + wv(f, 1, 14) : undefined} smile="open" />
         <Pers r={VIAJE.tia2} x={t2.x} y={1740} s={1.0} walk={t2.w} aL={t2.t >= 1 ? 125 + wv(f, 2, 14) : undefined} smile="open" />
-        <Pers r={VIAJE.camilo} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? up : undefined} holdR={inside < 0.02 && c.t >= 1 ? <g transform="translate(6 10) rotate(-40)"><Llave /></g> : undefined} smile="open" />
+        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? up : undefined} holdR={inside < 0.02 && c.t >= 1 ? <g transform="translate(6 10) rotate(-40)"><Llave /></g> : undefined} smile="open" />
         {f > 112 && <g transform={`translate(600 1200) scale(${ok})`}><circle r={46} fill={P.leaf} {...ln} /><path d="M-22 2 l14 14 l30 -32" stroke={P.white} strokeWidth={10} fill="none" strokeLinecap="round" strokeLinejoin="round" /></g>}
       </Sketch>
     </AbsoluteFill>
@@ -185,7 +189,8 @@ export const SOpinion: React.FC = () => {
       <Sketch>
         <Lobby />
         <MamaCoche x={m.x} y={1740} s={0.85} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        <Pers r={VIAJE.camilo} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? up : undefined} holdR={up > 60 ? <g transform="translate(0 -4)"><rect x={-17} y={-62} width={34} height={64} rx={8} fill={P.ink} /><rect x={-13} y={-57} width={26} height={50} rx={4} fill="#9be3f5" /></g> : undefined} smile="open" />
+        <Maleta x={510} y={1782} color={P.sea} s={0.8} />
+        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1740} s={1.08} walk={c.w} aR={c.t >= 1 ? up : undefined} holdR={up > 60 ? <g transform="translate(0 -4)"><rect x={-17} y={-62} width={34} height={64} rx={8} fill={P.ink} /><rect x={-13} y={-57} width={26} height={50} rx={4} fill="#9be3f5" /></g> : undefined} smile="open" />
         <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aL={t.t >= 1 ? interpolate(f, [60, 76], [0, 80], clampE) : undefined} smile="open" />
         <Pers r={VIAJE.tia2} x={t2.x} y={1740} s={1.0} walk={t2.w} aR={t2.t >= 1 ? 125 + wv(f, 2, 16) : undefined} smile="open" />
         <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.12} walk={n.w} aL={n.t >= 1 ? 130 + wv(f, 0, 16) : undefined} aR={n.t >= 1 ? 130 + wv(f, 1, 16) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 18 : 0} smile="open" />
@@ -210,7 +215,7 @@ export const SGracias: React.FC = () => {
         <Terraza />
         <Maleta x={500} y={1782} color={P.coral} s={0.85} />
         <MamaCoche x={m.x} y={1740} s={0.85} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        <Pers r={VIAJE.camilo} x={c.x} y={1740} s={1.08} walk={c.w} aR={there(c) ? 120 + wv(f, 0, 22) : undefined} look={there(c) ? -g1 : 0} smile="open" />
+        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1740} s={1.08} walk={c.w} aR={there(c) ? 120 + wv(f, 0, 22) : undefined} look={there(c) ? -g1 : 0} smile="open" />
         <Pers r={VIAJE.tia} x={t.x} y={1740} s={1.0} walk={t.w} aL={there(t) ? 120 + wv(f, 2, 22) : undefined} look={there(t) ? g2 : 0} smile="open" />
         <Pers r={VIAJE.tia2} x={t2.x} y={1740} s={1.0} walk={t2.w} aR={there(t2) ? 125 + wv(f, 3, 22) : undefined} look={there(t2) ? -g2 : 0} smile="open" />
         <Pers r={VIAJE.nino} x={n.x} y={1740} s={1.12} walk={n.w} aR={there(n) ? 130 + wv(f, 1, 22) : undefined} look={there(n) ? -g2 : 0} jump={there(n) ? Math.abs(Math.sin(f / 5)) * 10 : 0} smile="open" />
@@ -277,7 +282,8 @@ export const SCiudades: React.FC = () => {
           ) : null;
         })}
         <MamaCoche x={m.x} y={1760} s={0.85} walk={m.w} dress={MAMA.viaje.dress} dressLight={MAMA.viaje.dressLight} skin={MAMA.viaje.skin} smile="open" />
-        <Pers r={VIAJE.camilo} x={c.x} y={1760} s={1.08} walk={c.w} aR={c.t >= 1 ? 120 + wv(f, 0, 22) : undefined} look={c.t >= 1 ? -g : 0} smile="open" />
+        <Maleta x={505} y={1802} color={P.sea} s={0.8} />
+        <Pers r={VIAJE.camilo} holdL={<MaletaMano color={P.coral} />} x={c.x} y={1760} s={1.08} walk={c.w} aR={c.t >= 1 ? 120 + wv(f, 0, 22) : undefined} look={c.t >= 1 ? -g : 0} smile="open" />
         <Pers r={VIAJE.tia} x={t.x} y={1760} s={1.0} walk={t.w} aL={t.t >= 1 ? 120 + wv(f, 2, 22) : undefined} look={t.t >= 1 ? g : 0} smile="open" />
         <Pers r={VIAJE.tia2} x={t2.x} y={1760} s={1.0} walk={t2.w} aR={t2.t >= 1 ? 125 + wv(f, 3, 22) : undefined} look={t2.t >= 1 ? -g : 0} smile="open" />
         <Pers r={VIAJE.nino} x={n.x} y={1760} s={1.12} walk={n.w} aR={n.t >= 1 ? 130 + wv(f, 1, 22) : undefined} jump={n.t >= 1 ? Math.abs(Math.sin(f / 5)) * 10 : 0} smile="open" />
@@ -298,6 +304,19 @@ const Ventana: React.FC<{x: number; skin: string; hair: string; kid?: boolean}> 
       <circle cx={5} cy={kid ? 14 : 8} r={2.2} fill={P.ink} />
       <path d={`M-5 ${kid ? 20 : 14} q5 5 10 0`} stroke={P.ink} strokeWidth={2.5} fill="none" strokeLinecap="round" />
     </g>
+  </g>
+);
+/* a kiss sent from the plane: lips or a heart that drifts toward us and grows */
+const Beso: React.FC<{x: number; y: number; s: number; tipo: number; rot: number}> = ({x, y, s, tipo, rot}) => (
+  <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`}>
+    {tipo % 2 ? (
+      <path d="M0 22C-44 -8 -34 -46 -14 -46 -4 -46 0 -36 0 -36S4 -46 14 -46C34 -46 44 -8 0 22Z" fill={P.coral} {...ln} strokeWidth={5} />
+    ) : (
+      <g>
+        <path d="M-36 0 Q-20 -26 0 -10 Q20 -26 36 0 Q18 28 0 30 Q-18 28 -36 0 Z" fill="#d9443f" {...ln} strokeWidth={5} />
+        <path d="M-30 2 Q0 12 30 2" stroke="#8f2a2a" strokeWidth={4} fill="none" strokeLinecap="round" />
+      </g>
+    )}
   </g>
 );
 export const SAvion: React.FC = () => {
@@ -329,6 +348,20 @@ export const SAvion: React.FC = () => {
           <Ventana x={77} skin="#efcdab" hair="#4a2e20" kid />
           <Ventana x={145} skin="#f3d2b3" hair="#4a2e20" kid />
         </g>
+        {Array.from({length: 14}).map((_, k) => {
+          const t0 = 30 + k * 9, prog = (f - t0) / 70;
+          if (prog < 0 || prog > 1 || f > D - 30) return null;
+          const wx = [-195, -127, -59, 9, 77, 145][k % 6];
+          const ca = Math.cos((-8 * Math.PI) / 180), sa = Math.sin((-8 * Math.PI) / 180);
+          const sx = px + 1.3 * (wx * ca + 6 * sa), sy = py + 1.3 * (wx * sa - 6 * ca);
+          const dx = 160 + (k % 3) * 120, dy = -420 - (k % 4) * 90;
+          return <g key={k} opacity={Math.sin(prog * Math.PI)}><Beso x={sx + dx * prog + Math.sin(prog * 9 + k) * 26} y={sy + dy * prog} s={0.4 + prog * 1.0} tipo={k} rot={Math.sin(prog * 7 + k) * 16} /></g>;
+        })}
+        {[0, 1, 2].map((k) => {
+          const tt = f - (46 + k * 40);
+          if (tt < 0 || tt > 30) return null;
+          return <text key={k} x={470 + k * 120} y={880 - k * 90 - tt * 3} textAnchor="middle" fontFamily={hand} fontWeight={700} fontSize={70} fill={P.coral} stroke={P.ink} strokeWidth={2} opacity={Math.sin((tt / 30) * Math.PI)}>muá</text>;
+        })}
       </Sketch>
     </AbsoluteFill>
   );

@@ -143,6 +143,8 @@ def hit(kind, **k):
         return norm(band(n, 300, 3000))*e*.3 + norm(band(n, 3000, 9000))*e**2*.12
     if kind == "splash":
         t = tt(.5); return norm(band(r.standard_normal(len(t)), 800, 7000))*np.exp(-t*7)*(.6 + .4*np.sin(2*np.pi*30*t)) * .3
+    if kind == "beso":                     # a smooch: lips popping
+        t = tt(.16); return (np.sin(2*np.pi*np.cumsum(900*np.exp(-t*22) + 250)/SR)*np.exp(-t*26)*.6 + norm(band(r.standard_normal(len(t)), 400, 2500))*np.exp(-t*70)*.35) * .6
     if kind == "pop":
         t = tt(.12); return (norm(band(r.standard_normal(len(t)), 300, 3000))*np.exp(-t*50)*.5 + np.sin(2*np.pi*np.cumsum(500*np.exp(-t*25))/SR)*np.exp(-t*30)*.5) * .6
     if kind == "zap":
@@ -174,6 +176,7 @@ ev(7, .0, "whoosh", .7, 0, d=.8); ev(7, .3, "pop", .6); ev(7, 1.0, "chime", .7, 
 steps(8, 0, 1.5, 9, .5); ev(8, 0, "roll", .8, -.2, d=1.5)
 for tm in CITY_T: ev(8, tm, "pop", .5, rng.uniform(-.4, .4)); ev(8, tm + .02, "chime", .35, 0, f=1760)
 ev(9, durs[9] * .5 - 1.0, "whoosh", 1.0, 0, d=2.2); ev(9, .3, "ding", .5, 0, f=1320)
+for k in range(14): ev(9, (30 + 9 * k + 6) / 30, "beso", .55, rng.uniform(-.5, .5))   # kisses leave the plane windows
 ev(10, .73, "chime", .9, 0, f=1318); ev(10, 1.2, "chime", .6, 0, f=1760); ev(10, 2.3, "chime", .7, 0, f=1568)
 for j, tm in enumerate((.3, .9, 1.5, 2.6, 3.4, 4.6)): ev(10, tm, "pop", .4, rng.uniform(-.6, .6))
 for i in range(1, len(durs)): put(fx, starts[i] - .6, hit("whoosh", d=1.2), 0, .5)   # the sea wave between scenes

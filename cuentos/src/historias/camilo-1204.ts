@@ -6,7 +6,7 @@ import type {Historia} from './tipos';
 export const camilo1204: Historia = {
   id: 'camilo-1204',
   transicion: 'ola',
-  ritmo: {palabra: 0.27, base: 1.0, cola: 10, colaVoz: 0.35},
+  ritmo: {palabra: 0.27, base: 1.0, cola: 14, colaVoz: 0.7},
   reparto: {kids: [{look: LOOKS.boy, s: 0.9}], dog: false, toddler: true, title: '¡Hasta pronto, Camilo y familia!', puerta: '1204'},
   primerCuadroLleno: true,
   musica: true,
@@ -22,7 +22,7 @@ export const camilo1204: Historia = {
     {escena: 'gracias1204', texto: '¡Gracias por elegirnos! Fue un placer recibirlos.'},
     {escena: 'beneficios', texto: 'Beneficios especiales para quienes vuelven y reservan directo.'},
     {escena: 'ciudades', texto: 'Cartagena, Barranquilla, Santa Marta y Bogotá los esperan.'},
-    {escena: 'avion', texto: 'Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia!'},
+    {escena: 'avion', texto: 'Regresan a Bogotá y nos mandan besos desde el avión. ¡Buen viaje!'},
     {escena: 'cierre1204', texto: 'En 77Rentals no despedimos huéspedes, ¡damos la bienvenida a futuras experiencias!', dicho: 'No despedimos huéspedes: ¡damos la bienvenida a futuras experiencias! Escríbenos por WhatsApp.'},
   ],
 };
