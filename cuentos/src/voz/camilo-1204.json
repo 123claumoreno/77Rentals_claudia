@@ -78,50 +78,70 @@
   ]
  },
  {
-  "texto": "Antes de salir: luces, aires y electrodomésticos apagados.",
-  "dicho": "Antes de salir: luces, aires y electrodomésticos apagados.",
+  "texto": "Antes de salir les damos algunas recomendaciones: luces, aires y electrodomésticos apagados.",
+  "dicho": "Antes de salir les damos algunas recomendaciones: luces, aires y electrodomésticos apagados.",
   "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 4.626,
+  "dur": 6.194,
   "palabras": [
    {
     "w": "Antes",
     "s": 0,
-    "e": 0.464
+    "e": 0.383
    },
    {
     "w": "de",
-    "s": 0.522,
-    "e": 0.592
+    "s": 0.418,
+    "e": 0.488
    },
    {
-    "w": "salir:",
-    "s": 0.639,
-    "e": 1.126
+    "w": "salir",
+    "s": 0.534,
+    "e": 0.906
+   },
+   {
+    "w": "les",
+    "s": 0.998,
+    "e": 1.115
+   },
+   {
+    "w": "damos",
+    "s": 1.161,
+    "e": 1.393
+   },
+   {
+    "w": "algunas",
+    "s": 1.451,
+    "e": 1.811
+   },
+   {
+    "w": "recomendaciones:",
+    "s": 1.892,
+    "e": 2.914
    },
    {
     "w": "luces,",
-    "s": 1.335,
-    "e": 1.927
+    "s": 3.065,
+    "e": 3.576
    },
    {
     "w": "aires",
-    "s": 2.009,
-    "e": 2.438
+    "s": 3.634,
+    "e": 4.029
    },
    {
     "w": "y",
-    "s": 2.554,
-    "e": 2.612
+    "s": 4.087,
+    "e": 4.11
    },
    {
     "w": "electrodomésticos",
-    "s": 2.659,
-    "e": 3.599
+    "s": 4.156,
+    "e": 5.178
    },
    {
     "w": "apagados.",
-    "s": 3.657,
-    "e": 4.551
+    "s": 5.236,
+    "e": 6.13
    }
   ]
  },
