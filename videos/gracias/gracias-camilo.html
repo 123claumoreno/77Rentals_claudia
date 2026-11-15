@@ -26,9 +26,9 @@
   .stage { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
   .fig { position: absolute; width: 200px; height: 400px; transform-origin: 50% 0; }
   .fig svg { width: 100%; height: 100%; overflow: visible; display: block; }
-  .s1 { background: var(--gold-light); color: var(--purple); }
-  .s2 { background: var(--purple-light); color: var(--purple); }
-  .s3 { background: var(--purple); color: var(--white); }
+  .s1 { background: var(--gold); color: var(--purple); }
+  .s2 { background: var(--white); color: var(--purple); }
+  .s3 { background: var(--purple-dark); color: var(--white); }
   .s4 { background: var(--purple-logo); color: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 100px; }
   .s4 .logo { width: 480px; display: block; }
   .s4 .ask { font-family: var(--font-heading); font-size: 78px; line-height: 1.12; margin-top: 70px; text-wrap: balance; }
@@ -103,9 +103,9 @@ function person(kind, c) {
 
 // Four palettes so the family never looks the same on two backgrounds.
 const PAL = {
-  s1: { skin: '#FFFFFF', hair: '#251547', a: '#341D63', b: '#CBA54D', c: '#FFFFFF', baby: '#FFFFFF', legs: '#251547' },
-  s2: { skin: '#E0C585', hair: '#251547', a: '#CBA54D', b: '#341D63', c: '#3B2055', baby: '#CBA54D', legs: '#251547' },
-  s3: { skin: '#E0C585', hair: '#F1EEF6', a: '#CBA54D', b: '#FFFFFF', c: '#E0C585', baby: '#FFFFFF', legs: '#251547' },
+  s1: { skin: '#F1EEF6', hair: '#251547', a: '#341D63', b: '#FFFFFF', c: '#251547', d: '#F1EEF6', baby: '#FFFFFF', legs: '#251547' },
+  s2: { skin: '#E0C585', hair: '#251547', a: '#CBA54D', b: '#341D63', c: '#E0C585', d: '#251547', baby: '#CBA54D', legs: '#341D63' },
+  s3: { skin: '#E0C585', hair: '#F1EEF6', a: '#CBA54D', b: '#FFFFFF', c: '#E0C585', d: '#F1EEF6', baby: '#FFFFFF', legs: '#3B2055' },
 };
 function family(id, pal, baseY, spread) {
   const st = document.getElementById(id);
@@ -113,7 +113,7 @@ function family(id, pal, baseY, spread) {
   // [kind, scale, top color, hair style, x center]
   const defs = [
     ['mom', 1.0, P.a, 'long'], ['dad', 1.06, P.b, 'short'], ['adult', 1.0, P.c, 'cap'],
-    ['boy', 0.62, P.a, 'tuft'],
+    ['boy', 0.62, P.d, 'tuft'],
   ];
   const xs = [210, 430, 650, 850].map((x) => x + spread);
   defs.forEach((d, i) => {
@@ -199,7 +199,7 @@ function render(t) {
   document.getElementById('fx1').innerHTML = `<circle cx="540" cy="${1180 - ease(t / 3) * 120}" r="230" fill="#FFFFFF" opacity=".75"/>` +
     (() => { const s = []; for (let k = 0; k < 4; k++) { const y = 1500 + k * 62, off = (t * (60 + k * 18) * (k % 2 ? -1 : 1)) % 270; let d = `M${-270 + off} ${y}`; for (let x = 0; x < 12; x++) d += ` q 67.5 ${x % 2 ? 36 : -36} 135 0`; s.push(`<path d="${d}" fill="none" stroke="#341D63" stroke-width="6" stroke-linecap="round" opacity="${0.9 - k * 0.2}"/>`); } return s.join(''); })();
   const t2 = t - 3.6, t3 = t - 7.4;
-  document.getElementById('fx2').innerHTML = confetti(t2, ['#CBA54D', '#341D63', '#E0C585', '#3B2055'], 26, 3);
+  document.getElementById('fx2').innerHTML = `<circle cx="540" cy="1150" r="420" fill="#F1EEF6"/>` + confetti(t2, ['#CBA54D', '#341D63', '#E0C585', '#F1EEF6', '#251547'], 26, 3);
   document.getElementById('fx3').innerHTML = hearts(t3, '#CBA54D') + (() => { const s = []; for (let k = 0; k < 4; k++) { const y = 1500 + k * 62, off = (t3 * (60 + k * 18) * (k % 2 ? -1 : 1)) % 270; let d = `M${-270 + off} ${y}`; for (let x = 0; x < 12; x++) d += ` q 67.5 ${x % 2 ? 36 : -36} 135 0`; s.push(`<path d="${d}" fill="none" stroke="#E0C585" stroke-width="6" stroke-linecap="round" opacity="${0.9 - k * 0.2}"/>`); } return s.join(''); })();
   pose('st1', t, 'walk');
   pose('st2', t2, 'jump');
