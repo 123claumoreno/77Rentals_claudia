@@ -194,6 +194,7 @@ const clock = (cx, cy, r, t) => {
 const ICON = {
   bulb: '<svg viewBox="0 0 60 60" fill="none" stroke="#FFC93C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 38c-6-4-9-9-9-16a19 19 0 0138 0c0 7-3 12-9 16v6H20z" fill="#FFC93C"/><path d="M22 52h16"/></svg>',
   star: '<svg viewBox="0 0 60 60"><path d="' + starPath(30, 31, 28) + '" fill="#FFC93C" stroke="#CBA54D" stroke-width="3" stroke-linejoin="round"/></svg>',
+  key: '<svg viewBox="0 0 60 60" fill="none" stroke="#CBA54D" stroke-width="6" stroke-linecap="round"><circle cx="20" cy="20" r="11" fill="#FFC93C"/><path d="M28 28L52 52M42 42l7-7M48 48l6-6"/></svg>',
   plane: '<svg viewBox="0 0 60 60"><path d="M54 30L36 24 28 6H22L26 24 12 26 8 18H4L6 30 4 42H8L12 34 26 36 22 54H28L36 36 54 30Z" fill="#FFC93C" stroke="#CBA54D" stroke-width="2" stroke-linejoin="round"/></svg>',
   heart: '<svg viewBox="0 0 60 60"><path d="M30 52C4 32 10 8 22 8c6 0 8 6 8 6s2-6 8-6c12 0 18 24-8 44z" fill="#FF6B5B"/></svg>',
 };
@@ -348,6 +349,33 @@ V.push({ travel: true, title: '¡Ayúdanos a mantener todo en orden!', cap: '2. 
     const k = back((t - 1.8) / .5); if (t > 1.8) s += `<g transform="translate(${cx + 60} 300) scale(${k})">${star(0, 0, 70)}${spark(70, -60, 16, '#fff')}${spark(-80, -40, 12, '#FFC93C')}</g>`;
     return s;
   } });
+
+// 4b Llaves en la cajita
+const KEYP = `<circle cx="0" cy="-30" r="13" fill="#FFC93C" stroke="#CBA54D" stroke-width="5"/><circle cx="0" cy="-30" r="4" fill="#251547"/><rect x="-3.5" y="-18" width="7" height="42" rx="3" fill="#CBA54D"/><path d="M3 8h13M3 17h9" stroke="#CBA54D" stroke-width="6" stroke-linecap="round"/>`;
+V.push({ travel: true, title: '¡Un último detalle!', icon: 'key', cap: 'Deja la llave en la caja de seguridad pegada a la puerta', 
+  build(st) { this.F = FAM(st, [110, 470, 255, 380], 840, [1.0, 1.1, 1.0, .68]); prop(this.F.C, 'R', KEYP, true); },
+  bg: () => `<defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EDE8F6"/></linearGradient></defs><rect width="920" height="900" fill="url(#wl)"/>` +
+    [0, 1, 2, 3, 4].map((i) => `<rect x="${30 + i * 120}" y="90" width="90" height="640" rx="8" fill="#F1EEF6" stroke="#E4DEF0" stroke-width="2"/>`).join('') +
+    `<rect y="744" width="920" height="156" fill="#EBD7A6"/>` + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => `<line x1="${i * 100}" y1="744" x2="${i * 100 - 60}" y2="900" stroke="#CBA54D" stroke-width="3" opacity=".5"/>`).join('') +
+    `<rect x="690" y="190" width="220" height="560" rx="10" fill="#CBA54D"/><rect x="704" y="204" width="192" height="546" rx="6" fill="#B98B52" stroke="#251547" stroke-width="3"/><rect x="722" y="226" width="156" height="200" rx="8" fill="#C79A63" stroke="#8A5A3A" stroke-width="3"/><rect x="722" y="450" width="156" height="270" rx="8" fill="#C79A63" stroke="#8A5A3A" stroke-width="3"/><circle cx="740" cy="470" r="0"/><rect x="858" y="440" width="18" height="70" rx="9" fill="#E0C585" stroke="#251547" stroke-width="3"/><circle cx="800" cy="170" r="30" fill="#341D63" stroke="#CBA54D" stroke-width="4"/><text x="800" y="182" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="30" fill="#fff">1204</text>`,
+  frame(t) {
+    const { M, C, T, N } = this.F, up = ease((t - 1.0) / .45), flap = ease((t - 1.45) / .25) * (1 - ease((t - 2.0) / .25)), inK = clamp((t - 1.55) / .4);
+    const rM = run(t, 0, -1, .1, .9), rT = run(t, 1, -1, .1, .9), rN = run(t, 2, -1, .12, .9, 17), rC = run(t, 3, -1, .1, .9);
+    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t, 0) + 8 : 4, open: true, t, rot: rM.mov ? 0 : Math.sin(t * 3) * 1.5 });
+    pose(T, { ...rT, aL: rT.mov ? swing(t, 1) + 8 : 2, aR: rT.mov ? -swing(t, 1) + 8 : 70 + (t > 2.0 ? Math.sin(t * 12) * 25 : 0), open: true, t });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 120 + Math.sin(t * 9) * 25, aR: rN.mov ? 40 : 120 + Math.sin(t * 9 + 1) * 25, open: true, t, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 6)) * 14) });
+    pose(C, { ...rC, aL: rC.mov ? swing(t, 3) + 8 : 3, aR: rC.mov ? -swing(t, 3) + 8 : 20 + up * 66, open: true, t });
+    C.piR.style.display = t < 1.6 ? '' : 'none';
+    // small lockbox stuck on the wall (hinge on the left edge of the door)
+    const bx = 636, by = 520;
+    let s = `<g transform="translate(${bx} ${by})"><rect x="0" y="0" width="66" height="84" rx="10" fill="#251547" stroke="#CBA54D" stroke-width="4"/><rect x="8" y="8" width="50" height="68" rx="6" fill="#0F0A1E"/>`;
+    if (flap > .02) s += `<path transform="translate(${33 + 10 - 28 * (1 - inK)} ${44 + 6 * inK}) rotate(${-30 + inK * 30})" d="M0 -26a8 8 0 100 -0.1M0 -26" fill="none"/><g transform="translate(${33} ${40 + 8 * inK}) scale(${.55 - .18 * inK})">${KEYP}</g>`;
+    s += `<g transform="translate(0 0) scale(${1 - flap * .88} 1)"><rect x="4" y="4" width="58" height="76" rx="8" fill="#9A8FB8" stroke="#251547" stroke-width="3"/>`;
+    s += [[22, 26], [33, 26], [44, 26], [22, 38], [33, 38], [44, 38], [22, 50], [33, 50], [44, 50]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.5" fill="#E0C585"/>`).join('') + `<rect x="18" y="62" width="30" height="10" rx="4" fill="#12B5B0"/></g></g>`;
+    if (t > 1.45 && t < 1.95) { const k = (t - 1.45) / .5; s += `<g transform="translate(${C.x + 20 + (bx + 33 - C.x - 20) * k} ${by + 45})"><circle r="0" fill="none"/></g>`; }
+    const k = back((t - 2.1) / .5); if (t > 2.1) s += `<g transform="translate(${bx + 33} ${by - 70}) scale(${k})"><circle r="46" fill="#12B5B0" stroke="#fff" stroke-width="6"/><path d="M-22 2l14 14 30-32" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>` + spark(bx - 20, by - 110, 14, '#FFC93C') + spark(bx + 100, by - 100, 12, '#FFFFFF');
+    return s;
+  } });
 // 5 Opinion
 V.push({ travel: true, title: '¡Tu opinión es muy importante!', icon: 'star', cap: '3. Nos encantaría que nos compartieras cómo fue tu experiencia reservando y hospedándote con nosotros', small: true,
   build(st) { this.F = FAM(st, [130, 370, 600, 770], 840); prop(this.F.C, 'R', PHONE, true); },
@@ -435,7 +463,7 @@ const winFace = (cx, cy, k, kid) => { const c = CH[k]; return `<circle cx="${cx}
 V.push({ travel: true, title: '¡Rumbo a Bogotá!', icon: 'plane', cap: 'Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia! Feliz regreso a casa', small: true,
   build(st) {},
   bg: (t) => {
-    const p = t / 3.6, inK = ease(t / 1.0), outK = ease((t - 3.0) / 0.6), px = 300 + p * 240 + (1 - inK) * -700 + outK * 800, py = 640 - 0.3 * (px - 300) + Math.sin(t * 3) * 10;
+    const p = t / 3.3, inK = ease(t / 1.0), outK = ease((t - 2.7) / 0.6), px = 300 + p * 240 + (1 - inK) * -700 + outK * 800, py = 640 - 0.3 * (px - 300) + Math.sin(t * 3) * 10;
     let s = `<defs><linearGradient id="ps" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4DB8E8"/><stop offset=".65" stop-color="#BDEBFA"/><stop offset="1" stop-color="#FFE9B8"/></linearGradient></defs><rect width="920" height="900" fill="url(#ps)"/><circle cx="740" cy="170" r="90" fill="#FFC93C"/><circle cx="740" cy="170" r="125" fill="#FFC93C" opacity=".25"/>`;
     s += cloud(((t * -70) % 1200) + 1000, 200, 1.1) + cloud(((t * -45 + 400) % 1200) + 900, 520, .9) + cloud(((t * -100 + 700) % 1300) + 1000, 760, 1.3);
     s += `<path d="M100 760Q460 560 820 470" stroke="#FFFFFF" stroke-width="7" stroke-dasharray="4 22" stroke-linecap="round" fill="none"/>`;
@@ -454,7 +482,7 @@ V.push({ travel: true, title: '¡Rumbo a Bogotá!', icon: 'plane', cap: 'Hoy reg
 V.push({ title: '¡Hasta pronto!', final: true });
 
 // ---------------- build DOM ----------------
-const DUR = V.map((v, i) => (i === V.length - 1 ? 4.0 : 3.6));
+const DUR = V.map((v, i) => (i === V.length - 1 ? 4.0 : 3.3));
 const START = DUR.map((d, i) => DUR.slice(0, i).reduce((a, b) => a + b, 0));
 const app = document.getElementById('app');
 const slides = V.map((v, i) => {
