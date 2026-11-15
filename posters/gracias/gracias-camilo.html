@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gracias Camilo, 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* Story 1080x1920. Text stays inside y 250..1670. */
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: var(--font-body); color: var(--white); }
+  .slide { width: 1080px; height: 1920px; background: var(--purple-logo); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 250px 100px 0; text-align: center; }
+  .slide::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--gold); }
+  .waves { position: absolute; left: 0; right: 0; bottom: 14px; width: 1080px; height: 260px; }
+  .slide > :not(.waves) { position: relative; }
+  .logo { width: 330px; display: block; }
+  .kicker { font-size: 34px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); margin-top: 44px; }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 100px; line-height: 1.06; margin-top: 20px; text-wrap: balance; }
+  h1 em { font-style: italic; color: var(--gold-light); }
+  .rule { width: 140px; height: 8px; border-radius: 4px; background: var(--gold); margin: 34px auto 0; }
+  .text { font-size: 42px; line-height: 1.36; margin-top: 34px; text-wrap: balance; }
+  .text strong { color: var(--gold-light); font-weight: 600; }
+  .card { margin-top: 40px; width: 880px; background: var(--purple-dark); border: 3px solid var(--gold); border-radius: 36px; padding: 30px 40px; }
+  .card p { font-size: 38px; line-height: 1.38; text-wrap: balance; }
+  .card p + p { margin-top: 12px; color: var(--gold-light); }
+  .cta { margin-top: 36px; display: flex; align-items: center; gap: 36px; text-align: left; }
+  .cta .qr { background: var(--white); padding: 14px; border-radius: 22px; flex: none; }
+  .cta .qr img { width: 150px; height: 150px; display: block; }
+  .cta b { display: block; color: var(--gold-light); font-weight: 600; font-size: 38px; }
+  .cta div.t { font-size: 38px; line-height: 1.45; }
+</style>
+</head>
+<body>
+<div class="slide" id="poster">
+  <svg class="waves" viewBox="0 0 1080 420" preserveAspectRatio="none" fill="none" stroke="#CBA54D" stroke-width="5" stroke-linecap="round">
+    <path d="M0 150c90 -40 180 40 270 0s180 -40 270 0 180 40 270 0 180 -40 270 0" opacity=".9"/>
+    <path d="M0 220c90 -40 180 40 270 0s180 -40 270 0 180 40 270 0 180 -40 270 0" opacity=".6"/>
+    <path d="M0 290c90 -40 180 40 270 0s180 -40 270 0 180 40 270 0 180 -40 270 0" opacity=".35"/>
+    <path d="M0 360c90 -40 180 40 270 0s180 -40 270 0 180 40 270 0 180 -40 270 0" opacity=".18"/>
+  </svg>
+  <img class="logo" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <div class="kicker">Murano Élite · Cartagena</div>
+  <h1>Camilo,<br><em>gracias</em> por dejarnos ser parte de su viaje</h1>
+  <div class="rule"></div>
+  <p class="text">A ti y a toda tu familia, <strong>cerca&nbsp;al&nbsp;mar</strong>, con los grandes y los más pequeños. Fue un gusto recibirlos.</p>
+  <div class="card">
+    <p>¿Nos cuentas cómo fue tu experiencia?</p>
+    <p>Y si quieres, comparte una foto de su viaje.</p>
+  </div>
+  <div class="cta">
+    <div class="qr"><img src="../checkout/qr-whatsapp.svg" alt="QR WhatsApp"></div>
+    <div class="t"><b>Escríbenos por WhatsApp</b>+57 304 673 6241<br>77rentals.com</div>
+  </div>
+</div>
+</body>
+</html>
