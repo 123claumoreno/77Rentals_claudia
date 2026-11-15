@@ -1,17 +1,17 @@
 {
  "durations": [
-  5.77,
-  5.92,
-  6.06,
+  6.41,
+  6.49,
+  5.79,
+  5.09,
+  4.47,
+  5.62,
+  6.12,
+  4.37,
+  7.42,
+  7.67,
   5.19,
-  5.11,
-  5.51,
-  6.7,
-  4.61,
-  7.7,
-  7.99,
-  5.47,
-  5.8
+  5.83
  ],
  "text": [
   "¡Hola, Camilo! ¡Hola, familia! Esperamos que hayan disfrutado muchísimo su estadía.",
@@ -26,5 +26,11 @@
   "Recuerda que tenemos varias opciones de hospedaje: Cartagena, Barranquilla, Santa Marta y Bogotá siempre los están esperando.",
   "Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia! Feliz regreso a casa.",
   "No despedimos huéspedes: ¡damos la bienvenida a futuras experiencias! Escríbenos por WhatsApp."
+ ],
+ "city_t": [
+  3.53,
+  4.49,
+  5.47,
+  7.05
  ]
 }
