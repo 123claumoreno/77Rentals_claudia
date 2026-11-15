@@ -77,7 +77,7 @@ function charSVG(k, outfit) {
     : c.kind === 'trunks'
     ? `<path d="M49 238Q100 252 151 238L152 270Q100 284 48 270Z" fill="${c.legs}" stroke="${ln}" stroke-width="2"/><path d="M52 252Q100 266 148 252" stroke="${c.accent}" stroke-width="5" fill="none"/>`
     : `<path d="M62 152Q100 182 138 152L148 266Q100 280 52 266Z" fill="${T}" stroke="${ln}" stroke-width="2"/><path d="M72 154L86 112M128 154L114 112" stroke="${c.top}" stroke-width="10" stroke-linecap="round"/><path d="M70 200Q100 212 130 200" stroke="${c.accent}" stroke-width="5" fill="none" stroke-linecap="round"/>`
-      + (c.acc === 'pareo' ? `<path d="M44 248Q100 232 156 248L174 336Q100 352 26 336Z" fill="#FFFFFF" stroke="${c.top}" stroke-width="3" opacity=".95"/><path d="M60 262L52 340M100 258V346M140 262L148 340" stroke="${c.top}" stroke-width="5" opacity=".55"/>` : '');
+      + (c.acc === 'pareo' ? `<path d="M48 214Q100 202 152 214L170 300Q100 316 30 300Z" fill="#FFFFFF" stroke="${c.top}" stroke-width="3" opacity=".96"/><path d="M48 214Q100 202 152 214" stroke="${c.top}" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M64 226L56 304M100 220V310M136 226L144 304" stroke="${c.top}" stroke-width="5" opacity=".55"/>` : '');
   const body = torso + wear;
   const neck = `<rect x="86" y="96" width="28" height="30" rx="10" fill="${mix(c.skin, '#000000', .12)}"/>`;
   const arm = (side) => {
@@ -543,9 +543,9 @@ V.push({ title: '¡Hasta pronto!', final: true });
 
 // ---------------- build DOM ----------------
 // Each panel lasts as long as its narration (seconds, from audio/narration.json) plus a short lead and tail.
-const NARR_DUR = [6.41, 6.49, 5.79, 5.09, 4.47, 5.62, 6.12, 4.37, 7.42, 7.67, 5.19, 5.83];
-const CITY_T = [3.53, 4.49, 5.47, 7.05];   // seconds into the cities panel when each city is named
-const DUR = V.map((v, i) => +(NARR_DUR[i] + (i === V.length - 1 ? 1.5 : 1.0)).toFixed(2));
+const NARR_DUR = [6.29, 5.2, 4.6, 2.72, 3.09, 4.18, 3.65, 3.45, 7.16, 7.42, 3.76, 5.78];
+const CITY_T = [3.46, 4.56, 5.49, 7.15];   // seconds into the cities panel when each city is named
+const DUR = V.map((v, i) => +(i === V.length - 1 ? NARR_DUR[i] + 1.3 : Math.max(4.2, NARR_DUR[i] + 0.8)).toFixed(2));
 const START = DUR.map((d, i) => DUR.slice(0, i).reduce((a, b) => a + b, 0));
 const app = document.getElementById('app');
 const slides = V.map((v, i) => {
