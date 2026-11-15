@@ -105,7 +105,7 @@ function charSVG(k, outfit) {
   const strap = c.pack ? `<path d="M72 116L74 206M128 116L126 206" stroke="#FF6B5B" stroke-width="12" stroke-linecap="round"/><rect x="66" y="196" width="68" height="12" rx="6" fill="#E0C585"/>` : '';
   const head = `<circle cx="59" cy="68" r="9" fill="${S}"/><circle cx="141" cy="68" r="9" fill="${S}"/><ellipse cx="100" cy="64" rx="42" ry="45" fill="${S}"/>`;
   const baby = c.hasBaby ? `<g class="baby"><g transform="translate(-8 16) translate(153 200) scale(.82) translate(-153 -200)"><rect x="126" y="166" width="54" height="68" rx="26" fill="#FF6B5B" stroke="${ln}" stroke-width="2"/><path d="M142 190Q153 200 164 190" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="153" cy="146" r="29" fill="${S}"/><path d="M126 140Q130 112 153 114Q176 112 180 140Q166 126 153 130Q140 126 126 140Z" fill="${H}"/><circle cx="143" cy="148" r="4" fill="#3A2216"/><circle cx="163" cy="148" r="4" fill="#3A2216"/><circle cx="138" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><circle cx="168" cy="158" r="5" fill="#FF6B5B" opacity=".35"/><path d="M146 160Q153 168 160 160" stroke="#3A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>${c.babyHat === false ? '' : '<path d="M127 128Q131 98 153 98Q175 98 179 128Z" fill="#FFFFFF" stroke="#D9D2E6" stroke-width="2"/><rect x="123" y="124" width="60" height="10" rx="5" fill="#12B5B0"/>'}<g class="bArm"><circle cx="180" cy="204" r="10" fill="${S}"/></g></g></g>` : '';
-  return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${pack}${body}${strap}${neck}${arm('L')}${backHair}${head}${frontHair}${face}${accs}${arm('R')}${baby}</svg>`;
+  return `<svg viewBox="0 0 200 400">${defs}<ellipse cx="100" cy="392" rx="80" ry="12" fill="#251547" opacity=".2"/>${legs}${pack}${body}${strap}${neck}${arm('L')}<g class="head">${backHair}${head}${frontHair}${face}${accs}</g>${arm('R')}${baby}</svg>`;
 }
 function strollerSVG(u) {
   const S = CH.mama.skin, H = CH.mama.hair;
@@ -127,11 +127,11 @@ function mk(stage, key, x, y, s) {
   const q = (n) => el.querySelector(n);
   let stroller = null;
   if (key === 'mama' && CUR.outfit === 'travel') { stroller = document.createElement('div'); stroller.className = 'fig'; stroller.style.width = '220px'; stroller.style.height = '200px'; stroller.style.transformOrigin = '110px 190px'; stroller.innerHTML = strollerSVG('st' + (++UID)); stage.appendChild(stroller); }
-  return { stroller, el, key, x, y, s, legL: q('.legL'), legR: q('.legR'), armL: q('.armL'), armR: q('.armR'), eyes: q('.eyes'), mc: q('.mc'), mo: q('.mo'), piL: q('.pLi'), piR: q('.pRi'), pL: q('.pL'), pR: q('.pR'), bArm: q('.bArm'), propL: null, propR: null };
+  return { stroller, el, key, x, y, s, legL: q('.legL'), legR: q('.legR'), armL: q('.armL'), armR: q('.armR'), head: q('.head'), eyes: q('.eyes'), mc: q('.mc'), mo: q('.mo'), piL: q('.pLi'), piR: q('.pRi'), pL: q('.pL'), pR: q('.pR'), bArm: q('.bArm'), propL: null, propR: null };
 }
 function prop(f, side, svg, upright = true) { f['pi' + side].innerHTML = svg; f['prop' + side] = { upright }; }
 function pose(f, o = {}) {
-  const { dx = 0, dy = 0, rot = 0, aL: aL0 = 0, aR: aR0 = 0, leg = 0, open = false, t = 0, sx = 1, sy = 1, vis = 1 } = o;
+  const { look = 0, dx = 0, dy = 0, rot = 0, aL: aL0 = 0, aR: aR0 = 0, leg = 0, open = false, t = 0, sx = 1, sy = 1, vis = 1 } = o;
   const aL = f.stroller && aL0 < 40 ? 0 : aL0, aR = f.stroller && aR0 < 40 ? 0 : aR0;
   if (f.stroller) { f.stroller.style.opacity = vis; f.stroller.style.transform = `translate(${f.x + dx - 110}px,${f.y + 12 * f.s + dy - 190}px) scale(${f.s})`; const sa = f.stroller.querySelector('.sArm'); sa.style.transformOrigin = '120px 110px'; sa.style.transform = `translate(0px,${Math.sin(t * 7) * -6}px)`; }
   f.el.style.opacity = vis;
@@ -143,7 +143,8 @@ function pose(f, o = {}) {
   if (f.propL && f.propL.upright) f.piL.style.transform = `rotate(${-aL}deg)`;
   if (f.propR && f.propR.upright) f.piR.style.transform = `rotate(${aR}deg)`;
   const bl = ((t + f.x * 0.003) % 2.7) > 2.6 ? 0.1 : 1;
-  f.eyes.style.transformOrigin = '100px 64px'; f.eyes.style.transform = `scaleY(${bl})`;
+  f.eyes.style.transformOrigin = '100px 64px'; f.eyes.style.transform = `translate(${look * 3}px,0) scaleY(${bl})`;
+  f.head.style.transformOrigin = '100px 112px'; f.head.style.transform = `translate(${look * 4}px,0) rotate(${look * 7}deg)`;
   f.mc.style.display = open ? 'none' : ''; f.mo.style.display = open ? '' : 'none';
   if (f.bArm) { f.bArm.style.transformOrigin = '170px 200px'; f.bArm.style.transform = `rotate(${Math.sin(t * 9) * 45}deg)`; }
 }
@@ -397,12 +398,14 @@ V.push({ travel: true, title: '¡Gracias por elegirnos!', cap: 'Gracias por perm
   build(st) { this.F = FAM(st, [270, 440, 610, 745], 840, [1.05, 1.13, 1.03, .72]); },
   bg: (t) => `<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFE9A0"/><stop offset="1" stop-color="#FFE9A0" stop-opacity="0"/></radialGradient></defs>` + interior({ win: [60, 90, 330, 650], plant: 860 }, t) + `<circle cx="480" cy="520" r="360" fill="url(#glow)" opacity=".7"/>`,
   frame(t) {
-    const { M, C, T, N } = this.F, hk = ease((t - 1.2) / .5), sw = Math.sin(t * 3) * 2.5;
+    const { M, C, T, N } = this.F, w = (p, a = 25) => Math.sin(t * 9 + p) * a;
     const rM = run(t, 0, -1, .1, 1.0, 15), rC = run(t, 1, -1, .1, 1.0, 15), rT = run(t, 2, 1, .1, 1.0, 15), rN = run(t, 3, 1, .05, .9, 19);
-    pose(M, { ...rM, aR: rM.mov ? swing(t, 0) + 8 : hk * 72, aL: rM.mov ? swing(t, 0) + 8 : 4, open: true, t, rot: rM.mov ? 0 : hk * 3 + sw });
-    pose(C, { ...rC, aL: rC.mov ? swing(t, 1) + 8 : hk * 72, aR: rC.mov ? -swing(t, 1) + 8 : hk * 72, open: true, t, rot: rC.mov ? 0 : sw });
-    pose(T, { ...rT, aL: rT.mov ? swing(t, 2) + 8 : hk * 72, aR: rT.mov ? -swing(t, 2) + 8 : hk * 55, open: true, t, rot: rT.mov ? 0 : -hk * 2 + sw });
-    pose(N, { ...rN, aL: rN.mov ? 40 : hk * 75, aR: rN.mov ? 40 : 20 + hk * 5, open: true, t, rot: rN.mov ? 0 : -hk * 4 + sw, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 5)) * 6 * hk) });
+    // heads turn from side to side as if they were looking at each other
+    const lk = (p) => Math.sin(t * 2.4 + p);
+    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t, 0) + 8 : 100 + w(0), open: true, t, look: rM.mov ? 0 : lk(0) });
+    pose(C, { ...rC, aL: rC.mov ? swing(t, 1) + 8 : 4, aR: rC.mov ? -swing(t, 1) + 8 : 100 + w(1), open: true, t, look: rC.mov ? 0 : lk(1.7) });
+    pose(T, { ...rT, aL: rT.mov ? swing(t, 2) + 8 : 100 + w(2), aR: rT.mov ? -swing(t, 2) + 8 : 4, open: true, t, look: rT.mov ? 0 : lk(3.4) });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 4, aR: rN.mov ? 40 : 125 + w(3, 28), open: true, t, look: rN.mov ? 0 : lk(5.1), dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 5)) * 8) });
     let s = '';
     if (t > 1.5) { const k = back((t - 1.5) / .45); s += `<g transform="translate(450 ${300 - 30 * ease((t - 1.5) / 1)}) scale(${k * (1 + Math.sin(t * 7) * .06)})">${heart(0, 0, 1.9, '#FF6B5B')}</g>`; }
     for (let i = 0; i < 7; i++) { const x = 100 + (i * 131) % 760, y = 800 - ((t * (70 + i * 14) + i * 140) % 700); s += heart(x, y, .42 + (i % 3) * .1, ['#FF5FA2', '#FFC93C', '#FF6B5B'][i % 3], Math.sin(t * 3 + i) * 12); }
