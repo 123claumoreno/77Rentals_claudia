@@ -132,7 +132,7 @@ function mk(stage, key, x, y, s) {
 function prop(f, side, svg, upright = true) { f['pi' + side].innerHTML = svg; f['prop' + side] = { upright }; }
 function pose(f, o = {}) {
   const { dx = 0, dy = 0, rot = 0, aL: aL0 = 0, aR: aR0 = 0, leg = 0, open = false, t = 0, sx = 1, sy = 1, vis = 1 } = o;
-  const aL = f.stroller && aL0 < 40 ? 0 : aL0, aR = f.stroller ? 0 : aR0;
+  const aL = f.stroller && aL0 < 40 ? 0 : aL0, aR = f.stroller && aR0 < 40 ? 0 : aR0;
   if (f.stroller) { f.stroller.style.opacity = vis; f.stroller.style.transform = `translate(${f.x + dx - 110}px,${f.y + 12 * f.s + dy - 190}px) scale(${f.s})`; const sa = f.stroller.querySelector('.sArm'); sa.style.transformOrigin = '120px 110px'; sa.style.transform = `translate(0px,${Math.sin(t * 7) * -6}px)`; }
   f.el.style.opacity = vis;
   f.el.style.transform = `translate(${f.x + dx - 100}px,${f.y + dy - 400}px) rotate(${rot}deg) scale(${f.s * sx},${f.s * sy})`;
@@ -263,17 +263,21 @@ const FAM = (st, xs, y, ss = [1.02, 1.1, 1.0, .68]) => {
 const enter = (t, i, d = 0.12) => { const k = back((t - i * d) / 0.6); return { dy: (1 - k) * 520, vis: clamp(k * 5) }; };
 const sway = (t, i, a = 4) => ({ dy: Math.sin(t * 3 + i * 1.3) * -a });
 
+// movement helpers: walk/run in from a side, arm and leg swing
+const run = (t, i, dir, d0 = .15, dur = 1.0, spd = 13) => { const t0 = i * d0, k = ease((t - t0) / dur), mov = t >= t0 && k < .995; return { dx: dir * (1 - k) * 720, leg: mov ? Math.sin(t * spd + i) * 26 : 0, dy: mov ? -Math.abs(Math.sin(t * spd + i)) * 10 : 0, vis: t >= t0 ? 1 : 0, mov }; };
+const swing = (t, i, a = 18, spd = 13) => Math.sin(t * spd + i) * a;
 const V = [];
 // 1 Hola
 V.push({ title: '¡Hola, Camilo y familia!', cap: '¡Hola, Camilo! ¡Hola, familia! Esperamos que hayan disfrutado muchísimo su estadía',
   build(st) { this.F = FAM(st, [210, 410, 600, 770], 840); },
   bg: (t) => interior({ win: [470, 90, 380, 650], curtain: true, plant: 80 }, t),
   frame(t) {
-    const { M, C, T, N } = this.F, w = (p) => Math.sin(t * 9 + p) * 28, o = t > .5;
-    pose(M, { ...enter(t, 0), aR: 26, aL: 105 + w(0), open: o, t, rot: Math.sin(t * 5) * 1.5 });
-    pose(C, { ...enter(t, 1), aR: 112 + w(1), aL: 3, open: o, t });
-    pose(T, { ...enter(t, 2), aL: 108 + w(2), aR: 4, open: o, t });
-    pose(N, { ...enter(t, 3), aL: 130 + w(3), aR: 125 + w(4), open: o, t, dy: enter(t, 3).dy - Math.abs(Math.sin(t * 6)) * 14 });
+    const { M, C, T, N } = this.F, w = (p) => Math.sin(t * 9 + p) * 28;
+    const rM = run(t, 0, -1, .16, .9), rC = run(t, 1, -1, .16, .9), rT = run(t, 2, 1, .16, .9), rN = run(t, 3, 1, .1, .8, 17);
+    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t, 0) + 8 : 105 + w(0), open: t > .4, t, rot: rM.mov ? 0 : Math.sin(t * 5) * 1.5 });
+    pose(C, { ...rC, aR: rC.mov ? swing(t, 1) + 8 : 112 + w(1), aL: rC.mov ? -swing(t, 1) + 8 : 3, open: t > .4, t });
+    pose(T, { ...rT, aL: rT.mov ? swing(t, 2) + 8 : 108 + w(2), aR: rT.mov ? -swing(t, 2) + 8 : 4, open: t > .4, t });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 130 + w(3), aR: rN.mov ? 40 : 125 + w(4), open: t > .3, t, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 6)) * 14) });
     let s = bunting(0, t, ['#FFC93C', '#FF6B5B', '#12B5B0', '#FFFFFF'], 36);
     [[150, 330], [380, 270], [560, 300], [760, 410], [300, 450]].forEach(([x, y], i) => { const k = Math.max(0, Math.sin(t * 6 + i * 1.7)); s += spark(x, y, 10 + k * 26, i % 2 ? '#FFC93C' : '#FFFFFF'); });
     return s;
@@ -284,11 +288,13 @@ V.push({ title: '¡Llegó la hora de despedirnos!', cap: 'Hoy es nuestro día de
   bg: (t) => interior({ win: [640, 200, 230, 540], plant: 60 }, t) +
     `<g transform="translate(150 150)"><rect x="-120" y="-50" width="240" height="100" rx="22" fill="#CBA54D" stroke="#251547" stroke-width="4"/><rect x="-108" y="-38" width="216" height="76" rx="14" fill="#341D63"/><text x="0" y="22" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="72" fill="#FFFFFF">1204</text></g>`,
   frame(t) {
-    const { M, C, T, N } = this.F, th = ease((t - 1.1) / .5), o = t > .3;
-    pose(M, { ...enter(t, 0), aR: 26, aL: 4, open: o, t });
-    pose(C, { ...enter(t, 1), aL: 3 + Math.sin(t * 4) * 2, aR: th * 88, open: o, t, ...(th > 0 ? { dy: enter(t, 1).dy - Math.sin(clamp((t - 1.1) / .5) * Math.PI) * 14 } : {}) });
-    pose(T, { ...enter(t, 2), aL: 2, aR: 100 + Math.sin(t * 9) * 25, open: o, t });
-    pose(N, { ...enter(t, 3), aL: 120 + Math.sin(t * 9) * 25, aR: 120 + Math.sin(t * 9 + 1) * 25, open: o, t, dy: enter(t, 3).dy - Math.abs(Math.sin(t * 5)) * 12 });
+    const { M, C, T, N } = this.F, th = ease((t - 1.1) / .5);
+    const rM = run(t, 0, -1, .12, .9), rC = run(t, 1, 1, .1, .9), rT = run(t, 2, -1, .1, .9), rN = run(t, 3, 1, .15, .8, 17);
+    const spin = t > 1.3 && t < 2.0 ? Math.cos((t - 1.3) / .7 * Math.PI * 2) : 1;
+    pose(M, { ...rM, aR: 26 + (rM.mov ? 0 : Math.sin(t * 6) * 6), aL: rM.mov ? swing(t, 0) + 8 : 4, open: t > .3, t, rot: rM.mov ? 0 : Math.sin(t * 3.2) * 3 });
+    pose(C, { ...rC, aL: rC.mov ? swing(t, 1) + 8 : 3 + Math.sin(t * 4) * 2, aR: rC.mov ? -swing(t, 1) + 8 : th * 88, open: t > .3, t, dy: rC.dy - (th > 0 ? Math.sin(clamp((t - 1.1) / .5) * Math.PI) * 14 : 0) });
+    pose(T, { ...rT, aL: 2, aR: rT.mov ? swing(t, 2) + 8 : (t > 1.0 ? 150 + Math.sin(t * 6) * 8 : 40), open: t > .3, t });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 120 + Math.sin(t * 9) * 25, aR: rN.mov ? 40 : 120 + Math.sin(t * 9 + 1) * 25, open: t > .3, t, sx: spin, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 5)) * 12) });
     const tt = Math.floor(t * 2) % 2;
     let s = clock(480, 170, 78, t);
     s += `<text x="${tt ? 600 : 360}" y="${tt ? 110 : 120}" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="44" fill="#FF6B5B">${tt ? 'tac' : 'tic'}</text>`;
@@ -303,12 +309,14 @@ V.push({ travel: true, title: 'Primera recomendación', icon: 'bulb', cap: '1. A
      <rect x="630" y="250" width="270" height="170" rx="16" fill="#251547" stroke="#CBA54D" stroke-width="6"/><rect x="740" y="420" width="50" height="40" fill="#251547"/>
      <rect x="30" y="500" width="64" height="100" rx="14" fill="#FFFFFF" stroke="#CBA54D" stroke-width="5"/>`,
   frame(t) {
-    const { M, C, T, N } = this.F, lights = t < 1.0, ac = t < 1.5, tv = t < 1.7, rs = ease((t - .3) / .6), o = t > .3;
-    pose(M, { ...enter(t, 0), aR: 26, aL: 4, open: o, t });
-    pose(C, { ...enter(t, 1), aL: 3, aR: 20 + rs * 112, open: o, t });
-    pose(T, { ...enter(t, 2), aL: 90 + (t > .9 && t < 1.1 ? 6 : 0), aR: 3, open: o, t });
-    pose(N, { ...enter(t, 3), aL: 120, aR: 120 + Math.sin(t * 9) * 20, open: o, t });
-    const dark = ease((t - 1.0) / .4) * .2;
+    const { M, C, T, N } = this.F, t0 = t, u = t - .6;
+    const rT = run(t0, 0, -1, .1, .9), rC = run(t0, 1, -1, .12, .9), rM = run(t0, 2, 1, .1, .9), rN = run(t0, 3, 1, .14, .8, 17);
+    const lights = u < 1.0, ac = u < 1.5, tv = u < 1.7, rs = ease((u - .3) / .6);
+    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t0, 2) + 8 : 4, open: t0 > .3, t: t0, rot: rM.mov ? 0 : Math.sin(t0 * 3) * 1.2 });
+    pose(C, { ...rC, aL: rC.mov ? swing(t0, 1) + 8 : 3, aR: rC.mov ? -swing(t0, 1) + 8 : 20 + rs * 112, open: t0 > .3, t: t0 });
+    pose(T, { ...rT, aL: rT.mov ? swing(t0, 0) + 8 : 90 + (u > .9 && u < 1.1 ? 6 : 0), aR: 3, open: t0 > .3, t: t0 });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 120 + Math.sin(t0 * 9) * 25, aR: rN.mov ? 40 : 120 + Math.sin(t0 * 9 + 1) * 25, open: t0 > .3, t: t0, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t0 * 6)) * 12) });
+    const dark = ease((u - 1.0) / .4) * .2; t = u;
     let s = `<circle cx="520" cy="190" r="${lights ? 110 : 50}" fill="#FFE9A0" opacity="${lights ? .55 : .1}"/><path d="M510 150v30" stroke="#251547" stroke-width="0"/>`;
     s += `<rect x="46" y="${lights ? 516 : 548}" width="32" height="34" rx="8" fill="${lights ? '#12B5B0' : '#B8AECF'}"/>`;
     s += `<circle cx="${ac ? 676 : 676}" cy="80" r="0" fill="none"/><circle cx="680" cy="130" r="9" fill="${ac ? '#12B5B0' : '#FF6B5B'}"/>`;
@@ -328,11 +336,12 @@ V.push({ travel: true, title: '¡Ayúdanos a mantener todo en orden!', cap: '2. 
   frame(t) {
     const { M, C, T, N } = this.F, walk = ease(t / 1.2), cx = 150 + walk * 190, moving = t < 1.2 && t > 0.0;
     C.x = cx; const o = t > .3;
-    pose(C, { ...enter(t, 0), aR: 8 + (t > .9 && t < 1.35 ? 62 * Math.sin((t - .9) / .45 * Math.PI) : 0), aL: moving ? Math.sin(t * 12) * -20 : 3, leg: moving ? Math.sin(t * 12) * 22 : 0, open: o, t, dy: moving ? -Math.abs(Math.sin(t * 12)) * 8 : 0 });
+    pose(C, { vis: 1, aR: 8 + (t > .9 && t < 1.35 ? 62 * Math.sin((t - .9) / .45 * Math.PI) : 0), aL: moving ? Math.sin(t * 12) * -20 : 3, leg: moving ? Math.sin(t * 12) * 22 : 0, open: o, t, dy: moving ? -Math.abs(Math.sin(t * 12)) * 8 : 0 });
     C.propR && (C.piR.style.display = t < 1.3 ? '' : 'none');
-    pose(T, { ...enter(t, 1), aL: 2, aR: 90 + Math.sin(t * 8) * 20, open: o, t });
-    pose(M, { ...enter(t, 2), aR: 26, aL: 4, open: o, t });
-    pose(N, { ...enter(t, 3), aL: 120 + Math.sin(t * 9) * 25, aR: 3, open: o, t });
+    const rT = run(t, 1, 1, .15, 1.0), rM = run(t, 2, 1, .15, 1.0), rN = run(t, 3, 1, .1, .9, 17);
+    pose(T, { ...rT, aL: rT.mov ? swing(t, 1) + 8 : 2, aR: rT.mov ? -swing(t, 1) + 8 : 60 + (t > 1.7 ? Math.sin(t * 12) * 20 : 0), open: o, t });
+    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t, 2) + 8 : 4 + (t > 1.7 ? 70 + Math.sin(t * 12) * 20 : 0), open: o, t, rot: rM.mov ? 0 : Math.sin(t * 3) * 1.5 });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 120 + Math.sin(t * 9) * 25, aR: rN.mov ? 40 : 3, open: o, t, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 6)) * 12) });
     const flap = ease((t - 1.0) / .3) * (1 - ease((t - 1.7) / .3));
     let s = (flap > .02 ? `<rect x="410" y="450" width="100" height="130" rx="10" fill="#251547"/>` : '') + `<g transform="rotate(${-flap * 75} 410 450)"><rect x="410" y="450" width="100" height="130" rx="10" fill="#FFFFFF" stroke="#9A8FB8" stroke-width="3"/><circle cx="490" cy="515" r="7" fill="#CBA54D"/></g>`;
     if (t > 1.05 && t < 1.6) { const k = (t - 1.05) / .5; s += `<g transform="translate(${420 + k * 30} ${520 - 20 + k * 60}) scale(${1 - k * .6})"><ellipse rx="34" ry="40" fill="#4A3B6B" stroke="#251547" stroke-width="3"/></g>`; }
@@ -344,11 +353,12 @@ V.push({ travel: true, title: '¡Tu opinión es muy importante!', icon: 'star', 
   build(st) { this.F = FAM(st, [130, 370, 600, 770], 840); prop(this.F.C, 'R', PHONE, true); },
   bg: (t) => interior({ win: [560, 110, 300, 630], plant: 0 }, t),
   frame(t) {
-    const { M, C, T, N } = this.F, th = ease((t - .2) / .5), o = t > .3;
-    pose(M, { ...enter(t, 0), aR: 26, aL: 4, open: o, t });
-    pose(C, { ...enter(t, 1), aL: 3, aR: 20 + th * 105, open: o, t });
-    pose(T, { ...enter(t, 2), aL: 2, aR: 3, open: o, t, ...sway(t, 2) });
-    pose(N, { ...enter(t, 3), aL: 120 + Math.sin(t * 9) * 25, aR: 120 + Math.sin(t * 9 + 1) * 25, open: o, t });
+    const { M, C, T, N } = this.F, th = ease((t - 1.0) / .5), hug = ease((t - 1.4) / .5);
+    const rM = run(t, 0, -1, .1, .9), rC = run(t, 1, -1, .12, .9), rT = run(t, 2, 1, .1, .9), rN = run(t, 3, 1, .14, .8, 17);
+    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t, 0) + 8 : 4, open: t > .3, t, rot: rM.mov ? 0 : Math.sin(t * 4) * 2 });
+    pose(C, { ...rC, aL: rC.mov ? swing(t, 1) + 8 : 3, aR: rC.mov ? -swing(t, 1) + 8 : 20 + th * 105, open: t > .3, t });
+    pose(T, { ...rT, aL: rT.mov ? swing(t, 2) + 8 : hug * 78, aR: rT.mov ? -swing(t, 2) + 8 : 3, open: true, t, rot: rT.mov ? 0 : -hug * 4 + Math.sin(t * 3) });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 120 + Math.sin(t * 9) * 25, aR: rN.mov ? 40 : 140 + Math.sin(t * 8) * 20, open: true, t, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 5)) * 16) });
     let s = '';
     for (let i = 0; i < 5; i++) { const [x, y] = [[130, 340], [270, 250], [410, 215], [550, 250], [690, 340]][i], k = back((t - .5 - i * .4) / .45);
       if (k > 0.001) s += `<g transform="translate(${x} ${y}) scale(${k}) rotate(${Math.sin(t * 5 + i) * 8})">${star(0, 0, 52)}</g>` + (k > .9 ? spark(x + 50, y - 40, 7 + Math.max(0, Math.sin(t * 7 + i)) * 8) : ''); }
@@ -356,16 +366,17 @@ V.push({ travel: true, title: '¡Tu opinión es muy importante!', icon: 'star', 
   } });
 // 6 Gracias
 V.push({ travel: true, title: '¡Gracias por elegirnos!', cap: 'Gracias por permitirnos ser parte de sus días en Cartagena. ¡Fue un placer recibirlos!',
-  build(st) { this.F = FAM(st, [240, 420, 590, 730], 840, [1.05, 1.13, 1.03, .72]); },
+  build(st) { this.F = FAM(st, [270, 440, 610, 745], 840, [1.05, 1.13, 1.03, .72]); },
   bg: (t) => `<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFE9A0"/><stop offset="1" stop-color="#FFE9A0" stop-opacity="0"/></radialGradient></defs>` + interior({ win: [60, 90, 330, 650], plant: 860 }, t) + `<circle cx="480" cy="520" r="360" fill="url(#glow)" opacity=".7"/>`,
   frame(t) {
-    const { M, C, T, N } = this.F, hk = ease((t - .5) / .4);
-    pose(M, { ...enter(t, 0), aR: 26, aL: 30 + Math.sin(t * 3) * 6, open: true, t, rot: Math.sin(t * 3) * 1.5, sy: 1 + Math.sin(t * 5) * .008 });
-    pose(C, { ...enter(t, 1), aL: 30, aR: 28, open: true, t, rot: Math.sin(t * 3 + 1) * 1.5 });
-    pose(T, { ...enter(t, 2), aL: 28, aR: 30 + Math.sin(t * 3) * 6, open: true, t, rot: Math.sin(t * 3 + 2) * 1.5 });
-    pose(N, { ...enter(t, 3), aL: 150 * hk + 0, aR: 150 * hk, open: true, t, dy: enter(t, 3).dy - Math.abs(Math.sin(t * 5)) * 10 * hk });
+    const { M, C, T, N } = this.F, hk = ease((t - 1.2) / .5), sw = Math.sin(t * 3) * 2.5;
+    const rM = run(t, 0, -1, .1, 1.0, 15), rC = run(t, 1, -1, .1, 1.0, 15), rT = run(t, 2, 1, .1, 1.0, 15), rN = run(t, 3, 1, .05, .9, 19);
+    pose(M, { ...rM, aR: rM.mov ? swing(t, 0) + 8 : hk * 72, aL: rM.mov ? swing(t, 0) + 8 : 4, open: true, t, rot: rM.mov ? 0 : hk * 3 + sw });
+    pose(C, { ...rC, aL: rC.mov ? swing(t, 1) + 8 : hk * 72, aR: rC.mov ? -swing(t, 1) + 8 : hk * 72, open: true, t, rot: rC.mov ? 0 : sw });
+    pose(T, { ...rT, aL: rT.mov ? swing(t, 2) + 8 : hk * 72, aR: rT.mov ? -swing(t, 2) + 8 : hk * 55, open: true, t, rot: rT.mov ? 0 : -hk * 2 + sw });
+    pose(N, { ...rN, aL: rN.mov ? 40 : hk * 75, aR: rN.mov ? 40 : 20 + hk * 5, open: true, t, rot: rN.mov ? 0 : -hk * 4 + sw, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 5)) * 6 * hk) });
     let s = '';
-    if (t > .7) { const k = back((t - .7) / .45); s += `<g transform="translate(${730} ${420 - 30 * ease((t - .7) / 1)}) scale(${k * (1 + Math.sin(t * 7) * .06)})">${heart(0, 0, 1.4, '#FF6B5B')}</g>`; }
+    if (t > 1.5) { const k = back((t - 1.5) / .45); s += `<g transform="translate(450 ${300 - 30 * ease((t - 1.5) / 1)}) scale(${k * (1 + Math.sin(t * 7) * .06)})">${heart(0, 0, 1.9, '#FF6B5B')}</g>`; }
     for (let i = 0; i < 7; i++) { const x = 100 + (i * 131) % 760, y = 800 - ((t * (70 + i * 14) + i * 140) % 700); s += heart(x, y, .42 + (i % 3) * .1, ['#FF5FA2', '#FFC93C', '#FF6B5B'][i % 3], Math.sin(t * 3 + i) * 12); }
     return s;
   } });
@@ -404,11 +415,14 @@ V.push({ travel: true, title: '¡Cartagena siempre los espera!', cap: '¡Que sig
   build(st) { this.F = FAM(st, [210, 420, 610, 770], 840); prop(this.F.C, 'L', SUIT, true); prop(this.F.T, 'R', SUIT2, true); },
   bg: (t) => facade(t) + papel(110, t, ['#FF6B5B', '#FFC93C', '#12B5B0', '#FF5FA2']) + bunting(0, t, ['#FFC93C', '#FF6B5B', '#12B5B0', '#FFFFFF', '#FF5FA2'], 36),
   frame(t) {
-    const { M, C, T, N } = this.F, throwK = clamp((t - .9) / .35), w = (p) => Math.sin(t * 9 + p) * 25;
-    pose(M, { ...enter(t, 0), aR: 26, aL: 108 + w(0), open: true, t });
-    pose(C, { ...enter(t, 1), aL: 4, aR: 110 + w(1), open: true, t });
-    pose(T, { ...enter(t, 2), aL: 108 + w(2), aR: 4, open: true, t });
-    pose(N, { ...enter(t, 3), aL: 110 + w(3), aR: 20 + Math.sin(throwK * Math.PI) * 140, open: true, t, dy: enter(t, 3).dy - Math.abs(Math.sin(t * 6)) * 12 });
+    const { M, C, T, N } = this.F, t0 = t, u = t - .6, throwK = clamp((u - .9) / .35), w = (p) => Math.sin(t0 * 9 + p) * 25;
+    const rM = run(t0, 0, -1, .12, .9), rC = run(t0, 1, -1, .12, .9), rT = run(t0, 2, 1, .1, .9), rN = run(t0, 3, 1, .14, .8, 17);
+    const dz = (i) => Math.sin(t0 * 10 + i) * 18, hop = (i) => -Math.abs(Math.sin(t0 * 5 + i)) * 14;
+    pose(M, { ...rM, aR: 26, aL: rM.mov ? swing(t0, 0) + 8 : 108 + w(0), open: true, t: t0, rot: rM.mov ? 0 : Math.sin(t0 * 4) * 3 });
+    pose(C, { ...rC, aL: rC.mov ? swing(t0, 1) + 8 : 4, aR: rC.mov ? -swing(t0, 1) + 8 : 110 + w(1), leg: rC.mov ? rC.leg : dz(1), dy: rC.mov ? rC.dy : hop(1), rot: rC.mov ? 0 : Math.sin(t0 * 5 + 1) * 5, open: true, t: t0 });
+    pose(T, { ...rT, aL: rT.mov ? swing(t0, 2) + 8 : 108 + w(2), aR: rT.mov ? -swing(t0, 2) + 8 : 4, leg: rT.mov ? rT.leg : dz(2), dy: rT.mov ? rT.dy : hop(2), rot: rT.mov ? 0 : Math.sin(t0 * 5 + 2) * 5, open: true, t: t0 });
+    pose(N, { ...rN, aL: rN.mov ? 40 : 110 + w(3), aR: rN.mov ? 40 : 20 + Math.sin(throwK * Math.PI) * 140, open: true, t: t0, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t0 * 6)) * 14) });
+    t = u;
     let s = drum(70, 660, .8, t, true) + drum(860, 680, .9, t, true);
     if (t > 1.15) { const k = t - 1.15; for (let i = 0; i < 26; i++) { const a = -Math.PI / 2 + (i / 26 - .5) * 2.6, v = 260 + (i % 5) * 70, x = 800 + Math.cos(a) * v * k, y = 520 + Math.sin(a) * v * k + 420 * k * k; s += `<rect x="${x}" y="${y}" width="16" height="9" rx="3" fill="${['#FFC93C', '#FF5FA2', '#12B5B0', '#FFFFFF', '#FF6B5B'][i % 5]}" transform="rotate(${k * 600 + i * 30} ${x} ${y})" opacity="${clamp(1.6 - k)}"/>`; } }
     s += confetti(t, 10, 3, ['#FFC93C', '#FF5FA2', '#12B5B0'], [0, 120, 920, 700], true);
