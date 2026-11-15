@@ -286,7 +286,7 @@ V.push({ title: '¡Hola, Camilo y familia!', cap: '¡Hola, Camilo! ¡Hola, famil
 V.push({ title: '¡Llegó la hora de despedirnos!', cap: 'Hoy es nuestro día de check-out. Recuerda que la hora máxima de salida es a las 12:00 del mediodía',
   build(st) { this.F = FAM(st, [190, 380, 580, 760], 840); prop(this.F.C, 'R', THUMB(1), false); },
   bg: (t) => interior({ win: [640, 200, 230, 540], plant: 60 }, t) +
-    `<g transform="translate(150 150)"><rect x="-120" y="-50" width="240" height="100" rx="22" fill="#CBA54D" stroke="#251547" stroke-width="4"/><rect x="-108" y="-38" width="216" height="76" rx="14" fill="#341D63"/><text x="0" y="22" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="72" fill="#FFFFFF">1204</text></g>`,
+    `<g transform="translate(205 150)"><rect x="-170" y="-70" width="340" height="140" rx="26" fill="#CBA54D" stroke="#251547" stroke-width="4"/><rect x="-157" y="-57" width="314" height="114" rx="16" fill="#341D63"/><text x="0" y="-18" text-anchor="middle" font-family="General Sans, sans-serif" font-weight="600" font-size="27" letter-spacing="5" fill="#E0C585">APARTAMENTO</text><text x="0" y="42" text-anchor="middle" font-family="Fraunces, serif" font-weight="500" font-size="70" fill="#FFFFFF">1204</text></g>`,
   frame(t) {
     const { M, C, T, N } = this.F, th = ease((t - 1.1) / .5);
     const rM = run(t, 0, -1, .12, .9), rC = run(t, 1, 1, .1, .9), rT = run(t, 2, -1, .1, .9), rN = run(t, 3, 1, .15, .8, 17);
@@ -296,8 +296,8 @@ V.push({ title: '¡Llegó la hora de despedirnos!', cap: 'Hoy es nuestro día de
     pose(T, { ...rT, aL: 2, aR: rT.mov ? swing(t, 2) + 8 : (t > 1.0 ? 150 + Math.sin(t * 6) * 8 : 40), open: t > .3, t });
     pose(N, { ...rN, aL: rN.mov ? 40 : 120 + Math.sin(t * 9) * 25, aR: rN.mov ? 40 : 120 + Math.sin(t * 9 + 1) * 25, open: t > .3, t, sx: spin, dy: rN.dy - (rN.mov ? 0 : Math.abs(Math.sin(t * 5)) * 12) });
     const tt = Math.floor(t * 2) % 2;
-    let s = clock(480, 170, 78, t);
-    s += `<text x="${tt ? 600 : 360}" y="${tt ? 110 : 120}" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="44" fill="#FF6B5B">${tt ? 'tac' : 'tic'}</text>`;
+    let s = clock(560, 170, 72, t);
+    s += `<text x="${tt ? 690 : 450}" y="${tt ? 110 : 120}" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="44" fill="#FF6B5B">${tt ? 'tac' : 'tic'}</text>`;
     s += spark(540, 300, 8 + Math.max(0, Math.sin(t * 8)) * 12, '#FFC93C');
     return s;
   } });
