@@ -1,0 +1,21 @@
+{
+  "name": "estilo-cuento-77rentals",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Estilo Cuento storybook videos for 77Rentals (Remotion).",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.527",
+    "@remotion/google-fonts": "4.0.527",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.527"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "typescript": "7.0.2"
+  }
+}

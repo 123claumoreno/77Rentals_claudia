@@ -20,3 +20,12 @@ Before making anything, read `brand/BRAND.md` and follow it. In short:
 
 If something you need isn't in `brand/` (a transparent logo, a photo, a fact
 about a unit), ask instead of making it up.
+
+## Videos estilo cuento (`cuentos/`)
+
+`cuentos/` is a Remotion project for storybook videos with an optional
+narrator voice (ElevenLabs) and room for styles of Claudia's own. Before
+working there, read `cuentos/CLAUDE.md`, then use the skills in
+`.claude/skills/` (`estilo-cuento`, `voz-cuentacuentos`, `mi-estilo`).
+Never ask for, print or commit the ElevenLabs key: this repo is public, and
+the key reaches ElevenLabs through the cloud environment's network secret.
