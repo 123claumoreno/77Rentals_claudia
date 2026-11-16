@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cotización Gabriel Acosta</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF; --muted: #6F677E; --border: #DFDCE5;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); color: var(--purple); font-size: 10.5pt; line-height: 1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page:nth-of-type(2) main { padding-top: 6mm; }
+  .page { width: 210mm; height: 297mm; display: flex; flex-direction: column; overflow: hidden; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+
+  header { background: var(--purple-logo); color: var(--white); padding: 7mm 16mm 6mm; display: flex; align-items: center; gap: 9mm; }
+  header img { height: 26mm; display: block; flex: none; }
+  .kicker { font-size: 9pt; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 27pt; line-height: 1.08; margin-top: 1.5mm; }
+  .rule { width: 22mm; height: 1.2mm; background: var(--gold); border-radius: 1mm; margin-top: 3.5mm; }
+  .mini { font-size: 7.5pt; letter-spacing: .08em; color: var(--gold-light); font-weight: 600; text-transform: uppercase; }
+
+  main { flex: 1; padding: 8mm 16mm 6mm; min-height: 0; display: flex; flex-direction: column; }
+  h2 { font-family: var(--font-heading); font-weight: 400; font-size: 15pt; line-height: 1.2; margin: 4mm 0 2mm; display: flex; align-items: center; gap: 3mm; }
+  h2 .n { width: 7mm; height: 7mm; border-radius: 50%; background: var(--gold); color: var(--purple-dark); font-size: 10.5pt; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  h2:first-child { margin-top: 0; }
+
+  .info { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 8mm; background: var(--purple-light); border-left: 1.4mm solid var(--gold); border-radius: 2mm; padding: 4.5mm 6mm; }
+  .info dt { font-size: 7.5pt; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .info dd { font-size: 11pt; font-weight: 500; }
+  .info .wide { grid-column: 1 / -1; }
+
+  p { margin-top: 2.5mm; }
+  .greet { margin-top: 5mm; }
+
+  .units { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .card { border: .3mm solid var(--border); border-top: 1.4mm solid var(--gold); border-radius: 2mm; padding: 4mm 5mm; }
+  .card h3 { font-family: var(--font-heading); font-weight: 400; font-size: 13pt; }
+  .card .price { font-size: 17pt; font-family: var(--font-heading); margin: 1mm 0 2mm; }
+  .card .price small { font-family: var(--font-body); font-size: 8.5pt; color: var(--muted); }
+  ul { list-style: none; }
+  .card li, .bul li { position: relative; padding-left: 4.5mm; margin-top: 1.4mm; font-size: 10pt; }
+  .card li::before, .bul li::before { content: ""; position: absolute; left: 0; top: 2.1mm; width: 1.8mm; height: 1.8mm; border-radius: 50%; background: var(--gold); }
+  .card ul ul { margin-top: .6mm; }
+  .card ul ul li { font-size: 9.5pt; color: var(--muted); }
+  .card ul ul li::before { background: var(--border); }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 1mm; }
+  th { background: var(--purple); color: var(--white); text-align: left; font-weight: 600; font-size: 9pt; letter-spacing: .08em; text-transform: uppercase; padding: 2.4mm 4mm; }
+  th:last-child, td:last-child { text-align: right; }
+  td { padding: 1.7mm 4mm; border-bottom: .3mm solid var(--border); font-size: 10.5pt; }
+  tr.sub td { font-weight: 600; background: var(--purple-light); }
+  tr.total td { background: var(--purple); color: var(--white); font-family: var(--font-heading); font-size: 13.5pt; border: 0; padding: 3.2mm 4mm; }
+  tr.total td:last-child { color: var(--gold-light); }
+  td.neg { color: var(--purple); }
+
+  .pay { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+  .step { background: var(--purple-light); border-radius: 2mm; padding: 3.5mm 4mm; }
+  .step .pct { font-family: var(--font-heading); font-size: 20pt; line-height: 1; }
+  .step .amt { font-weight: 600; font-size: 11.5pt; margin-top: 1.5mm; }
+  .step .when { font-size: 9.5pt; color: var(--muted); margin-top: 1mm; line-height: 1.35; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .two .bul li { font-size: 9.5pt; }
+  .sign { margin-top: 3mm; }
+  .sign .name { font-family: var(--font-heading); font-size: 14pt; margin-top: 1.5mm; }
+  .sign .tag { color: var(--muted); font-size: 10pt; }
+
+  footer { flex: none; background: var(--purple-logo); color: var(--white); padding: 5.5mm 16mm; display: flex; justify-content: space-between; align-items: center; font-size: 10pt; }
+  footer .cta { font-family: var(--font-heading); font-size: 13pt; }
+  footer .cta span { color: var(--gold-light); }
+  footer .r { text-align: right; line-height: 1.5; }
+  footer b { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <header>
+    <img src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+    <div>
+      <div class="kicker">Cotización Gabriel Acosta</div>
+      <h1>Temporada de Navidad<br>y Año Nuevo en Santa Marta</h1>
+      <div class="rule"></div>
+    </div>
+  </header>
+
+  <main>
+    <dl class="info">
+      <div class="wide"><dt>Preparada para</dt><dd>Gabriel Acosta</dd></div>
+      <div><dt>Destino</dt><dd>Pozos Colorados, Playa Cabo Tortuga</dd></div>
+      <div><dt>Edificio</dt><dd>Delvento</dd></div>
+      <div><dt>Ciudad</dt><dd>Santa Marta, Magdalena</dd></div>
+      <div><dt>Duración</dt><dd>13 noches</dd></div>
+      <div><dt>Fechas</dt><dd>22 de diciembre de 2026 al 4 de enero de 2027</dd></div>
+      <div><dt>Unidades</dt><dd>7 suites tipo B y 2 apartamentos tipo D</dd></div>
+    </dl>
+
+    <p class="greet">Estimado Gabriel Acosta:</p>
+    <p>Reciba un cordial saludo.</p>
+    <p>Nos complace presentar nuestra propuesta de alojamiento para la temporada alta de Navidad y Año Nuevo en el edificio Delvento, ubicado en el exclusivo sector de Pozos Colorados, Playa Cabo Tortuga, Santa Marta.</p>
+
+    <h2><span class="n">1</span>Distribución y tarifas</h2>
+    <div class="units">
+      <div class="card">
+        <h3>7 suites tipo B</h3>
+        <div class="price">$369.000 <small>COP por noche y suite</small></div>
+        <ul>
+          <li>Duración: 13 noches.</li>
+          <li>Capacidad máxima: 2 personas por suite.</li>
+          <li>Configuración de camas, según disponibilidad:
+            <ul>
+              <li>Opción 1: dos camas dobles.</li>
+              <li>Opción 2: una cama doble y un sofá cama.</li>
+            </ul>
+          </li>
+          <li>Aseo de checkout: $80.000 COP por suite.</li>
+          <li>Obsequio: un kit de bienvenida por suite.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2 apartamentos tipo D</h3>
+        <div class="price">$750.000 <small>COP por noche y apartamento</small></div>
+        <ul>
+          <li>Duración: 13 noches.</li>
+          <li>Capacidad máxima: 3 personas por apartamento.</li>
+          <li>Dotación: tres camas dobles por apartamento.</li>
+          <li>Aseo de checkout: $90.000 COP por apartamento.</li>
+          <li>Obsequio: un kit de bienvenida por apartamento.</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="cta">Escríbenos por <span>WhatsApp</span></div>
+    <div class="r"><b>+57 304 673 6241</b><br>77rentals.com</div>
+  </footer>
+</section>
+
+<section class="page">
+  <header>
+    <img src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+    <div>
+      <div class="kicker">Cotización Gabriel Acosta</div>
+      <h1>Resumen, pago y condiciones</h1>
+      <div class="rule"></div>
+    </div>
+  </header>
+
+  <main>
+        <h2><span class="n">2</span>Resumen económico</h2>
+    <table>
+      <tr><th>Concepto</th><th>Valor</th></tr>
+      <tr><td>7 suites tipo B (13 noches)</td><td>$33.579.000</td></tr>
+      <tr><td>2 apartamentos tipo D (13 noches)</td><td>$19.500.000</td></tr>
+      <tr><td>7 aseos tipo B</td><td>$560.000</td></tr>
+      <tr><td>2 aseos tipo D</td><td>$180.000</td></tr>
+      <tr class="sub"><td>Subtotal</td><td>$53.819.000</td></tr>
+      <tr><td>Descuento especial de 6 noches tipo B</td><td class="neg">-$2.214.000</td></tr>
+      <tr class="total"><td>Total de la reserva</td><td>$51.605.000 COP</td></tr>
+    </table>
+<h2><span class="n">3</span>Forma de pago</h2>
+    <div class="pay">
+      <div class="step"><div class="pct">60%</div><div class="amt">$30.963.000</div><div class="when">Anticipo para confirmar la reserva.</div></div>
+      <div class="step"><div class="pct">20%</div><div class="amt">$10.321.000</div><div class="when">A más tardar el 10 de diciembre de 2026.</div></div>
+      <div class="step"><div class="pct">20%</div><div class="amt">$10.321.000</div><div class="when">Al momento de la entrega de los apartamentos, el 22 de diciembre de 2026.</div></div>
+    </div>
+
+    <div class="two">
+<div><h2><span class="n">4</span>Beneficios incluidos</h2>
+    <ul class="bul">
+      <li>Un kit de bienvenida de cortesía por cada unidad.</li>
+      <li>Atención y acompañamiento personalizado durante la estadía.</li>
+      <li>Descuento especial equivalente a 6 noches de una suite tipo B.</li>
+    </ul></div>
+<div>    <h2><span class="n">5</span>Condiciones generales</h2>
+    <ul class="bul">
+      <li>Tarifas correspondientes a temporada alta de Navidad y Año Nuevo.</li>
+      <li>La configuración de camas de las suites tipo B estará sujeta a disponibilidad.</li>
+      <li>La capacidad máxima de ocupación deberá respetarse en cada unidad.</li>
+      <li>La reserva estará sujeta a disponibilidad y confirmación mediante el pago del anticipo.</li>
+    </ul></div>
+</div>
+
+    <p style="margin-top:3.5mm">Agradecemos la oportunidad de presentar esta propuesta. Será un gusto recibirlos y brindarles una excelente experiencia de alojamiento en Santa Marta durante estas fechas tan especiales.</p>
+
+    <div class="sign">
+      <div>Cordialmente,</div>
+      <div class="name">Claudia Moreno</div>
+      <div><b>77Rentals</b></div>
+      <div class="tag">Experiencias de alojamiento con atención personalizada.</div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="cta">Confirma tu reserva por <span>WhatsApp</span></div>
+    <div class="r"><b>+57 304 673 6241</b><br>77rentals.com</div>
+  </footer>
+</section>
+
+</body>
+</html>
