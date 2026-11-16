@@ -14,7 +14,7 @@
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: var(--font-body); color: var(--purple); font-size: 10.5pt; line-height: 1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .page:nth-of-type(2) main { padding-top: 4mm; }
+  .page:nth-of-type(2) main { padding-top: 3mm; }
   .page { width: 210mm; height: 297mm; display: flex; flex-direction: column; overflow: hidden; page-break-after: always; }
   .page:last-child { page-break-after: auto; }
 
@@ -53,21 +53,21 @@
   table { width: 100%; border-collapse: collapse; margin-top: 1mm; }
   th { background: var(--purple); color: var(--white); text-align: left; font-weight: 600; font-size: 9pt; letter-spacing: .08em; text-transform: uppercase; padding: 2.4mm 4mm; }
   th:last-child, td:last-child { text-align: right; }
-  td { padding: .8mm 4mm; border-bottom: .3mm solid var(--border); font-size: 10.5pt; }
+  td { padding: .6mm 4mm; border-bottom: .3mm solid var(--border); font-size: 10pt; }
   tr.sub td { font-weight: 600; background: var(--purple-light); }
-  tr.total td { background: var(--purple); color: var(--white); font-family: var(--font-heading); font-size: 13.5pt; border: 0; padding: 3.2mm 4mm; }
+  tr.total td { background: var(--purple); color: var(--white); font-family: var(--font-heading); font-size: 13pt; border: 0; padding: 2.2mm 4mm; }
   tr.total td:last-child { color: var(--gold-light); }
   td.neg { color: var(--purple); }
 
   .pay { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
-  .step { background: var(--purple-light); border-radius: 2mm; padding: 2.5mm 4mm; }
+  .step { background: var(--purple-light); border-radius: 2mm; padding: 2mm 4mm; }
   .step .pct { font-family: var(--font-heading); font-size: 20pt; line-height: 1; }
   .step .amt { font-weight: 600; font-size: 11.5pt; margin-top: 1.5mm; }
   .step .when { font-size: 9.5pt; color: var(--muted); margin-top: 1mm; line-height: 1.35; }
 
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
   .two .bul li { font-size: 9.5pt; }
-  .sign { margin-top: 3mm; }
+  .sign { margin-top: 2mm; }
   .sign .name { font-family: var(--font-heading); font-size: 14pt; margin-top: 1.5mm; }
   .sign .tag { color: var(--muted); font-size: 10pt; }
 
@@ -118,6 +118,7 @@
               <li>Opción 2: una cama doble y un sofá cama.</li>
             </ul>
           </li>
+          <li>Aseo durante la estadía: 2 por semana, $70.000 COP cada uno.</li>
           <li>Aseo de checkout: $70.000 COP por suite.</li>
           <li>Obsequio: un kit de bienvenida por suite.</li>
         </ul>
@@ -129,6 +130,7 @@
           <li>Duración: 13 noches.</li>
           <li>Capacidad máxima: 3 personas por apartamento.</li>
           <li>Dotación: tres camas dobles por apartamento.</li>
+          <li>Aseo durante la estadía: 2 por semana, $70.000 COP cada uno.</li>
           <li>Aseo de checkout: $70.000 COP por apartamento.</li>
           <li>Obsequio: un kit de bienvenida por apartamento.</li>
         </ul>
@@ -159,19 +161,21 @@
       <tr><th>Concepto</th><th>Valor</th></tr>
       <tr><td>7 suites tipo B (13 noches)</td><td>$33.579.000</td></tr>
       <tr><td>2 apartamentos tipo D (13 noches)</td><td>$19.500.000</td></tr>
-      <tr><td>7 aseos tipo B</td><td>$490.000</td></tr>
-      <tr><td>2 aseos tipo D</td><td>$140.000</td></tr>
-      <tr class="sub"><td>Subtotal</td><td>$53.709.000</td></tr>
+      <tr><td>7 aseos de checkout tipo B</td><td>$490.000</td></tr>
+      <tr><td>2 aseos de checkout tipo D</td><td>$140.000</td></tr>
+      <tr><td>28 aseos durante la estadía tipo B (4 por suite)</td><td>$1.960.000</td></tr>
+      <tr><td>8 aseos durante la estadía tipo D (4 por apartamento)</td><td>$560.000</td></tr>
+      <tr class="sub"><td>Subtotal</td><td>$56.229.000</td></tr>
       <tr><td>Descuento especial: 6 noches tipo B</td><td class="neg">-$2.214.000</td></tr>
       <tr><td>Condonación de aseo (descuento)</td><td class="neg">-$1.500.000</td></tr>
-      <tr class="total"><td>Total de la reserva</td><td>$49.995.000 COP</td></tr>
+      <tr class="total"><td>Total de la reserva</td><td>$52.515.000 COP</td></tr>
     </table>
 <h2><span class="n">3</span>Forma de pago</h2>
     <p style="margin:0 0 2.5mm">Para garantizar y formalizar la reserva, proponemos el siguiente esquema:</p>
     <div class="pay">
-      <div class="step"><div class="pct">60%</div><div class="amt">$29.997.000</div><div class="when">Anticipo para confirmar la reserva.</div></div>
-      <div class="step"><div class="pct">20%</div><div class="amt">$9.999.000</div><div class="when">A más tardar el 10 de diciembre de 2026.</div></div>
-      <div class="step"><div class="pct">20%</div><div class="amt">$9.999.000</div><div class="when">Al momento de la entrega de los apartamentos, el 22 de diciembre de 2026.</div></div>
+      <div class="step"><div class="pct">60%</div><div class="amt">$31.509.000</div><div class="when">Anticipo para confirmar la reserva.</div></div>
+      <div class="step"><div class="pct">20%</div><div class="amt">$10.503.000</div><div class="when">A más tardar el 10 de diciembre de 2026.</div></div>
+      <div class="step"><div class="pct">20%</div><div class="amt">$10.503.000</div><div class="when">Al momento de la entrega de los apartamentos, el 22 de diciembre de 2026.</div></div>
     </div>
 
     <div class="two">
