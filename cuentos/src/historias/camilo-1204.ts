@@ -18,7 +18,7 @@ export const camilo1204: Historia = {
     {escena: 'pasillo1204', texto: 'La basura va al chute, y la llave a la cajita de seguridad.'},
     {escena: 'terraza1204', texto: 'Cuéntennos cómo fue su experiencia reservando y hospedándose con nosotros. ¡Gracias por elegirnos!'},
     {escena: 'benciu1204', texto: 'Beneficios para quienes vuelven y reservan directo. Cartagena, Barranquilla, Santa Marta y Bogotá los esperan.'},
-    {escena: 'avion', texto: 'Regresan a Bogotá y nos mandan besos desde el avión. ¡Buen viaje!'},
+    {escena: 'avion', texto: 'Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia!'},
     {escena: 'cierre1204', texto: 'En 77Rentals no despedimos huéspedes, ¡damos la bienvenida a futuras experiencias!', dicho: 'No despedimos huéspedes: ¡damos la bienvenida a futuras experiencias! Escríbenos por WhatsApp.'},
   ],
 };
