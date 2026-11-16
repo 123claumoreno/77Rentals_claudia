@@ -1,14 +1,14 @@
 {
   "voz": {
-    "nombre": "Emma",
-    "id": "yucd0sG7llUqHcI8UJIM"
+    "nombre": "Kate",
+    "id": "qWWAqFomnJ99VwQLREfT"
   },
   "modelo": "eleven_multilingual_v2",
   "ajustes": {
-    "stability": 0.5,
+    "stability": 0.42,
     "similarity_boost": 0.8,
-    "style": 0.15,
+    "style": 0.3,
     "use_speaker_boost": true,
-    "speed": 1
+    "speed": 1.0
   }
 }

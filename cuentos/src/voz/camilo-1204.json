@@ -2,305 +2,305 @@
  {
   "texto": "¡Hola, Camilo y familia! Hoy es el check-out: salida máxima, 12 del mediodía.",
   "dicho": "¡Hola, Camilo y familia! Hoy es el chek aut: salida máxima, doce del mediodía.",
-  "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 5.488,
+  "vozId": "qWWAqFomnJ99VwQLREfT",
+  "dur": 6.716,
   "palabras": [
    {
     "w": "¡Hola,",
     "s": 0,
-    "e": 0.418
+    "e": 0.453
    },
    {
     "w": "Camilo",
-    "s": 0.464,
-    "e": 0.859
+    "s": 0.488,
+    "e": 0.975
    },
    {
     "w": "y",
-    "s": 0.882,
-    "e": 0.906
+    "s": 0.998,
+    "e": 1.022
    },
    {
     "w": "familia!",
-    "s": 0.975,
-    "e": 1.602
+    "s": 1.08,
+    "e": 1.683
    },
    {
     "w": "Hoy",
-    "s": 1.649,
-    "e": 1.881
+    "s": 1.8,
+    "e": 2.067
    },
    {
     "w": "es",
-    "s": 1.939,
-    "e": 2.009
+    "s": 2.136,
+    "e": 2.218
    },
    {
     "w": "el",
-    "s": 2.078,
-    "e": 2.171
+    "s": 2.287,
+    "e": 2.392
    },
    {
     "w": "chek",
-    "s": 2.264,
-    "e": 2.519
+    "s": 2.485,
+    "e": 2.763
    },
    {
     "w": "aut:",
-    "s": 2.612,
-    "e": 2.926
+    "s": 2.879,
+    "e": 3.425
    },
    {
     "w": "salida",
-    "s": 3.1,
-    "e": 3.506
+    "s": 3.669,
+    "e": 4.168
    },
    {
     "w": "máxima,",
-    "s": 3.564,
-    "e": 4.098
+    "s": 4.261,
+    "e": 4.934
    },
    {
     "w": "doce",
-    "s": 4.145,
-    "e": 4.493
+    "s": 4.981,
+    "e": 5.341
    },
    {
     "w": "del",
-    "s": 4.516,
-    "e": 4.632
+    "s": 5.399,
+    "e": 5.538
    },
    {
     "w": "mediodía.",
-    "s": 4.702,
-    "e": 5.433
+    "s": 5.608,
+    "e": 6.641
    }
   ]
  },
  {
   "texto": "Antes de tu check-out, aquí algunas recomendaciones: luces, aires y electrodomésticos apagados.",
   "dicho": "Antes de tu chek aut, aquí algunas recomendaciones: luces, aires y electrodomésticos apagados.",
-  "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 7.082,
+  "vozId": "qWWAqFomnJ99VwQLREfT",
+  "dur": 7.578,
   "palabras": [
    {
     "w": "Antes",
     "s": 0,
-    "e": 0.395
+    "e": 0.441
    },
    {
     "w": "de",
-    "s": 0.441,
-    "e": 0.511
+    "s": 0.488,
+    "e": 0.546
    },
    {
     "w": "tu",
-    "s": 0.557,
-    "e": 0.673
+    "s": 0.592,
+    "e": 0.708
    },
    {
     "w": "chek",
-    "s": 0.731,
-    "e": 0.975
+    "s": 0.766,
+    "e": 0.998
    },
    {
     "w": "aut,",
-    "s": 1.091,
-    "e": 1.509
+    "s": 1.115,
+    "e": 1.428
    },
    {
     "w": "aquí",
-    "s": 1.683,
-    "e": 1.95
+    "s": 1.637,
+    "e": 1.985
    },
    {
     "w": "algunas",
-    "s": 1.985,
-    "e": 2.38
+    "s": 2.032,
+    "e": 2.519
    },
    {
     "w": "recomendaciones:",
-    "s": 2.461,
-    "e": 3.541
+    "s": 2.635,
+    "e": 3.715
    },
    {
     "w": "luces,",
-    "s": 3.715,
-    "e": 4.284
+    "s": 3.959,
+    "e": 4.574
    },
    {
     "w": "aires",
-    "s": 4.412,
-    "e": 4.841
+    "s": 4.598,
+    "e": 5.062
    },
    {
     "w": "y",
-    "s": 4.957,
-    "e": 5.027
+    "s": 5.178,
+    "e": 5.248
    },
    {
     "w": "electrodomésticos",
-    "s": 5.085,
-    "e": 6.049
+    "s": 5.329,
+    "e": 6.432
    },
    {
     "w": "apagados.",
-    "s": 6.118,
-    "e": 7.012
+    "s": 6.49,
+    "e": 7.523
    }
   ]
  },
  {
   "texto": "La basura va al chute, y la llave a la cajita de seguridad.",
   "dicho": "La basura va al chute, y la llave a la cajita de seguridad.",
-  "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 3.738,
+  "vozId": "qWWAqFomnJ99VwQLREfT",
+  "dur": 4.861,
   "palabras": [
    {
     "w": "La",
     "s": 0,
-    "e": 0.186
+    "e": 0.151
    },
    {
     "w": "basura",
-    "s": 0.221,
-    "e": 0.662
+    "s": 0.197,
+    "e": 0.766
    },
    {
     "w": "va",
-    "s": 0.708,
-    "e": 0.778
+    "s": 0.859,
+    "e": 1.022
    },
    {
     "w": "al",
-    "s": 0.801,
-    "e": 0.882
+    "s": 1.057,
+    "e": 1.161
    },
    {
     "w": "chute,",
-    "s": 0.952,
-    "e": 1.324
+    "s": 1.242,
+    "e": 1.741
    },
    {
     "w": "y",
-    "s": 1.358,
-    "e": 1.428
+    "s": 1.985,
+    "e": 2.067
    },
    {
     "w": "la",
-    "s": 1.521,
-    "e": 1.614
+    "s": 2.183,
+    "e": 2.276
    },
    {
     "w": "llave",
-    "s": 1.637,
-    "e": 1.985
+    "s": 2.31,
+    "e": 2.705
    },
    {
     "w": "a",
-    "s": 2.02,
-    "e": 2.043
+    "s": 2.74,
+    "e": 2.763
    },
    {
     "w": "la",
-    "s": 2.09,
-    "e": 2.159
+    "s": 2.81,
+    "e": 2.891
    },
    {
     "w": "cajita",
-    "s": 2.206,
-    "e": 2.624
+    "s": 2.949,
+    "e": 3.46
    },
    {
     "w": "de",
-    "s": 2.659,
-    "e": 2.717
+    "s": 3.506,
+    "e": 3.576
    },
    {
     "w": "seguridad.",
-    "s": 2.763,
-    "e": 3.669
+    "s": 3.622,
+    "e": 4.783
    }
   ]
  },
  {
   "texto": "Cuéntennos cómo fue su experiencia reservando y hospedándose con nosotros. ¡Gracias por elegirnos!",
   "dicho": "Cuéntennos cómo fue su experiencia reservando y hospedándose con nosotros. ¡Gracias por elegirnos!",
-  "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 5.828,
+  "vozId": "qWWAqFomnJ99VwQLREfT",
+  "dur": 6.742,
   "palabras": [
    {
     "w": "Cuéntennos",
     "s": 0,
-    "e": 0.58
+    "e": 0.685
    },
    {
     "w": "cómo",
-    "s": 0.639,
-    "e": 0.836
+    "s": 0.755,
+    "e": 0.975
    },
    {
     "w": "fue",
-    "s": 0.894,
-    "e": 0.998
+    "s": 1.022,
+    "e": 1.196
    },
    {
     "w": "su",
-    "s": 1.033,
-    "e": 1.115
+    "s": 1.219,
+    "e": 1.3
    },
    {
     "w": "experiencia",
-    "s": 1.149,
-    "e": 1.753
+    "s": 1.335,
+    "e": 2.009
    },
    {
     "w": "reservando",
-    "s": 1.8,
-    "e": 2.392
+    "s": 2.067,
+    "e": 2.717
    },
    {
     "w": "y",
-    "s": 2.461,
-    "e": 2.485
+    "s": 2.798,
+    "e": 2.821
    },
    {
     "w": "hospedándose",
-    "s": 2.519,
-    "e": 3.135
+    "s": 2.856,
+    "e": 3.657
    },
    {
     "w": "con",
-    "s": 3.181,
-    "e": 3.32
+    "s": 3.715,
+    "e": 3.831
    },
    {
     "w": "nosotros.",
-    "s": 3.355,
-    "e": 4.005
+    "s": 3.866,
+    "e": 4.481
    },
    {
     "w": "¡Gracias",
-    "s": 4.122,
-    "e": 4.656
+    "s": 4.632,
+    "e": 5.317
    },
    {
     "w": "por",
-    "s": 4.714,
-    "e": 4.865
+    "s": 5.375,
+    "e": 5.538
    },
    {
     "w": "elegirnos!",
-    "s": 4.923,
-    "e": 5.759
+    "s": 5.596,
+    "e": 6.687
    }
   ]
  },
  {
   "texto": "Beneficios para quienes vuelven y reservan directo. Cartagena, Barranquilla, Santa Marta y Bogotá los esperan.",
   "dicho": "Beneficios para quienes vuelven y reservan directo. Cartagena, Barranquilla, Santa Marta y Bogotá los esperan.",
-  "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 8.701,
+  "vozId": "qWWAqFomnJ99VwQLREfT",
+  "dur": 7.265,
   "palabras": [
    {
     "w": "Beneficios",
@@ -310,148 +310,133 @@
    {
     "w": "para",
     "s": 0.766,
-    "e": 0.94
+    "e": 0.952
    },
    {
     "w": "quienes",
-    "s": 0.998,
-    "e": 1.289
+    "s": 1.01,
+    "e": 1.312
    },
    {
     "w": "vuelven",
-    "s": 1.347,
+    "s": 1.37,
     "e": 1.765
    },
    {
     "w": "y",
-    "s": 1.881,
-    "e": 1.939
+    "s": 1.823,
+    "e": 1.846
    },
    {
     "w": "reservan",
-    "s": 2.067,
-    "e": 2.566
+    "s": 1.916,
+    "e": 2.473
    },
    {
     "w": "directo.",
-    "s": 2.624,
+    "s": 2.531,
     "e": 3.251
    },
    {
     "w": "Cartagena,",
-    "s": 3.529,
-    "e": 4.493
+    "s": 3.46,
+    "e": 4.226
    },
    {
     "w": "Barranquilla,",
-    "s": 4.609,
-    "e": 5.55
+    "s": 4.261,
+    "e": 4.957
    },
    {
     "w": "Santa",
-    "s": 5.666,
-    "e": 6.06
+    "s": 4.992,
+    "e": 5.283
    },
    {
     "w": "Marta",
-    "s": 6.13,
-    "e": 6.478
+    "s": 5.341,
+    "e": 5.654
    },
    {
     "w": "y",
-    "s": 6.513,
-    "e": 6.536
+    "s": 5.677,
+    "e": 5.7
    },
    {
     "w": "Bogotá",
-    "s": 6.583,
-    "e": 7.129
+    "s": 5.747,
+    "e": 6.142
    },
    {
     "w": "los",
-    "s": 7.454,
-    "e": 7.639
+    "s": 6.223,
+    "e": 6.362
    },
    {
     "w": "esperan.",
-    "s": 7.709,
-    "e": 8.638
+    "s": 6.432,
+    "e": 7.198
    }
   ]
  },
  {
-  "texto": "Regresan a Bogotá y nos mandan besos desde el avión. ¡Buen viaje!",
-  "dicho": "Regresan a Bogotá y nos mandan besos desde el avión. ¡Buen viaje!",
-  "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 4.652,
+  "texto": "Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia!",
+  "dicho": "Hoy regresan a Bogotá. ¡Buen viaje, Camilo y familia!",
+  "vozId": "qWWAqFomnJ99VwQLREfT",
+  "dur": 4.339,
   "palabras": [
    {
-    "w": "Regresan",
+    "w": "Hoy",
     "s": 0,
-    "e": 0.476
+    "e": 0.267
+   },
+   {
+    "w": "regresan",
+    "s": 0.383,
+    "e": 1.045
    },
    {
     "w": "a",
-    "s": 0.534,
-    "e": 0.557
+    "s": 1.103,
+    "e": 1.126
    },
    {
-    "w": "Bogotá",
-    "s": 0.604,
-    "e": 1.033
-   },
-   {
-    "w": "y",
-    "s": 1.115,
-    "e": 1.173
-   },
-   {
-    "w": "nos",
-    "s": 1.242,
-    "e": 1.37
-   },
-   {
-    "w": "mandan",
-    "s": 1.44,
-    "e": 1.776
-   },
-   {
-    "w": "besos",
-    "s": 1.846,
-    "e": 2.194
-   },
-   {
-    "w": "desde",
-    "s": 2.241,
-    "e": 2.485
-   },
-   {
-    "w": "el",
-    "s": 2.508,
-    "e": 2.577
-   },
-   {
-    "w": "avión.",
-    "s": 2.647,
-    "e": 3.1
+    "w": "Bogotá.",
+    "s": 1.173,
+    "e": 1.765
    },
    {
     "w": "¡Buen",
-    "s": 3.274,
-    "e": 3.622
+    "s": 1.939,
+    "e": 2.31
    },
    {
-    "w": "viaje!",
-    "s": 3.692,
-    "e": 4.598
+    "w": "viaje,",
+    "s": 2.368,
+    "e": 2.821
+   },
+   {
+    "w": "Camilo",
+    "s": 2.856,
+    "e": 3.344
+   },
+   {
+    "w": "y",
+    "s": 3.367,
+    "e": 3.39
+   },
+   {
+    "w": "familia!",
+    "s": 3.46,
+    "e": 4.272
    }
   ]
  },
  {
   "texto": "En 77Rentals no despedimos huéspedes, ¡damos la bienvenida a futuras experiencias!",
   "dicho": "No despedimos huéspedes: ¡damos la bienvenida a futuras experiencias! Escríbenos por WhatsApp.",
-  "vozId": "yfUfwZTRubVrsUZWqzwp",
-  "dur": 6.011,
+  "vozId": "qWWAqFomnJ99VwQLREfT",
+  "dur": 7.134,
   "palabras": [
    {
     "w": "No",
@@ -460,58 +445,58 @@
    },
    {
     "w": "despedimos",
-    "s": 0.267,
-    "e": 0.789
+    "s": 0.302,
+    "e": 1.068
    },
    {
     "w": "huéspedes:",
-    "s": 0.848,
-    "e": 1.474
+    "s": 1.126,
+    "e": 1.881
    },
    {
     "w": "¡damos",
-    "s": 1.591,
-    "e": 2.043
+    "s": 2.009,
+    "e": 2.531
    },
    {
     "w": "la",
-    "s": 2.113,
-    "e": 2.183
+    "s": 2.589,
+    "e": 2.659
    },
    {
     "w": "bienvenida",
-    "s": 2.229,
-    "e": 2.798
+    "s": 2.705,
+    "e": 3.286
    },
    {
     "w": "a",
-    "s": 2.821,
-    "e": 2.844
+    "s": 3.332,
+    "e": 3.355
    },
    {
     "w": "futuras",
-    "s": 2.891,
-    "e": 3.32
+    "s": 3.413,
+    "e": 3.994
    },
    {
     "w": "experiencias!",
-    "s": 3.39,
-    "e": 4.214
+    "s": 4.052,
+    "e": 5.062
    },
    {
     "w": "Escríbenos",
-    "s": 4.331,
-    "e": 5.016
+    "s": 5.236,
+    "e": 6.002
    },
    {
     "w": "por",
-    "s": 5.074,
-    "e": 5.201
+    "s": 6.06,
+    "e": 6.177
    },
    {
     "w": "WhatsApp.",
-    "s": 5.259,
-    "e": 5.944
+    "s": 6.246,
+    "e": 7.059
    }
   ]
  }
