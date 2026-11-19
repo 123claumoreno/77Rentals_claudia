@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reserva 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF; --muted: #6F677E; --border: #DFDCE5;
+    --font-heading: 'Fraunces', Georgia, serif;
+    --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); color: var(--purple); -webkit-print-color-adjust: exact; print-color-adjust: exact; background: var(--white); }
+  .page { width: 210mm; height: 297mm; display: flex; flex-direction: column; overflow: hidden; }
+
+  header { background: var(--purple-logo); color: var(--white); display: flex; align-items: center; justify-content: space-between; padding: 5mm 16mm; }
+  header img { height: 20mm; display: block; }
+  .title { text-align: right; }
+  .kicker { font-size: 9.5pt; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 26pt; line-height: 1.05; margin-top: 1mm; }
+  .rule { height: 1.2mm; background: var(--gold); }
+
+  main { flex: 1; padding: 5mm 16mm 3mm; display: flex; flex-direction: column; gap: 3.6mm; min-height: 0; }
+  h2 { font-family: var(--font-heading); font-weight: 400; font-size: 15pt; line-height: 1.2; padding-bottom: 1.2mm; border-bottom: .5mm solid var(--gold); margin-bottom: 1.8mm; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8mm 8mm; }
+  .field .label { font-size: 8pt; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .field .value { font-size: 11.5pt; font-weight: 500; line-height: 1.3; margin-top: .6mm; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 10.5pt; }
+  th { text-align: left; font-size: 8pt; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 0 0 1.6mm; }
+  td { padding: 1.4mm 0; border-top: .3mm solid var(--border); }
+  td.r, th.r { text-align: right; }
+  .tag { display: inline-block; font-size: 8pt; font-weight: 600; background: var(--purple-light); border-radius: 1.5mm; padding: .5mm 2mm; margin-left: 2mm; }
+
+  .totals td { font-size: 11pt; }
+  .totals tr.total td { border-top: .5mm solid var(--purple); font-weight: 600; font-size: 12pt; }
+  .totals tr.paid td { color: var(--muted); }
+  .balance { margin-top: 2.4mm; background: var(--purple-dark); color: var(--white); border-radius: 2mm; padding: 3mm 6mm; display: flex; justify-content: space-between; align-items: center; }
+  .balance .lbl { font-size: 10.5pt; line-height: 1.35; }
+  .balance .lbl small { display: block; color: var(--gold-light); font-size: 9pt; margin-top: .6mm; }
+  .balance .amt { font-family: var(--font-heading); font-size: 22pt; color: var(--gold-light); white-space: nowrap; }
+
+  .note { background: var(--purple-light); border-left: 1.4mm solid var(--gold); border-radius: 2mm; padding: 3.4mm 5mm; font-size: 10pt; line-height: 1.45; }
+  .note b { font-weight: 600; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+
+  footer { background: var(--purple-logo); color: var(--white); padding: 5mm 16mm; display: flex; justify-content: space-between; align-items: center; gap: 8mm; }
+  .thanks { font-family: var(--font-heading); font-size: 16pt; line-height: 1.25; }
+  .thanks span { color: var(--gold-light); }
+  .contact { font-size: 10pt; line-height: 1.55; text-align: right; }
+  .contact b { font-weight: 600; color: var(--gold-light); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <img src="../brand/logos/logo77.jpeg" alt="77Rentals">
+    <div class="title">
+      <div class="kicker">Confirmación</div>
+      <h1>Tu reserva</h1>
+    </div>
+  </header>
+  <div class="rule"></div>
+
+  <main>
+    <section>
+      <h2>Datos de la reserva</h2>
+      <div class="grid">
+        <div class="field"><div class="label">Edificio</div><div class="value">Salguero Suites</div></div>
+        <div class="field"><div class="label">Apartamento</div><div class="value">912</div></div>
+        <div class="field"><div class="label">Llegada</div><div class="value">Martes 29 de diciembre de 2026</div></div>
+        <div class="field"><div class="label">Salida</div><div class="value">Domingo 3 de enero de 2027</div></div>
+        <div class="field"><div class="label">Duración</div><div class="value">5 noches</div></div>
+        <div class="field"><div class="label">Huéspedes</div><div class="value">4 personas</div></div>
+        <div class="field"><div class="label">Acomodación</div><div class="value">Suite con 2 camas dobles</div></div>
+        <div class="field"><div class="label">Ubicación</div><div class="value">A dos cuadras de la playa</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Huéspedes</h2>
+      <table>
+        <thead><tr><th>Nombre</th><th>Documento</th></tr></thead>
+        <tbody>
+          <tr><td>Luisa Fernanda Riaño Caballero <span class="tag">Titular</span></td><td>CC 1033718277</td></tr>
+          <tr><td>Jorge Ignacio Velásquez Cortés</td><td>CC 79119223</td></tr>
+          <tr><td>Vilma Rojas Mateus</td><td>CC 51776434</td></tr>
+          <tr><td>Santiago Velásquez Rojas</td><td>Doc. 1015464769</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:10pt;color:var(--muted);margin-top:2mm">Contacto del titular: 321 403 1370 &nbsp;·&nbsp; luisaferica7@gmail.com</p>
+    </section>
+
+    <section>
+      <h2>Valores y pagos</h2>
+      <table class="totals">
+        <tbody>
+          <tr><td>Alojamiento, 5 noches x $650.000</td><td class="r">$3.250.000</td></tr>
+          <tr><td>Aseo de check-out</td><td class="r">$100.000</td></tr>
+          <tr><td>Manillas de ingreso, 4 personas x $25.000</td><td class="r">$100.000</td></tr>
+          <tr class="total"><td>Total de la reserva</td><td class="r">$3.450.000 COP</td></tr>
+          <tr class="paid"><td>Anticipo recibido</td><td class="r">- $2.000.000</td></tr>
+        </tbody>
+      </table>
+      <div class="balance">
+        <div class="lbl">Saldo pendiente<small>Se paga al momento de la entrega del apartamento</small></div>
+        <div class="amt">$1.450.000</div>
+      </div>
+    </section>
+
+    <div class="two">
+      <section>
+        <h2>Horarios</h2>
+        <div class="grid" style="grid-template-columns:1fr">
+          <div class="field"><div class="label">Check-in</div><div class="value">Desde las 3:00 p. m.</div></div>
+          <div class="field"><div class="label">Check-out</div><div class="value">Hasta las 11:00 a. m.</div></div>
+        </div>
+      </section>
+      <section>
+        <h2>Parqueadero</h2>
+        <p style="font-size:10pt;line-height:1.45">El edificio tiene parqueadero comunitario. Los espacios no son asignados ni se pueden garantizar al 100%, pero por el número de cupos del edificio no esperamos inconvenientes.</p>
+      </section>
+    </div>
+
+    <div class="note"><b>¿Algo cambia en tu viaje?</b> Escríbenos por WhatsApp y lo resolvemos.</div>
+  </main>
+
+  <footer>
+    <div class="thanks">Será un gusto recibirlos.<br><span>Disfruten su estadía.</span></div>
+    <div class="contact"><b>Reserva y soporte por WhatsApp</b><br>+57 304 673 6241<br>wa.me/573046736241 &nbsp;·&nbsp; 77rentals.com</div>
+  </footer>
+</div>
+</body>
+</html>
