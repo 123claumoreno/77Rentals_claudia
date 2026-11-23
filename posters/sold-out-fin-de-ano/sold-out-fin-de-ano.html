@@ -18,33 +18,33 @@
   body { font-family: var(--font-body); color: var(--purple); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .flyer { position: relative; width: 210mm; height: 297mm; overflow: hidden; background: var(--white); }
 
-  .hero { position: absolute; inset: 0 0 auto 0; height: 104mm; background: url('../../assets/photos/stories/descuentos-bahia.jpg') center 42% / cover; }
+  .hero { position: absolute; inset: 0 0 auto 0; height: 94mm; background: url('../../assets/photos/stories/descuentos-bahia.jpg') center 42% / cover; }
   .hero::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(to bottom, rgba(15,76,129,0) 0%, rgba(37,21,71,.15) 30%, rgba(37,21,71,.72) 58%, rgba(37,21,71,.95) 100%); }
   .logo-card { position: absolute; top: 9mm; left: 14mm; background: var(--purple-logo); border-radius: 4mm; padding: 2.5mm; box-shadow: 0 2mm 6mm rgba(37,21,71,.35); }
   .logo-card img { height: 19mm; display: block; border-radius: 2mm; }
-  .headline { position: absolute; left: 16mm; right: 16mm; top: 55mm; color: var(--white); }
+  .headline { position: absolute; left: 16mm; right: 16mm; top: 45mm; color: var(--white); }
   .kicker { font-size: 10pt; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-light); }
   h1 { font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 33pt; line-height: 1.08; margin-top: 2.5mm; }
   h1 em { font-style: italic; color: var(--gold-light); }
 
-  .body { position: absolute; left: 0; right: 0; top: 96mm; bottom: 0; background: var(--white); border-radius: 9mm 9mm 0 0; padding: 9mm 16mm 0; }
+  .body { position: absolute; left: 0; right: 0; top: 86mm; bottom: 0; background: var(--white); border-radius: 9mm 9mm 0 0; padding: 8mm 16mm 0; }
 
-  .rows { display: flex; flex-direction: column; gap: 3mm; }
-  .row { display: flex; align-items: center; justify-content: space-between; border-radius: 4mm; padding: 0 7mm; height: 19mm; background: var(--purple-light); }
-  .row .city { font-family: var(--font-heading); font-size: 24pt; color: var(--muted); line-height: 1; }
+  .rows { display: flex; flex-direction: column; gap: 2.6mm; }
+  .row { display: flex; align-items: center; justify-content: space-between; border-radius: 4mm; padding: 0 7mm; height: 17mm; background: var(--purple-light); }
+  .row .city { font-family: var(--font-heading); font-size: 23pt; color: var(--muted); line-height: 1; }
   .row .when { font-size: 9pt; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 1.6mm; }
   .chip { color: #C62828; border: .9mm solid #C62828; border-radius: 2mm; font-size: 15pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: 2mm 5mm; transform: rotate(-8deg); background: rgba(198,40,40,.06); box-shadow: inset 0 0 0 .35mm rgba(198,40,40,.35); }
 
-  .row.open { height: 36mm; background: var(--purple); border: .9mm solid var(--gold); padding: 0 8mm; position: relative; }
-  .row.open .city { color: var(--white); font-size: 34pt; }
+  .row.open { height: 31mm; background: var(--purple); border: .9mm solid var(--gold); padding: 0 8mm; position: relative; }
+  .row.open .city { color: var(--white); font-size: 32pt; }
   .row.open .when { color: var(--gold-light); font-size: 11pt; margin-top: 2.5mm; letter-spacing: .2em; }
   .big .solo { margin: 0 0 .5mm; font-size: 10pt; }
   .big { text-align: center; line-height: 1; }
-  .big b { display: block; font-family: var(--font-heading); font-weight: 400; font-size: 46pt; color: var(--gold); line-height: .9; }
+  .big b { display: block; font-family: var(--font-heading); font-weight: 400; font-size: 40pt; color: var(--gold); line-height: .9; }
   .big span { display: block; line-height: 1.35; font-size: 8.5pt; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-light); margin-top: 1mm; }
 
-  .pet { margin-top: 4.5mm; background: var(--blue); color: var(--white); border-radius: 4mm; padding: 0 7mm; height: 17mm; display: flex; align-items: center; gap: 5mm; }
+  .pet { margin-top: 4mm; background: var(--blue); color: var(--white); border-radius: 4mm; padding: 0 7mm; height: 15mm; display: flex; align-items: center; gap: 5mm; }
   .pet svg { width: 11mm; height: 11mm; flex: none; }
   .pet .t { font-size: 15pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; line-height: 1; }
   .pet .s { font-family: var(--font-heading); font-style: italic; font-size: 14pt; margin-top: 1.3mm; line-height: 1; }
@@ -70,6 +70,9 @@
   .qr small { display: block; color: var(--purple); font-size: 7pt; font-weight: 600; margin-top: 1mm; letter-spacing: .06em; }
   .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3mm; background: var(--purple-logo); }
   .ok { display: inline-block; margin-top: 2.6mm; background: #1E8E4F; color: var(--white); font-size: 10.5pt; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 1.4mm 4.5mm; border-radius: 10mm; }
+  .row.avail { background: #E8F5EE; }
+  .row.avail .city { color: var(--purple); }
+  .row.avail .ok { margin-top: 0; font-size: 12pt; padding: 2mm 5.5mm; }
 </style>
 </head>
 <body>
@@ -87,6 +90,7 @@
       <div class="row"><div><div class="city">Santa Marta</div></div><div class="chip">Sold out</div></div>
       <div class="row open"><div><div class="city">Cartagena</div><div class="ok">Disponible</div></div>
         <div class="big"><span class="solo">Aún contamos con</span><b>3</b><span>opciones</span></div></div>
+      <div class="row avail"><div><div class="city">Bogotá</div></div><div class="ok">Disponible</div></div>
     </div>
 
     <div class="pet">
