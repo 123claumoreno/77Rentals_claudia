@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reserva seguro con 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF; --muted: #6F677E; --border: #DFDCE5;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--white); }
+  body { font-family: var(--font-body); color: var(--purple); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .flyer { position: relative; width: 210mm; height: 297mm; overflow: hidden; background: var(--white); }
+
+  /* Photo background */
+  .hero { position: absolute; inset: 0 0 auto 0; height: 118mm; background: url('../../assets/photos/stories/portada-atardecer.jpg') center 38% / cover; }
+  .hero::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(37,21,71,.10) 0%, rgba(37,21,71,0) 28%, rgba(37,21,71,.55) 62%, rgba(37,21,71,.94) 100%); }
+
+  .logo-card { position: absolute; top: 12mm; left: 14mm; background: var(--purple-logo); border-radius: 4mm; padding: 2.5mm; box-shadow: 0 2mm 6mm rgba(37,21,71,.35); }
+  .logo-card img { height: 22mm; display: block; border-radius: 2mm; }
+
+  .headline { position: absolute; left: 16mm; right: 16mm; top: 63mm; color: var(--white); }
+  .kicker { font-size: 10pt; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-light); }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 42pt; line-height: 1.02; margin-top: 3mm; }
+  h1 em { font-style: italic; color: var(--gold-light); }
+
+  /* White body */
+  .body { position: absolute; left: 0; right: 0; top: 110mm; bottom: 0; background: var(--white); border-radius: 9mm 9mm 0 0; padding: 10mm 16mm 0; }
+  .lead { font-size: 10pt; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 4mm; }
+  .lead::after { content: ""; flex: 1; height: .3mm; background: var(--border); }
+
+  ol { list-style: none; margin-top: 6mm; display: flex; flex-direction: column; gap: 5mm; }
+  li { display: grid; grid-template-columns: 14mm 1fr; column-gap: 6mm; align-items: center; }
+  .num { width: 14mm; height: 14mm; border-radius: 50%; background: var(--gold); color: var(--purple-dark); font-family: var(--font-heading); font-size: 20pt; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+  .item { font-size: 15.5pt; line-height: 1.3; font-weight: 400; }
+  .item b { font-weight: 600; }
+
+  .help { margin-top: 8mm; background: var(--purple); color: var(--white); border-radius: 5mm; padding: 8mm 10mm; position: relative; overflow: hidden; }
+  .help::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2.4mm; background: var(--gold); }
+  .help h2 { font-family: var(--font-heading); font-weight: 400; font-size: 24pt; line-height: 1.12; }
+  .help p { margin-top: 2.5mm; font-size: 13pt; line-height: 1.4; }
+  .help .warn { margin-top: 1.5mm; font-family: var(--font-heading); font-style: italic; font-size: 16pt; color: var(--gold-light); }
+
+  .contact { position: absolute; left: 16mm; right: 16mm; bottom: 10mm; display: flex; align-items: center; justify-content: space-between; gap: 8mm; }
+  .wa-label { font-size: 9pt; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .phone { font-family: var(--font-heading); font-size: 30pt; line-height: 1.1; margin-top: 1mm; }
+  .host { margin-top: 3mm; font-size: 12pt; font-weight: 600; }
+  .host span { color: var(--muted); font-weight: 400; }
+  .web { margin-top: 1mm; font-size: 10.5pt; color: var(--muted); }
+  .qr { flex: none; background: var(--white); border: .3mm solid var(--border); border-radius: 3mm; padding: 2.5mm; text-align: center; }
+  .qr img { width: 27mm; height: 27mm; display: block; }
+  .qr small { display: block; color: var(--purple); font-size: 7.5pt; font-weight: 600; margin-top: 1.5mm; letter-spacing: .06em; }
+  .goldbar { position: absolute; left: 0; right: 0; bottom: 0; height: 3mm; background: var(--purple-logo); }
+</style>
+</head>
+<body>
+<div class="flyer">
+  <div class="hero"></div>
+  <div class="logo-card"><img src="../../brand/logos/logo77.jpeg" alt="77Rentals"></div>
+  <div class="headline">
+    <div class="kicker">Reserva con seguridad</div>
+    <h1>Antes de reservar,<br><em>asegúrate</em></h1>
+  </div>
+
+  <div class="body">
+    <div class="lead">Verifica tres cosas</div>
+    <ol>
+      <li><div class="num">1</div><div class="item">Que las fotografías y la información sean <b>auténticas</b>.</div></li>
+      <li><div class="num">2</div><div class="item">Que estés utilizando <b>canales de reserva seguros</b>.</div></li>
+      <li><div class="num">3</div><div class="item">Que las condiciones y los <b>datos de pago estén confirmados</b>.</div></li>
+    </ol>
+
+    <div class="help">
+      <h2>¿Tienes dudas antes de reservar?</h2>
+      <p>Asesórate con un experto.</p>
+      <p class="warn">¡No arriesgues tu dinero ni tus vacaciones!</p>
+    </div>
+
+    <div class="contact">
+      <div>
+        <div class="wa-label">Escríbenos por WhatsApp</div>
+        <div class="phone">+57 304 673 6241</div>
+        <div class="host">Clau Moreno <span>| Your Host</span></div>
+        <div class="web">77rentals.com · @co77rentals</div>
+      </div>
+      <div class="qr"><img src="../checkout/qr-whatsapp.svg" alt="QR WhatsApp"><small>ESCRÍBENOS</small></div>
+    </div>
+  </div>
+  <div class="goldbar"></div>
+</div>
+</body>
+</html>
