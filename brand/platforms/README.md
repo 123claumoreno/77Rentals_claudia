@@ -13,6 +13,7 @@ Downloaded 2026-11-07 from Wikimedia Commons:
 | vrbo.svg | Vrbo.svg |
 | hotels.svg | Hotels.com Logo 2025.svg |
 | tripadvisor.svg | TripAdvisor Logo.svg |
+| kayak.svg | Kayak Logo.svg (downloaded 2026-11-23) |
 
 If a platform changes its logo, replace the file with the one from its press
 or brand page.

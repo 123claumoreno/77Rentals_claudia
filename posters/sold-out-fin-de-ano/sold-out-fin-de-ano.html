@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Fin de año sold out 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-light: #F1EEF6; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF; --muted: #6F677E; --border: #DFDCE5;
+    --blue: #1F6FB2; --blue-light: #E6F1FA; --blue-dark: #0F4C81;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--white); }
+  body { font-family: var(--font-body); color: var(--purple); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .flyer { position: relative; width: 210mm; height: 297mm; overflow: hidden; background: var(--white); }
+
+  .hero { position: absolute; inset: 0 0 auto 0; height: 104mm; background: url('../../assets/photos/stories/descuentos-bahia.jpg') center 42% / cover; }
+  .hero::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(15,76,129,0) 0%, rgba(37,21,71,.15) 30%, rgba(37,21,71,.72) 58%, rgba(37,21,71,.95) 100%); }
+  .logo-card { position: absolute; top: 9mm; left: 14mm; background: var(--purple-logo); border-radius: 4mm; padding: 2.5mm; box-shadow: 0 2mm 6mm rgba(37,21,71,.35); }
+  .logo-card img { height: 19mm; display: block; border-radius: 2mm; }
+  .headline { position: absolute; left: 16mm; right: 16mm; top: 52mm; color: var(--white); }
+  .kicker { font-size: 10pt; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-light); }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 41pt; line-height: 1.02; margin-top: 2.5mm; }
+  h1 em { font-style: italic; color: var(--gold-light); }
+
+  .body { position: absolute; left: 0; right: 0; top: 96mm; bottom: 0; background: var(--white); border-radius: 9mm 9mm 0 0; padding: 9mm 16mm 0; }
+
+  .rows { display: flex; flex-direction: column; gap: 3mm; }
+  .row { display: flex; align-items: center; justify-content: space-between; border-radius: 4mm; padding: 0 7mm; height: 19mm; background: var(--purple-light); }
+  .row .city { font-family: var(--font-heading); font-size: 24pt; color: var(--muted); line-height: 1; }
+  .row .when { font-size: 9pt; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 1.6mm; }
+  .chip { background: var(--purple-dark); color: var(--white); font-size: 13pt; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 2.6mm 5.5mm; border-radius: 10mm; }
+
+  .row.open { height: 36mm; background: var(--purple); border: .9mm solid var(--gold); padding: 0 8mm; position: relative; }
+  .row.open .city { color: var(--white); font-size: 34pt; }
+  .row.open .when { color: var(--gold-light); font-size: 11pt; margin-top: 2.5mm; letter-spacing: .2em; }
+  .big .solo { margin: 0 0 .5mm; font-size: 10pt; }
+  .big { text-align: center; line-height: 1; }
+  .big b { display: block; font-family: var(--font-heading); font-weight: 400; font-size: 46pt; color: var(--gold); line-height: .9; }
+  .big span { display: block; line-height: 1.35; font-size: 8.5pt; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-light); margin-top: 1mm; }
+
+  .pet { margin-top: 4.5mm; background: var(--blue); color: var(--white); border-radius: 4mm; padding: 0 7mm; height: 17mm; display: flex; align-items: center; gap: 5mm; }
+  .pet svg { width: 11mm; height: 11mm; flex: none; }
+  .pet .t { font-size: 15pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; line-height: 1; }
+  .pet .s { font-family: var(--font-heading); font-style: italic; font-size: 14pt; margin-top: 1.3mm; line-height: 1; }
+
+  .cta { margin-top: 5mm; display: flex; align-items: baseline; gap: 4mm; flex-wrap: wrap; }
+  .cta h2 { font-family: var(--font-heading); font-weight: 400; font-size: 27pt; line-height: 1.05; }
+  .cta h2 em { font-style: italic; color: var(--blue); }
+  .cta p { font-size: 11pt; color: var(--muted); }
+
+  .plats { margin-top: 4mm; background: var(--blue-light); border-radius: 4mm; padding: 3mm 5mm 3.5mm; }
+  .plats .lab { font-size: 8.5pt; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-dark); }
+  .logos { margin-top: 2.2mm; display: flex; gap: 3mm; }
+  .logos div { flex: 1; background: var(--white); border-radius: 2.5mm; height: 11mm; display: flex; align-items: center; justify-content: center; padding: 0 3mm; }
+  .logos img { max-height: 6mm; max-width: 100%; display: block; }
+
+  .contact { position: absolute; left: 16mm; right: 16mm; bottom: 9mm; display: flex; align-items: center; justify-content: space-between; gap: 8mm; }
+  .lbl { font-size: 8.5pt; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .host { font-family: var(--font-heading); font-size: 22pt; line-height: 1.1; margin-top: .8mm; }
+  .phone { margin-top: 1.5mm; font-size: 14pt; font-weight: 600; }
+  .web { margin-top: .8mm; font-size: 10pt; color: var(--muted); }
+  .qr { flex: none; background: var(--white); border: .3mm solid var(--border); border-radius: 3mm; padding: 2mm; text-align: center; }
+  .qr img { width: 22mm; height: 22mm; display: block; }
+  .qr small { display: block; color: var(--purple); font-size: 7pt; font-weight: 600; margin-top: 1mm; letter-spacing: .06em; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3mm; background: var(--purple-logo); }
+</style>
+</head>
+<body>
+<div class="flyer">
+  <div class="hero"></div>
+  <div class="logo-card"><img src="../../brand/logos/logo77.jpeg" alt="77Rentals"></div>
+  <div class="headline">
+    <div class="kicker">Fin de año 2026</div>
+    <h1>Las fiestas<br><em>se están agotando</em></h1>
+  </div>
+
+  <div class="body">
+    <div class="rows">
+      <div class="row"><div><div class="city">Barranquilla</div></div><div class="chip">Sold out</div></div>
+      <div class="row"><div><div class="city">Santa Marta</div></div><div class="chip">Sold out</div></div>
+      <div class="row open"><div><div class="city">Cartagena</div><div class="when">Aún hay lugar</div></div>
+        <div class="big"><span class="solo">Solo</span><b>3</b><span>opciones de<br>hospedaje</span></div></div>
+    </div>
+
+    <div class="pet">
+      <svg viewBox="0 0 64 64" fill="#fff" aria-hidden="true"><ellipse cx="32" cy="42" rx="13" ry="11"/><ellipse cx="12" cy="29" rx="6" ry="8" transform="rotate(-18 12 29)"/><ellipse cx="25" cy="17" rx="6" ry="8.5" transform="rotate(-6 25 17)"/><ellipse cx="39" cy="17" rx="6" ry="8.5" transform="rotate(6 39 17)"/><ellipse cx="52" cy="29" rx="6" ry="8" transform="rotate(18 52 29)"/></svg>
+      <div><div class="t">Pet friendly</div><div class="s">Se aceptan mascotas</div></div>
+    </div>
+
+    <div class="cta"><h2>Reserva <em>con tiempo.</em></h2><p>Escríbenos por WhatsApp y asegura tu lugar.</p></div>
+
+    <div class="plats">
+      <div class="lab">Encuéntranos también en</div>
+      <div class="logos">
+        <div><img src="../../brand/platforms/airbnb.svg" alt="Airbnb"></div>
+        <div><img src="../../brand/platforms/booking.svg" alt="Booking.com"></div>
+        <div><img src="../../brand/platforms/despegar.svg" alt="Despegar"></div>
+        <div><img src="../../brand/platforms/kayak.svg" alt="Kayak"></div>
+      </div>
+    </div>
+
+    <div class="contact">
+      <div>
+        <div class="lbl">Your host</div>
+        <div class="host">Claudia Moreno</div>
+        <div class="phone">WhatsApp +57 304 673 6241</div>
+        <div class="web">77rentals.com · @co77rentals</div>
+      </div>
+      <div class="qr"><img src="../checkout/qr-whatsapp.svg" alt="QR WhatsApp"><small>ESCRÍBENOS</small></div>
+    </div>
+  </div>
+  <div class="bar"></div>
+</div>
+</body>
+</html>
