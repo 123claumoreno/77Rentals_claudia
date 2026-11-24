@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Domingo gratis Castillo de San Felipe 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* Instagram feed post 4:5, 1080x1350.
+     Brand palette with a livelier twist for this promo: electric violet, warm amber and coral.
+     Logo stays untouched on its own purple card. */
+  :root {
+    --violet: #4B22C8;        /* livelier cousin of brand purple #341D63 */
+    --violet-dark: #2E1385;
+    --amber: #FFB938;         /* warmer cousin of brand gold #CBA54D */
+    --coral: #FF5C6C;
+    --purple-logo: #3B2055;
+    --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif;
+    --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: var(--font-body); color: var(--white); }
+  .post { width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    background: linear-gradient(170deg, var(--violet) 0%, var(--violet-dark) 100%); }
+
+  .photo { position: absolute; left: 0; right: 0; top: 0; height: 640px;
+    background: url('../../assets/photos/castillo/castillo-san-felipe.jpg') center 38% / cover no-repeat; }
+  .photo { height: 700px; -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); }
+
+  .logo { position: absolute; left: 56px; top: 52px; width: 230px; border-radius: 26px; display: block;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+
+  .sticker { position: absolute; right: 56px; top: 56px; width: 180px; height: 180px; border-radius: 50%;
+    background: var(--coral); color: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transform: rotate(8deg); box-shadow: 0 10px 30px rgba(0,0,0,.3); text-align: center; }
+  .sticker b { font-family: var(--font-heading); font-weight: 500; font-size: 46px; line-height: 1; }
+  .sticker span { font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin-top: 6px; }
+
+  .content { position: absolute; left: 64px; right: 64px; top: 590px; }
+  .kicker { font-size: 34px; font-weight: 500; color: var(--amber); }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-size: 96px; line-height: 1.02; margin-top: 14px; text-wrap: balance; }
+  h1 em { font-style: italic; color: var(--amber); }
+
+  .date { display: inline-flex; align-items: center; gap: 22px; margin-top: 30px; background: var(--amber); color: var(--violet-dark);
+    border-radius: 24px; padding: 20px 34px; }
+  .date b { font-family: var(--font-heading); font-weight: 500; font-size: 52px; line-height: 1; }
+  .date span { font-size: 28px; font-weight: 600; line-height: 1.15; }
+
+  .info { margin-top: 30px; display: flex; flex-direction: column; gap: 12px; font-size: 31px; line-height: 1.25; }
+  .info div { display: flex; gap: 16px; align-items: flex-start; }
+  .info i { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--coral); margin-top: 12px; }
+
+  .footer { position: absolute; left: 0; right: 0; bottom: 0; height: 118px; background: var(--amber); color: var(--violet-dark);
+    display: flex; align-items: center; justify-content: space-between; padding: 0 64px; }
+  .footer .cta { font-size: 32px; font-weight: 600; }
+  .footer .cta small { display: block; font-size: 27px; font-weight: 500; margin-top: 2px; }
+  .footer .host { font-family: var(--font-heading); font-size: 40px; text-align: right; line-height: 1.1; }
+  .footer .host small { display: block; font-family: var(--font-body); font-size: 22px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+
+  .credit { position: absolute; right: 18px; top: 612px; font-size: 15px; color: rgba(255,255,255,.75); }
+.credit2 { position: absolute; left: 64px; bottom: 128px; font-size: 15px; color: rgba(255,255,255,.6); }
+</style>
+</head>
+<body>
+<div class="post" id="post">
+  <div class="photo"></div>
+  <img class="logo" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <div class="sticker"><b>GRATIS</b><span>entrada</span></div>
+
+  <div class="content">
+    <div class="kicker">¿Vas a Cartagena este fin de semana? </div>
+    <h1>Entra gratis al <em>Castillo de San Felipe</em></h1>
+    <div class="date"><b>Dom 29 nov</b><span>Último domingo gratuito<br>del año</span></div>
+    <div class="info">
+      <div><i></i><span>Para colombianos y extranjeros residentes con cédula de extranjería</span></div>
+      <div><i></i><span>Lleva tu cédula, física o digital</span></div>
+      <div><i></i><span>Pie del Cerro, Cl. 31, Cartagena</span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="cta">Escríbenos por WhatsApp<small>wa.me/573046736241</small></div>
+    <div class="host"><small>Tu host</small>Claudia Moreno</div>
+  </div>
+  <div class="credit2">Foto: Bernard Gagnon, CC BY-SA 4.0</div>
+</div>
+</body>
+</html>
