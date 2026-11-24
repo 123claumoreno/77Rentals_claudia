@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reserva 77Rentals, Jorge Moncada</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  :root { --purple:#341D63; --purple-dark:#251547; --purple-light:#F1EEF6; --purple-logo:#3B2055; --gold:#CBA54D; --gold-light:#E0C585; --white:#FFF; --muted:#6F677E; --border:#DFDCE5;
+    --font-heading:'Fraunces',Georgia,serif; --font-body:'General Sans',system-ui,sans-serif; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:var(--font-body); color:var(--purple); -webkit-print-color-adjust:exact; print-color-adjust:exact; background:#fff; }
+  .page { width:210mm; height:297mm; display:flex; flex-direction:column; overflow:hidden; }
+  header { background:var(--purple-logo); color:#fff; text-align:center; padding:4mm 16mm 4mm; }
+  header img { height:19mm; display:block; margin:0 auto 2.5mm; }
+  .kicker { font-size:9.5pt; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-light); }
+  h1 { font-family:var(--font-heading); font-weight:400; font-size:28pt; line-height:1.05; margin-top:1mm; }
+  .rule { width:20mm; height:1.1mm; background:var(--gold); border-radius:1mm; margin:3mm auto 0; }
+  main { flex:1; padding:5mm 14mm 3mm; display:flex; flex-direction:column; gap:3mm; min-height:0; }
+  h2 { font-family:var(--font-heading); font-weight:400; font-size:13.5pt; margin-bottom:1.6mm; display:flex; align-items:center; gap:2.5mm; }
+  h2::before { content:""; width:1.2mm; height:5mm; background:var(--gold); border-radius:1mm; }
+  .guest { display:grid; grid-template-columns:1fr 1fr; gap:1.5mm 8mm; font-size:10.5pt; }
+  .guest b { font-weight:600; } .guest span.l { color:var(--muted); font-size:8.5pt; display:block; text-transform:uppercase; letter-spacing:.08em; }
+  .dates { display:grid; grid-template-columns:1fr 1fr auto; gap:3mm; }
+  .box { background:var(--purple-light); border-left:1.2mm solid var(--gold); border-radius:2mm; padding:2.6mm 4mm; }
+  .box .l { font-size:8.5pt; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-weight:600; }
+  .box .v { font-family:var(--font-heading); font-size:14pt; line-height:1.2; margin-top:.5mm; }
+  .box .s { font-size:10pt; margin-top:.3mm; }
+  .nights { text-align:center; display:flex; flex-direction:column; justify-content:center; background:var(--purple); color:#fff; border-left:0; min-width:24mm; }
+  .nights .v { color:var(--gold-light); font-size:20pt; } .nights .l { color:#fff; }
+  .prop { font-size:10.5pt; line-height:1.4; }
+  .prop b { font-weight:600; }
+  .cols { display:grid; grid-template-columns:1.25fr 1fr; gap:6mm; }
+  ul { list-style:none; font-size:10pt; line-height:1.35; }
+  ul li { padding-left:5mm; position:relative; margin-bottom:.3mm; }
+  ul li::before { content:""; position:absolute; left:0; top:1.9mm; width:2mm; height:2mm; border-radius:50%; background:var(--gold); }
+  ul.no li::before { background:var(--muted); }
+  .note { font-size:9.5pt; color:var(--muted); margin-top:1.5mm; }
+  table { width:100%; border-collapse:collapse; font-size:10.5pt; }
+  td { padding:1.4mm 3mm; border-bottom:.3mm solid var(--border); }
+  td.r { text-align:right; font-weight:600; white-space:nowrap; }
+  tr.total td { background:var(--purple); color:#fff; font-size:12pt; border:0; }
+  tr.total td.r { color:var(--gold-light); font-family:var(--font-heading); font-size:14pt; font-weight:500; }
+  tr.saldo td { background:var(--purple-light); font-weight:600; border-bottom:0; }
+  .pay { display:grid; grid-template-columns:1fr 1fr; gap:4mm; font-size:10pt; line-height:1.4; }
+  .pay .card { border:.3mm solid var(--border); border-radius:2mm; padding:2.6mm 4mm; }
+  .pay b { font-weight:600; }
+  .pay .who { font-weight:600; font-size:10.5pt; margin-bottom:.8mm; }
+  .card-note { font-size:9.5pt; margin-top:2mm; }
+  footer { flex:none; background:var(--purple-logo); color:#fff; padding:4.5mm 14mm; display:flex; justify-content:space-between; align-items:center; gap:6mm; }
+  .thanks { font-family:var(--font-heading); font-size:16pt; line-height:1.15; }
+  .thanks span { color:var(--gold-light); }
+  .contact { font-size:10pt; line-height:1.5; text-align:right; }
+  .contact b { font-weight:600; color:var(--gold-light); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <img src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+    <div class="kicker">Cartagena · El Laguito</div>
+    <h1>Confirmación de reserva</h1>
+    <div class="rule"></div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Huésped</h2>
+      <div class="guest">
+        <div><span class="l">Nombre</span><b>Jorge Moncada</b></div>
+        <div><span class="l">Correo</span><b>Jolumoru77@hotmail.com</b></div>
+        <div><span class="l">Huéspedes</span><b>3 adultos y 1 niño (7 años)</b></div>
+        <div><span class="l">Apartamento</span><b>1108, vista al mar</b></div>
+      </div>
+    </section>
+
+    <section class="dates">
+      <div class="box"><div class="l">Check-in</div><div class="v">29 de noviembre</div><div class="s">2026 · desde las 3:00 pm</div></div>
+      <div class="box"><div class="l">Check-out</div><div class="v">6 de diciembre</div><div class="s">2026 · hasta las 12:00 del mediodía</div></div>
+      <div class="box nights"><div class="l">Noches</div><div class="v">7</div></div>
+    </section>
+
+    <section>
+      <h2>Tu apartamento</h2>
+      <p class="prop"><b>2 habitaciones</b> · <b>2 baños</b> · <b>2 aires acondicionados</b> · cocina completa. Sector El Laguito, Cartagena.</p>
+    </section>
+
+    <section class="cols">
+      <div>
+        <h2>Incluye</h2>
+        <ul>
+          <li>Sábanas y 4 toallas de baño</li>
+          <li>2 toallas de manos</li>
+          <li>2 rollos de papel higiénico</li>
+          <li>Jabón de loza y jabón de manos</li>
+          <li>WiFi</li>
+          <li>Manillas de acceso</li>
+          <li>1 aseo el día del check-out</li>
+        </ul>
+      </div>
+      <div>
+        <h2>No incluye</h2>
+        <ul class="no">
+          <li>Parqueadero</li>
+          <li>Servicio de lavadora (tal como indica Booking)</li>
+        </ul>
+        <p class="note">El edificio no cuenta con piscina.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Resumen de pago</h2>
+      <table>
+        <tr><td>7 noches × $229.000</td><td class="r">$1.603.000</td></tr>
+        <tr class="total"><td>Total de la reserva</td><td class="r">$1.603.000 COP</td></tr>
+        <tr><td>Anticipo pendiente (20%)</td><td class="r">$320.600</td></tr>
+        <tr class="saldo"><td>Saldo (80%) al momento del check-in</td><td class="r">$1.282.400</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Datos para pago</h2>
+      <div class="pay">
+        <div class="card">
+          <div class="who">Claudia Moreno Velosa</div>
+          <div><b>Bancolombia</b> · ahorros 20444432854</div>
+          <div><b>Nequi</b> · 304 673 6241</div>
+          <div><b>Davivienda</b> · ahorros 488 446 486 604</div>
+          <div><b>Llave Bancolombia</b> · @claudia8523</div>
+        </div>
+        <div class="card">
+          <div class="who">Roberto Carlos Ruiz Gómez</div>
+          <div><b>BBVA</b> · ahorros 0142274059</div>
+          <p class="card-note">¿Prefieres pagar con tarjeta de crédito? Escríbenos y te enviamos el link de pago.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="thanks">Te esperamos en <span>Cartagena</span></div>
+    <div class="contact"><b>Tu anfitriona: Claudia Moreno</b><br>WhatsApp +57 304 673 6241<br>wa.me/573046736241 · 77rentals.com</div>
+  </footer>
+</div>
+</body>
+</html>
