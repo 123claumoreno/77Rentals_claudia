@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Post v4 Entrada gratis 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* Instagram feed post 1080x1350. White and brand purple only. */
+  :root { --purple:#341D63; --white:#FFFFFF; --muted:#6F677E;
+    --font-heading:'Fraunces',Georgia,serif; --font-body:'General Sans',system-ui,sans-serif; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#222; font-family:var(--font-body); color:var(--purple); }
+  .post { width:1080px; height:1350px; position:relative; overflow:hidden; background:var(--purple); isolation:isolate; }
+  .bg { position:absolute; inset:0; z-index:-3; background:url('../../assets/photos/castillo/castillo-san-felipe.jpg') 38% 50% / cover no-repeat; filter:grayscale(1) contrast(1.05) brightness(1.15); }
+  .tint { position:absolute; inset:0; z-index:-2; background:var(--purple); mix-blend-mode:multiply; }
+  .glow { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg, rgba(37,21,71,.55) 0%, rgba(52,29,99,.15) 40%, rgba(37,21,71,.85) 100%); }
+
+  .logo { position:absolute; left:56px; top:44px; width:170px; border-radius:22px; box-shadow:0 12px 34px rgba(0,0,0,.4); }
+  .kicker { position:absolute; right:56px; top:76px; width:560px; text-align:right; color:var(--white); font-size:28px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; line-height:1.3; }
+
+  .ticket { position:absolute; left:60px; right:60px; top:190px; filter:drop-shadow(0 26px 36px rgba(0,0,0,.45)); }
+  .t-top, .t-stub { background:var(--white); position:relative; }
+  .t-top { border-radius:40px 40px 0 0; overflow:hidden;
+    -webkit-mask-image:radial-gradient(circle at 0 100%, transparent 30px, #000 31px), radial-gradient(circle at 100% 100%, transparent 30px, #000 31px);
+    -webkit-mask-composite:source-in; mask-image:radial-gradient(circle at 0 100%, transparent 30px, #000 31px), radial-gradient(circle at 100% 100%, transparent 30px, #000 31px); mask-composite:intersect; }
+  .t-stub { border-radius:0 0 40px 40px;
+    -webkit-mask-image:radial-gradient(circle at 0 0, transparent 30px, #000 31px), radial-gradient(circle at 100% 0, transparent 30px, #000 31px);
+    -webkit-mask-composite:source-in; mask-image:radial-gradient(circle at 0 0, transparent 30px, #000 31px), radial-gradient(circle at 100% 0, transparent 30px, #000 31px); mask-composite:intersect; }
+  .t-stub::before { content:""; position:absolute; left:44px; right:44px; top:-2px; border-top:4px dashed rgba(52,29,99,.35); }
+
+  .window { height:380px; background:url('../../assets/photos/castillo/castillo-san-felipe.jpg') 40% 6% / cover no-repeat; position:relative; }
+  .window .credit { position:absolute; right:18px; bottom:8px; font-size:13px; color:rgba(255,255,255,.9); }
+  .t-body { padding:22px 40px 34px; text-align:center; }
+  .label { font-size:24px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+  .big { font-family:var(--font-heading); font-weight:500; font-size:230px; line-height:.95; letter-spacing:-.02em; margin-top:6px; }
+  .castle { font-family:var(--font-heading); font-size:48px; line-height:1.1; margin-top:8px; }
+  .castle i { font-style:italic; }
+  .t-stub .row { padding:32px 50px 34px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+  .date b { display:block; font-family:var(--font-heading); font-weight:500; font-size:50px; line-height:1.05; }
+  .date span { font-size:22px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); display:block; margin-top:8px; }
+  .need { font-size:26px; line-height:1.3; text-align:right; max-width:380px; }
+  .need small { display:block; font-size:21px; color:var(--muted); margin-top:6px; }
+
+  .footer { position:absolute; left:60px; right:60px; bottom:34px; display:flex; align-items:center; justify-content:space-between; color:var(--white); }
+  .cta { background:var(--white); color:var(--purple); border-radius:999px; padding:14px 40px; box-shadow:0 14px 30px rgba(0,0,0,.35); }
+  .cta b { display:block; font-size:30px; font-weight:600; }
+  .cta span { font-size:24px; color:var(--muted); font-weight:500; }
+  .host { font-family:var(--font-heading); font-size:34px; text-align:right; line-height:1.1; }
+  .host small { display:block; font-family:var(--font-body); font-size:20px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div class="post" id="post">
+  <div class="bg"></div><div class="tint"></div><div class="glow"></div>
+  <img class="logo" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <div class="kicker">¿Vas a Cartagena este fin de semana?</div>
+  <div class="ticket">
+    <div class="t-top">
+      <div class="window"><div class="credit">Foto: Bernard Gagnon, CC BY-SA 4.0</div></div>
+      <div class="t-body">
+        <div class="label">Último domingo gratuito del año</div>
+        <div class="big">GRATIS</div>
+        <div class="castle">Entrada al <i>Castillo de San Felipe</i></div>
+      </div>
+    </div>
+    <div class="t-stub">
+      <div class="row">
+        <div class="date"><b>Domingo<br>29 de noviembre</b><span>Cartagena</span></div>
+        <div class="need">Lleva tu cédula, física o digital<small>Colombianos y extranjeros residentes con cédula de extranjería</small></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="cta"><b>Escríbenos por WhatsApp</b><span>wa.me/573046736241</span></div>
+    <div class="host"><small>Tu host</small>Claudia Moreno</div>
+  </div>
+</div>
+</body>
+</html>
