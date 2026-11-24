@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Estado WhatsApp Castillo de San Felipe 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  /* WhatsApp status 9:16, 1080x1920. Text stays between y 200 and 1720 (WhatsApp covers top and bottom).
+     Softer palette: lavender background, brand purple text, amber and coral accents. */
+  :root {
+    --lavender: #EEE8F8; --lavender-2: #E2D8F3;
+    --purple: #341D63; --purple-logo: #3B2055;
+    --amber: #FFB938; --coral: #FF5C6C; --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif; --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: var(--font-body); color: var(--purple); }
+  .post { width: 1080px; height: 1920px; position: relative; overflow: hidden;
+    background: linear-gradient(180deg, var(--lavender) 0%, var(--lavender-2) 100%); }
+  .photo { position: absolute; left: 0; right: 0; top: 0; height: 1000px;
+    background: url('../../assets/photos/castillo/castillo-san-felipe.jpg') 42% 30% / cover no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, #000 68%, transparent 100%); mask-image: linear-gradient(to bottom, #000 68%, transparent 100%); }
+  .logo { position: absolute; left: 64px; top: 210px; width: 240px; border-radius: 26px; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+  .sticker { position: absolute; right: 64px; top: 210px; width: 190px; height: 190px; border-radius: 50%; background: var(--coral); color: var(--white);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(8deg); box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .sticker b { font-family: var(--font-heading); font-weight: 500; font-size: 50px; line-height: 1; }
+  .sticker span { font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin-top: 6px; }
+
+  .content { position: absolute; left: 70px; right: 70px; top: 880px; text-align: center; }
+  .kicker { font-size: 38px; font-weight: 600; color: #7A4FD0; }
+  h1 { font-family: var(--font-heading); font-weight: 400; font-size: 112px; line-height: 1.03; margin-top: 16px; text-wrap: balance; }
+  h1 em { font-style: italic; color: #B8740A; }
+  .date { display: inline-block; margin-top: 36px; background: var(--amber); border-radius: 28px; padding: 24px 46px; }
+  .date b { display: block; font-family: var(--font-heading); font-weight: 500; font-size: 64px; line-height: 1.05; }
+  .date span { display: block; font-size: 30px; font-weight: 600; margin-top: 6px; }
+  .info { margin-top: 30px; font-size: 38px; line-height: 1.3; }
+  .info small { display: block; font-size: 30px; margin-top: 10px; opacity: .8; }
+
+  .cta { position: absolute; left: 70px; right: 70px; top: 1560px; background: var(--purple); color: var(--white); border-radius: 999px; padding: 26px 40px; text-align: center; }
+  .cta b { display: block; font-size: 38px; font-weight: 600; }
+  .cta span { font-size: 30px; color: #E0C585; }
+  .host { position: absolute; left: 0; right: 0; top: 1728px; text-align: center; font-family: var(--font-heading); font-size: 38px; }
+  .credit { position: absolute; left: 0; right: 0; top: 1784px; text-align: center; font-size: 15px; opacity: .55; }
+</style>
+</head>
+<body>
+<div class="post" id="post">
+  <div class="photo"></div>
+  <img class="logo" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <div class="sticker"><b>GRATIS</b><span>entrada</span></div>
+  <div class="content">
+    <div class="kicker">¿Vas a Cartagena este fin de semana?</div>
+    <h1>Entra gratis al <em>Castillo de San Felipe</em></h1>
+    <div class="date"><b>Domingo 29 de noviembre</b><span>Último domingo gratuito del año</span></div>
+    <div class="info">Lleva tu cédula, física o digital<small>Colombianos y extranjeros residentes con cédula de extranjería</small></div>
+  </div>
+  <div class="cta"><b>Escríbenos por WhatsApp</b><span>wa.me/573046736241</span></div>
+  <div class="host">Tu host, Claudia Moreno</div>
+  <div class="credit">Foto: Bernard Gagnon, CC BY-SA 4.0</div>
+</div>
+</body>
+</html>
