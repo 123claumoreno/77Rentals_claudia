@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Fin de año 77Rentals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<style>
+  :root {
+    --purple: #341D63; --purple-dark: #251547; --purple-logo: #3B2055;
+    --gold: #CBA54D; --gold-light: #E0C585; --white: #FFFFFF;
+    --font-heading: 'Fraunces', Georgia, serif;
+    --font-body: 'General Sans', system-ui, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); color: var(--white); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .poster { width: 210mm; height: 297mm; background: var(--purple-logo); padding: 9mm; overflow: hidden; }
+  .frame { height: 100%; border: .35mm solid var(--gold); position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 8mm 14mm 9mm; }
+  .frame::before { content: ""; position: absolute; inset: 1.6mm; border: .2mm solid rgba(203,165,77,.45); pointer-events: none; }
+
+  .logo { height: 36mm; display: block; }
+  .kicker { margin-top: 5mm; font-size: 10.5pt; font-weight: 600; letter-spacing: .38em; text-transform: uppercase; color: var(--gold-light); }
+  .sold { margin-top: 9mm !important; font-family: var(--font-heading); font-weight: 400; font-optical-sizing: auto; font-size: 82pt; line-height: 1; letter-spacing: .02em; margin-top: 4mm; text-transform: uppercase; }
+  .orn { display: flex; align-items: center; gap: 4mm; margin-top: 3mm; width: 100%; justify-content: center; }
+  .orn i { display: block; height: .3mm; width: 34mm; background: var(--gold); }
+  .orn b { width: 2.4mm; height: 2.4mm; background: var(--gold); transform: rotate(45deg); }
+  .city-big { font-family: var(--font-heading); font-size: 38pt; line-height: 1.1; margin-top: 3mm; color: var(--gold-light); }
+  .sub { margin-top: 1.5mm; font-size: 12pt; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; }
+
+  .avail { margin-top: 9mm; font-size: 10.5pt; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light); }
+  .cards { margin-top: 4mm; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .card { border: .3mm solid var(--gold); background: var(--purple-dark); border-radius: 3mm; padding: 6mm 4mm 6mm; }
+  .card .city { font-family: var(--font-heading); font-size: 25pt; line-height: 1.1; }
+  .card .n { margin-top: 3mm; font-size: 14pt; font-weight: 600; color: var(--gold-light); }
+  .card .line { width: 12mm; height: .35mm; background: var(--gold); margin: 3.5mm auto; }
+  .card .sector { font-size: 8.5pt; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-light); font-weight: 500; }
+  .card .sector-name { font-family: var(--font-heading); font-size: 17pt; margin-top: 1mm; }
+
+  .tours { margin-top: 8mm; font-family: var(--font-heading); font-size: 19pt; line-height: 1.2; }
+  .tours span { color: var(--gold-light); }
+
+  .spacer { flex: 1; }
+  .host { display: flex; align-items: center; justify-content: center; gap: 9mm; width: 100%; border-top: .3mm solid var(--gold); padding-top: 6mm; }
+  .host-text { text-align: left; }
+  .host-label { font-size: 9pt; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light); font-weight: 600; }
+  .host-name { font-family: var(--font-heading); font-size: 24pt; line-height: 1.15; margin-top: 1mm; }
+  .host-tel { margin-top: 2mm; font-size: 14pt; font-weight: 600; }
+  .host-web { margin-top: 1mm; font-size: 10.5pt; color: var(--gold-light); }
+  .qr { background: var(--white); padding: 2.5mm; border-radius: 2.5mm; text-align: center; flex: none; }
+  .qr img { width: 27mm; height: 27mm; display: block; }
+  .qr small { display: block; color: var(--purple); font-size: 7.5pt; font-weight: 600; margin-top: 1.5mm; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+<div class="poster"><div class="frame">
+  <img class="logo" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
+  <h1 class="sold">Sold out</h1>
+  <div class="orn"><i></i><b></b><i></i></div>
+  <div class="city-big">Barranquilla</div>
+  <div class="sub">Para fin de año</div>
+
+  <div class="avail">Aún disponible</div>
+  <div class="cards">
+    <div class="card">
+      <div class="city">Cartagena</div>
+      <div class="n">2 apartamentos</div>
+      <div class="line"></div>
+      <div class="sector">Sector</div>
+      <div class="sector-name">Boca Grande</div>
+    </div>
+    <div class="card">
+      <div class="city">Santa Marta</div>
+      <div class="n">1 apartamento</div>
+      <div class="line"></div>
+      <div class="sector">Sector</div>
+      <div class="sector-name">Cabo Tortuga</div>
+    </div>
+  </div>
+
+  <div class="tours">Reserva los tours <span>con tiempo.</span></div>
+
+  <div class="spacer"></div>
+  <div class="host">
+    <div class="host-text">
+      <div class="host-label">Your host</div>
+      <div class="host-name">Claudia Moreno</div>
+      <div class="host-tel">WhatsApp 304 673 6241</div>
+      <div class="host-web">77rentals.com</div>
+    </div>
+    <div class="qr"><img src="qr-whatsapp.svg" alt="QR WhatsApp"><small>ESCRÍBENOS</small></div>
+  </div>
+</div></div>
+</body>
+</html>
