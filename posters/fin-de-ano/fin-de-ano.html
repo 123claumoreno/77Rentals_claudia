@@ -40,7 +40,7 @@
   .tours { margin-top: 8mm; font-family: var(--font-heading); font-size: 19pt; line-height: 1.2; }
   .tours span { color: var(--gold-light); }
 
-  .spacer { flex: 1; }
+  .spacer { flex: 1; min-height: 5mm; }
   .host { display: flex; align-items: center; justify-content: center; gap: 9mm; width: 100%; border-top: .3mm solid var(--gold); padding-top: 6mm; }
   .host-text { text-align: left; }
   .host-label { font-size: 9pt; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light); font-weight: 600; }
@@ -50,13 +50,30 @@
   .qr { background: var(--white); padding: 2.5mm; border-radius: 2.5mm; text-align: center; flex: none; }
   .qr img { width: 27mm; height: 27mm; display: block; }
   .qr small { display: block; color: var(--purple); font-size: 7.5pt; font-weight: 600; margin-top: 1.5mm; letter-spacing: .06em; }
+
+  :root { --red: #D91E2E; }
+  .stage { position: relative; width: 100%; height: 58mm; margin-top: 3mm; display:flex; align-items:center; justify-content:center; }
+  .stage::before { content:""; position:absolute; left:-14mm; right:-14mm; top:50%; height:46mm; transform: translateY(-50%) rotate(-10deg); background: repeating-linear-gradient(135deg, rgba(203,165,77,.16) 0 2mm, transparent 2mm 5mm); }
+  .stamp { position: relative; transform: rotate(-10deg); background: var(--red); color: var(--white); border: 1.4mm solid var(--white); outline: 1.2mm solid var(--red); border-radius: 3mm; padding: 2mm 9mm 4mm; box-shadow: 0 3mm 7mm rgba(0,0,0,.45); }
+  .stamp::after { content:""; position:absolute; inset: 1.6mm; border: .5mm solid rgba(255,255,255,.7); border-radius: 1.5mm; }
+  .stamp .sold { margin: 0 !important; font-size: 70pt; white-space: nowrap; font-weight: 500; letter-spacing: .04em; line-height: 1; text-shadow: 0 .6mm 0 rgba(0,0,0,.25); }
+  .city-big { font-size: 50pt !important; color: var(--gold) !important; margin-top: 0 !important; }
+  .sub { font-size: 13pt !important; font-weight: 600 !important; letter-spacing: .28em !important; color: var(--white); }
+  .avail { margin-top: 7mm !important; background: var(--gold); color: var(--purple-dark) !important; padding: 2mm 8mm; border-radius: 10mm; font-size: 11.5pt !important; font-weight: 600; }
+  .card { background: var(--gold) !important; border: 0 !important; color: var(--purple-dark); box-shadow: 0 2mm 5mm rgba(0,0,0,.35); }
+  .card .city { font-size: 28pt !important; }
+  .card .n { color: var(--purple-dark) !important; font-size: 17pt !important; font-weight: 600; }
+  .card .line { background: var(--purple-dark) !important; }
+  .card .sector { color: var(--purple) !important; font-weight: 600 !important; }
+  .card .sector-name { font-size: 20pt !important; font-weight: 500; }
+  .tours { margin-top: 7mm !important; background: var(--white); color: var(--purple-dark); border-radius: 10mm; padding: 2.5mm 9mm; font-size: 19pt !important; }
+  .tours span { color: var(--red) !important; font-weight: 500; }
 </style>
 </head>
 <body>
 <div class="poster"><div class="frame">
   <img class="logo" src="../../brand/logos/logo77.jpeg" alt="77Rentals">
-  <h1 class="sold">Sold out</h1>
-  <div class="orn"><i></i><b></b><i></i></div>
+  <div class="stage"><div class="stamp"><h1 class="sold">Sold out</h1></div></div>
   <div class="city-big">Barranquilla</div>
   <div class="sub">Para fin de año</div>
 
